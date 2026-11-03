@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Apex Appliance Repair - Base Reset & Mobile Container Layout
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Outer layout background with soft desktop presentation */
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: radial-gradient(circle at 50% 0%, #E8F3EE 0%, #E2EDF7 60%, #DBE5F0 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* App-like mobile viewport container (max ~430px centered on desktop) */
+.mobile-viewport-container {
+  width: 100%;
+  max-width: var(--app-max-width);
+  min-height: 100vh;
+  background: var(--page-bg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 50px rgba(15, 42, 68, 0.12),
+              0 0 0 1px rgba(15, 42, 68, 0.04);
+  z-index: 1;
+}
+
+@media (min-width: 480px) {
+  .mobile-viewport-container {
+    margin: 16px auto;
+    border-radius: 36px;
+    min-height: calc(100vh - 32px);
+    overflow: hidden;
+    border: 8px solid rgba(255, 255, 255, 0.85);
+  }
+}
+
+/* Main Content Area */
+.app-main-content {
+  flex: 1;
+  padding: 16px 18px 96px 18px; /* Safe padding for bottom nav */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* When a sticky bar exists (e.g. Booking confirmation), add extra bottom space */
+.has-sticky-bar .app-main-content {
+  padding-bottom: 154px;
+}
+
+/* Typography Defaults */
+h1, h2, h3, .serif-heading {
+  font-family: var(--font-serif);
+  color: var(--navy-900);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+p, span, label, input, button {
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--primary-600);
+  outline-offset: 2px;
+}
+
+input, textarea, select {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+/* Utility to hide scrollbars while maintaining scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

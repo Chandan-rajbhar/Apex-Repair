@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Apex Appliance Repair - Design Tokens
+   ========================================================================== */
+
+:root {
+  /* Brand Palette */
+  --primary-50: #F2FBF7;
+  --primary-100: #E1F6ED;
+  --primary-200: #C1EDD9;
+  --primary-300: #8EDBB8;
+  --primary-400: #4FC293;
+  --primary-500: #2FA67C;
+  --primary-600: #1E7B5A; /* Base Primary Green */
+  --primary-700: #145A42;
+  --primary-800: #0F3F2F;
+  --primary-900: #09261C;
+
+  /* Navy Shades */
+  --navy-50: #F1F5FB;
+  --navy-100: #E1EAF4;
+  --navy-200: #C2D5E8;
+  --navy-500: #386A94;
+  --navy-700: #17405F;
+  --navy-800: #12334D;
+  --navy-900: #0F2A44; /* Base Dark Navy */
+  --navy-950: #091929;
+
+  /* Accent & Utility */
+  --mint-tint: #E8F6EF;
+  --mint-soft: #F2FBF7;
+  --page-bg: #F1F5FB;
+  --gold-accent: #FDE68A;
+  --gold-dark: #B45309;
+  --gold-amber: #D97706;
+  --cta-orange: #E8541E;
+  --cta-orange-hover: #FF7A3D;
+  --cta-orange-dark: #C73E10;
+
+  /* Neutrals */
+  --text-main: #0F2A44;
+  --text-secondary: #4A5D6E;
+  --text-muted: #7E92A2;
+  --text-light: #FFFFFF;
+  --border-light: rgba(15, 42, 68, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.65);
+  --border-glass-dark: rgba(255, 255, 255, 0.15);
+
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #2FA67C 0%, #1E7B5A 55%, #145A42 100%);
+  --grad-navy: linear-gradient(135deg, #0F2A44 0%, #17405F 50%, #1E7B5A 120%);
+  --grad-hero: radial-gradient(circle at 20% 0%, rgba(255,255,255,0.22), transparent 50%),
+               linear-gradient(135deg, #0F2A44 0%, #17405F 45%, #1E7B5A 100%);
+  --grad-cta: linear-gradient(135deg, #FF7A3D 0%, #E8541E 60%, #C73E10 100%);
+  --grad-mint: linear-gradient(160deg, #F2FBF7 0%, #DDF3E8 100%);
+  --grad-gold: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  --grad-card-soft: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+  --grad-page: linear-gradient(180deg, #F1F5FB 0%, #EBF4F0 100%);
+  --grad-skeleton: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Elevation & Shadows */
+  --shadow-xs: 0 1px 3px rgba(15, 42, 68, 0.05);
+  --shadow-sm: 0 4px 12px rgba(15, 42, 68, 0.06);
+  --shadow-md: 0 10px 24px rgba(15, 42, 68, 0.09);
+  --shadow-lg: 0 18px 38px rgba(15, 42, 68, 0.12);
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 12px 30px rgba(15, 42, 68, 0.1);
+  --shadow-glow-primary: 0 0 24px rgba(30, 123, 90, 0.45);
+  --shadow-glow-orange: 0 0 20px rgba(232, 84, 30, 0.4);
+
+  /* Border Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 30px;
+  --radius-pill: 9999px;
+
+  /* App dimensions */
+  --app-max-width: 440px;
+  --nav-height: 72px;
+  --header-height: 64px;
+}
+
