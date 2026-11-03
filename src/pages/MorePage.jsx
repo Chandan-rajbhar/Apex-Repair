@@ -136,7 +136,7 @@ export const MorePage = () => {
             height: 46,
             borderRadius: '50%',
             background: '#FFFFFF',
-            color: '#1E7B5A',
+            color: 'var(--orange-600)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -152,7 +152,7 @@ export const MorePage = () => {
             <div style={{ fontSize: '1rem', fontWeight: 800, letterSpacing: '0.01em' }}>
               {user ? user.name.toUpperCase() : 'GUEST CLIENT'}
             </div>
-            <div style={{ fontSize: '0.72rem', color: '#D1FAE5', marginTop: 1 }}>
+            <div style={{ fontSize: '0.72rem', color: 'rgba(255, 255, 255, 0.88)', marginTop: 1 }}>
               {user ? `Client ${user.clientId || 'APEX-2409'} • Springfield Care Zone` : 'Sign in to sync your repair history'}
             </div>
           </div>
@@ -222,7 +222,7 @@ export const MorePage = () => {
           width: 140,
           height: 140,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(47,166,124,0.3) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(242,107,45,0.25) 0%, transparent 70%)',
           pointerEvents: 'none'
         }} />
 
@@ -230,7 +230,7 @@ export const MorePage = () => {
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
           <span className="badge" style={{
             background: 'rgba(255,255,255,0.12)',
-            color: '#A7F3D0',
+            color: 'var(--amber-400)',
             border: '1px solid rgba(255,255,255,0.2)'
           }}>
             <Sparkles size={12} /> AI APPLIANCE DIAGNOSTICS
@@ -261,7 +261,7 @@ export const MorePage = () => {
         <button
           className="btn btn-primary btn-sm tap-effect shine-sweep"
           style={{
-            background: 'linear-gradient(135deg, #1E7B5A 0%, #2FA67C 100%)',
+            background: 'var(--grad-cta)',
             color: '#FFFFFF',
             borderRadius: 9999,
             padding: '9px 18px',
@@ -316,8 +316,8 @@ export const MorePage = () => {
       <div className="card-white" style={{ padding: '16px 14px', borderRadius: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, padding: '0 4px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <Calendar size={16} color="#1E7B5A" />
-            <span style={{ fontSize: '0.86rem', fontWeight: 800, color: '#0F2A44', letterSpacing: '0.02em' }}>
+            <Calendar size={16} color="var(--orange-600)" />
+            <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--navy-900)', letterSpacing: '0.02em' }}>
               APPOINTMENTS & HISTORY
             </span>
           </div>
@@ -353,17 +353,17 @@ export const MorePage = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#1E7B5A',
+                    color: 'var(--orange-600)',
                     boxShadow: 'var(--shadow-xs)',
                     flexShrink: 0
                   }}>
                     <ItemIcon size={18} />
                   </div>
                   <div>
-                    <div style={{ fontSize: '0.84rem', fontWeight: 700, color: '#0F2A44' }}>
+                    <div style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                       {item.title}
                     </div>
-                    <div style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
                       {item.sub}
                     </div>
                   </div>

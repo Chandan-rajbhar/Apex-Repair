@@ -112,8 +112,8 @@ export const AuthModal = () => {
             style={{
               padding: '10px 14px',
               borderRadius: '16px',
-              background: 'linear-gradient(135deg, #E8F6EF 0%, #D8F2E4 100%)',
-              border: '1px solid rgba(30, 123, 90, 0.25)',
+              background: 'var(--grad-warm)',
+              border: '1px solid rgba(232, 84, 30, 0.25)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -122,15 +122,15 @@ export const AuthModal = () => {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#1E7B5A', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--orange-600)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <KeyRound size={15} />
               </div>
               <div>
-                <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#1E7B5A' }}>Demo Credentials Ready</div>
-                <div style={{ fontSize: '0.68rem', color: '#0F2A44' }}>demo@apex.com • Demo@123</div>
+                <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--orange-600)' }}>Demo Credentials Ready</div>
+                <div style={{ fontSize: '0.68rem', color: 'var(--navy-900)' }}>demo@apex.com • Demo@123</div>
               </div>
             </div>
-            <span className="badge badge-mint" style={{ background: '#FFFFFF', fontSize: '0.68rem' }}>
+            <span className="badge badge-warm" style={{ background: '#FFFFFF', fontSize: '0.68rem' }}>
               Autofill
             </span>
           </div>
@@ -209,13 +209,13 @@ export const AuthModal = () => {
 
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                  <label style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0F2A44' }}>
+                  <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                     Password
                   </label>
                   <button
                     type="button"
                     onClick={handleForgotPassword}
-                    style={{ fontSize: '0.72rem', color: '#1E7B5A', fontWeight: 600 }}
+                    style={{ fontSize: '0.72rem', color: 'var(--orange-600)', fontWeight: 600 }}
                   >
                     Forgot Password?
                   </button>
@@ -255,7 +255,7 @@ export const AuthModal = () => {
                   id="remember-me"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  style={{ accentColor: '#1E7B5A', width: 16, height: 16 }}
+                  style={{ accentColor: 'var(--orange-600)', width: 16, height: 16 }}
                 />
                 <label htmlFor="remember-me" style={{ fontSize: '0.78rem', color: '#4A5D6E', cursor: 'pointer' }}>
                   Keep me signed in on this device

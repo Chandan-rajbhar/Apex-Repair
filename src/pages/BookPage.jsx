@@ -166,33 +166,33 @@ export const BookPage = () => {
             padding: '28px 20px',
             textAlign: 'center',
             boxShadow: 'var(--shadow-md)',
-            border: '1.5px solid rgba(30, 123, 90, 0.25)'
+            border: '1.5px solid rgba(232, 84, 30, 0.25)'
           }}
         >
           <div style={{
             width: 72,
             height: 72,
             borderRadius: '50%',
-            background: 'var(--grad-primary)',
+            background: 'var(--grad-cta)',
             color: '#FFFFFF',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             margin: '0 auto 16px auto',
-            boxShadow: '0 8px 24px rgba(30, 123, 90, 0.4)'
+            boxShadow: 'var(--glow-orange)'
           }}>
             <CheckCircle2 size={44} />
           </div>
 
-          <span className="badge badge-mint" style={{ marginBottom: 6 }}>
+          <span className="badge badge-warm" style={{ marginBottom: 6 }}>
             BOOKING CONFIRMED & DISPATCHED
           </span>
 
-          <h2 style={{ fontSize: '1.6rem', color: '#0F2A44', margin: '4px 0 8px 0' }}>
+          <h2 style={{ fontSize: '1.6rem', color: 'var(--navy-900)', margin: '4px 0 8px 0' }}>
             Appointment Locked In!
           </h2>
 
-          <p style={{ fontSize: '0.8rem', color: '#4A5D6E', lineHeight: 1.45, maxWidth: 320, margin: '0 auto 18px auto' }}>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.45, maxWidth: 320, margin: '0 auto 18px auto' }}>
             Your service request has been transmitted to regional dispatch. Master Technician Marcus Vance has been reserved.
           </p>
 
@@ -206,22 +206,22 @@ export const BookPage = () => {
               gap: 8,
               padding: '10px 18px',
               borderRadius: 9999,
-              background: '#F1F5FB',
-              border: '1px solid rgba(15, 42, 68, 0.12)',
+              background: 'var(--navy-50)',
+              border: '1px solid var(--border)',
               cursor: 'pointer',
               marginBottom: 16
             }}
           >
-            <span style={{ fontSize: '0.78rem', color: '#7E92A2' }}>Booking ID:</span>
-            <strong style={{ fontSize: '1.05rem', color: '#1E7B5A', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Booking ID:</span>
+            <strong style={{ fontSize: '1.05rem', color: 'var(--orange-600)', letterSpacing: '0.04em' }}>
               {confirmedBooking.id}
             </strong>
-            <Copy size={16} color="#1E7B5A" />
+            <Copy size={16} color="var(--orange-600)" />
           </div>
 
           {/* Details Summary Table */}
           <div style={{
-            background: '#F8FAFC',
+            background: 'var(--navy-50)',
             borderRadius: 18,
             padding: '14px 16px',
             textAlign: 'left',
@@ -229,23 +229,23 @@ export const BookPage = () => {
             flexDirection: 'column',
             gap: 8,
             fontSize: '0.78rem',
-            color: '#334155'
+            color: 'var(--navy-900)'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: '#7E92A2' }}>Appliance:</span>
+              <span style={{ color: 'var(--text-muted)' }}>Appliance:</span>
               <strong>{confirmedBooking.brand} {confirmedBooking.applianceName}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: '#7E92A2' }}>Slot Window:</span>
+              <span style={{ color: 'var(--text-muted)' }}>Slot Window:</span>
               <strong>{confirmedBooking.date} ({confirmedBooking.timeSlot})</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: '#7E92A2' }}>Service Address:</span>
+              <span style={{ color: 'var(--text-muted)' }}>Service Address:</span>
               <strong style={{ textAlign: 'right', maxWidth: '60%' }}>{confirmedBooking.address}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: '#7E92A2' }}>Diagnostic Fee:</span>
-              <strong style={{ color: '#1E7B5A' }}>$79 (Waived with repair)</strong>
+              <span style={{ color: 'var(--text-muted)' }}>Diagnostic Fee:</span>
+              <strong style={{ color: 'var(--orange-600)' }}>$79 (Waived with repair)</strong>
             </div>
           </div>
         </div>
@@ -326,8 +326,8 @@ export const BookPage = () => {
                     style={{
                       padding: '10px 12px',
                       borderRadius: 14,
-                      background: isSelected ? '#E8F6EF' : '#FFFFFF',
-                      border: isSelected ? '2px solid #1E7B5A' : '1px solid rgba(15,42,68,0.08)',
+                      background: isSelected ? 'var(--orange-50)' : '#FFFFFF',
+                      border: isSelected ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                       display: 'flex',
                       alignItems: 'center',
                       gap: 8,
@@ -338,8 +338,8 @@ export const BookPage = () => {
                       width: 28,
                       height: 28,
                       borderRadius: 8,
-                      background: isSelected ? '#1E7B5A' : '#F1F5FB',
-                      color: isSelected ? '#FFFFFF' : '#1E7B5A',
+                      background: isSelected ? 'var(--orange-600)' : 'var(--navy-50)',
+                      color: isSelected ? '#FFFFFF' : 'var(--orange-600)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -347,7 +347,7 @@ export const BookPage = () => {
                     }}>
                       <Wrench size={15} />
                     </div>
-                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0F2A44' }}>
+                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                       {app.name}
                     </span>
                   </button>
@@ -358,7 +358,7 @@ export const BookPage = () => {
 
           {/* 2. Brand Selector */}
           <div className="card-white" style={{ padding: 16, borderRadius: 22 }}>
-            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: '#0F2A44', marginBottom: 8 }}>
+            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: 'var(--navy-900)', marginBottom: 8 }}>
               2. Appliance Manufacturer Brand
             </label>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -367,15 +367,15 @@ export const BookPage = () => {
                   key={b}
                   type="button"
                   onClick={() => setSelectedBrand(b)}
-                  className={`tap-effect ${selectedBrand === b ? 'badge-green-pill' : ''}`}
+                  className="tap-effect"
                   style={{
                     padding: '6px 12px',
                     borderRadius: 9999,
                     fontSize: '0.76rem',
                     fontWeight: 700,
-                    background: selectedBrand === b ? '#1E7B5A' : '#F1F5FB',
-                    color: selectedBrand === b ? '#FFFFFF' : '#0F2A44',
-                    border: '1px solid rgba(15,42,68,0.08)'
+                    background: selectedBrand === b ? 'var(--orange-600)' : 'var(--navy-50)',
+                    color: selectedBrand === b ? '#FFFFFF' : 'var(--navy-900)',
+                    border: '1px solid var(--border)'
                   }}
                 >
                   {b}
@@ -393,7 +393,7 @@ export const BookPage = () => {
                   width: '100%',
                   height: 40,
                   borderRadius: 12,
-                  border: '1px solid #CBD5E1',
+                  border: '1px solid var(--border)',
                   padding: '0 12px',
                   fontSize: '0.82rem'
                 }}
@@ -403,7 +403,7 @@ export const BookPage = () => {
 
           {/* 3. Common Symptoms & Details */}
           <div className="card-white" style={{ padding: 16, borderRadius: 22 }}>
-            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: '#0F2A44', marginBottom: 8 }}>
+            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: 'var(--navy-900)', marginBottom: 8 }}>
               3. Primary Issue Symptom
             </label>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
@@ -420,9 +420,9 @@ export const BookPage = () => {
                     padding: '6px 12px',
                     borderRadius: 12,
                     fontSize: '0.74rem',
-                    background: selectedSymptomChip === issue ? '#E8F6EF' : '#FFFFFF',
-                    color: selectedSymptomChip === issue ? '#1E7B5A' : '#4A5D6E',
-                    border: selectedSymptomChip === issue ? '1.5px solid #1E7B5A' : '1px solid #E2E8F0',
+                    background: selectedSymptomChip === issue ? 'var(--orange-50)' : '#FFFFFF',
+                    color: selectedSymptomChip === issue ? 'var(--orange-600)' : 'var(--text-muted)',
+                    border: selectedSymptomChip === issue ? '1.5px solid var(--orange-600)' : '1px solid var(--border)',
                     textAlign: 'left'
                   }}
                 >
@@ -439,7 +439,7 @@ export const BookPage = () => {
               style={{
                 width: '100%',
                 borderRadius: 12,
-                border: '1px solid #CBD5E1',
+                border: '1px solid var(--border)',
                 padding: '10px 12px',
                 fontSize: '0.82rem',
                 resize: 'none'
@@ -449,7 +449,7 @@ export const BookPage = () => {
 
           {/* 4. Date Strip */}
           <div className="card-white" style={{ padding: 16, borderRadius: 22 }}>
-            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: '#0F2A44', marginBottom: 8 }}>
+            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: 'var(--navy-900)', marginBottom: 8 }}>
               4. Preferred Date
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
@@ -461,13 +461,13 @@ export const BookPage = () => {
                   style={{
                     padding: '10px 12px',
                     borderRadius: 14,
-                    background: selectedDate === d.day ? '#E8F6EF' : '#FFFFFF',
-                    border: selectedDate === d.day ? '2px solid #1E7B5A' : '1px solid #E2E8F0',
+                    background: selectedDate === d.day ? 'var(--orange-50)' : '#FFFFFF',
+                    border: selectedDate === d.day ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                     textAlign: 'left'
                   }}
                 >
-                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0F2A44' }}>{d.day}</div>
-                  <div style={{ fontSize: '0.66rem', color: '#7E92A2' }}>{d.date}</div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--navy-900)' }}>{d.day}</div>
+                  <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>{d.date}</div>
                 </button>
               ))}
             </div>
@@ -475,7 +475,7 @@ export const BookPage = () => {
 
           {/* 5. 3-Hour Arrival Window */}
           <div className="card-white" style={{ padding: 16, borderRadius: 22 }}>
-            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: '#0F2A44', marginBottom: 8 }}>
+            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: 'var(--navy-900)', marginBottom: 8 }}>
               5. 3-Hour Arrival Window
             </label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -488,8 +488,8 @@ export const BookPage = () => {
                     justifyContent: 'space-between',
                     padding: '8px 12px',
                     borderRadius: 12,
-                    background: selectedSlot === slot.label ? '#E8F6EF' : '#FFFFFF',
-                    border: selectedSlot === slot.label ? '1.5px solid #1E7B5A' : '1px solid #E2E8F0',
+                    background: selectedSlot === slot.label ? 'var(--orange-50)' : '#FFFFFF',
+                    border: selectedSlot === slot.label ? '1.5px solid var(--orange-600)' : '1px solid var(--border)',
                     cursor: 'pointer'
                   }}
                 >
@@ -499,9 +499,9 @@ export const BookPage = () => {
                       name="slot"
                       checked={selectedSlot === slot.label}
                       onChange={() => setSelectedSlot(slot.label)}
-                      style={{ accentColor: '#1E7B5A' }}
+                      style={{ accentColor: 'var(--orange-600)' }}
                     />
-                    <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F2A44' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                       {slot.label}
                     </span>
                   </div>
@@ -620,15 +620,15 @@ export const BookPage = () => {
                   gap: 8,
                   padding: '10px 14px',
                   borderRadius: 14,
-                  background: '#F1F5FB',
-                  border: '1px dashed #94A3B8',
+                  background: 'var(--navy-50)',
+                  border: '1px dashed var(--border)',
                   cursor: 'pointer',
                   fontSize: '0.78rem',
                   fontWeight: 700,
-                  color: '#0F2A44'
+                  color: 'var(--navy-900)'
                 }}
               >
-                <Camera size={18} color="#1E7B5A" />
+                <Camera size={18} color="var(--orange-600)" />
                 <span>Upload Photo</span>
                 <input
                   type="file"
@@ -639,7 +639,7 @@ export const BookPage = () => {
               </label>
 
               {photoPreview && (
-                <div style={{ width: 44, height: 44, borderRadius: 10, overflow: 'hidden', border: '2px solid #1E7B5A' }}>
+                <div style={{ width: 44, height: 44, borderRadius: 10, overflow: 'hidden', border: '2px solid var(--orange-600)' }}>
                   <img src={photoPreview} alt="Appliance" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
               )}

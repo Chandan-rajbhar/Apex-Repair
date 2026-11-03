@@ -66,8 +66,8 @@ export const ServicesPage = () => {
         style={{
           borderRadius: 24,
           padding: '20px 18px',
-          background: 'linear-gradient(135deg, #F2FBF7 0%, #E2F5EC 100%)',
-          border: '1px solid rgba(30, 123, 90, 0.2)',
+          background: 'var(--grad-warm)',
+          border: '1px solid rgba(232, 84, 30, 0.2)',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -77,10 +77,10 @@ export const ServicesPage = () => {
             <span className="badge badge-mint" style={{ marginBottom: 6 }}>
               EXPERT CARE • OEM CERTIFIED
             </span>
-            <h1 style={{ fontSize: '1.45rem', color: '#0F2A44', lineHeight: 1.25, marginTop: 4, marginBottom: 6 }}>
+            <h1 style={{ fontSize: '1.45rem', color: 'var(--navy-900)', lineHeight: 1.25, marginTop: 4, marginBottom: 6 }}>
               Advanced Appliance Care for Every Room
             </h1>
-            <p style={{ fontSize: '0.78rem', color: '#4A5D6E', lineHeight: 1.4, marginBottom: 14 }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.4, marginBottom: 14 }}>
               Factory-trained master technicians providing transparent upfront quotes, same-day dispatch, and 90-day guarantee.
             </p>
             <button
@@ -213,8 +213,8 @@ export const ServicesPage = () => {
                   position: 'absolute',
                   top: 6,
                   left: 6,
-                  background: 'rgba(15, 42, 68, 0.85)',
-                  color: '#A7F3D0',
+                  background: 'rgba(14, 26, 54, 0.85)',
+                  color: 'var(--amber-400)',
                   fontSize: '0.58rem',
                   padding: '2px 6px'
                 }}
@@ -229,12 +229,12 @@ export const ServicesPage = () => {
                 <span className="badge badge-mint" style={{ fontSize: '0.62rem', padding: '2px 8px' }}>
                   {app.tag}
                 </span>
-                <ChevronRight size={16} color="#7E92A2" />
+                <ChevronRight size={16} color="var(--text-muted)" />
               </div>
 
               <h3 style={{
                 fontSize: '0.98rem',
-                color: '#0F2A44',
+                color: 'var(--navy-900)',
                 lineHeight: 1.25,
                 margin: '4px 0 2px 0'
               }}>
@@ -243,7 +243,7 @@ export const ServicesPage = () => {
 
               <p style={{
                 fontSize: '0.72rem',
-                color: '#4A5D6E',
+                color: 'var(--text-muted)',
                 lineHeight: 1.3,
                 marginBottom: 6,
                 display: '-webkit-box',
@@ -255,18 +255,18 @@ export const ServicesPage = () => {
               </p>
 
               {/* Duration and Warranty info */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.68rem', color: '#7E92A2', marginBottom: 8 }}>
-                <Clock size={12} color="#1E7B5A" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: 8 }}>
+                <Clock size={12} color="var(--orange-600)" />
                 <span>{app.estDuration} • {app.warranty}</span>
               </div>
 
               {/* Bottom Row: Price + Details + Book Now */}
               <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
                 <div>
-                  <span style={{ fontSize: '0.94rem', fontWeight: 800, color: '#0F2A44' }}>
+                  <span style={{ fontSize: '0.94rem', fontWeight: 800, color: 'var(--navy-900)' }}>
                     ${app.diagnosticFee}
                   </span>
-                  <span style={{ fontSize: '0.65rem', color: '#7E92A2', marginLeft: 3 }}>
+                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginLeft: 3 }}>
                     Diag
                   </span>
                 </div>
@@ -311,7 +311,7 @@ export const ServicesPage = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                 <div>
                   <span className="badge badge-mint">{selectedServiceForDetail.tag}</span>
-                  <h2 style={{ fontSize: '1.4rem', color: '#0F2A44', marginTop: 4 }}>
+                  <h2 style={{ fontSize: '1.4rem', color: 'var(--navy-900)', marginTop: 4 }}>
                     {selectedServiceForDetail.name}
                   </h2>
                 </div>
@@ -330,7 +330,7 @@ export const ServicesPage = () => {
               </div>
 
               {/* Description */}
-              <p style={{ fontSize: '0.82rem', color: '#4A5D6E', lineHeight: 1.45, marginBottom: 14 }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.45, marginBottom: 14 }}>
                 {selectedServiceForDetail.fullDesc}
               </p>
 
@@ -338,32 +338,32 @@ export const ServicesPage = () => {
               <div style={{
                 padding: '12px 14px',
                 borderRadius: 16,
-                background: '#E8F6EF',
-                border: '1px solid rgba(30, 123, 90, 0.25)',
+                background: 'var(--orange-50)',
+                border: '1px solid rgba(232, 84, 30, 0.25)',
                 marginBottom: 16
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <div style={{ fontSize: '0.86rem', fontWeight: 800, color: '#1E7B5A' }}>
+                    <div style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--orange-600)' }}>
                       ${selectedServiceForDetail.diagnosticFee} Multi-Point Diagnostic
                     </div>
-                    <div style={{ fontSize: '0.7rem', color: '#0F2A44' }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--navy-900)' }}>
                       100% credited toward total bill if you approve repair
                     </div>
                   </div>
-                  <ShieldCheck size={24} color="#1E7B5A" />
+                  <ShieldCheck size={24} color="var(--orange-600)" />
                 </div>
               </div>
 
               {/* Common Issues Handled */}
               <div style={{ marginBottom: 16 }}>
-                <h4 style={{ fontSize: '0.88rem', color: '#0F2A44', fontWeight: 700, marginBottom: 8 }}>
+                <h4 style={{ fontSize: '0.88rem', color: 'var(--navy-900)', fontWeight: 700, marginBottom: 8 }}>
                   Common Symptoms Handled:
                 </h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {selectedServiceForDetail.commonIssues.map((issue, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.78rem', color: '#334155' }}>
-                      <CheckCircle2 size={15} color="#1E7B5A" style={{ flexShrink: 0 }} />
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.78rem', color: 'var(--text)' }}>
+                      <CheckCircle2 size={15} color="var(--success)" style={{ flexShrink: 0 }} />
                       <span>{issue}</span>
                     </div>
                   ))}

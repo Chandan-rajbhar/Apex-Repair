@@ -59,7 +59,7 @@ export const HomePage = () => {
           width: 140,
           height: 140,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(47,166,124,0.3) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(242,107,45,0.25) 0%, transparent 70%)',
           pointerEvents: 'none'
         }} />
 
@@ -67,7 +67,7 @@ export const HomePage = () => {
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 12 }}>
           <span className="badge" style={{
             background: 'rgba(255, 255, 255, 0.16)',
-            color: '#A7F3D0',
+            color: 'var(--amber-400)',
             border: '1px solid rgba(255, 255, 255, 0.25)',
             letterSpacing: '0.06em'
           }}>
@@ -85,7 +85,7 @@ export const HomePage = () => {
           Precision Care,<br />
           Flawless Performance,<br />
           <span style={{
-            background: 'linear-gradient(135deg, #A7F3D0 0%, #FDE68A 100%)',
+            background: 'linear-gradient(135deg, #FFB547 0%, #E8541E 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>
@@ -110,12 +110,9 @@ export const HomePage = () => {
             onClick={() => navigate('/book')}
             className="btn btn-primary tap-effect shine-sweep"
             style={{
-              background: '#FFFFFF',
-              color: '#0F2A44',
               padding: '10px 18px',
               fontSize: '0.86rem',
-              fontWeight: 800,
-              boxShadow: '0 4px 14px rgba(0,0,0,0.15)'
+              fontWeight: 800
             }}
           >
             Book Consultation <ArrowRight size={15} />
@@ -131,7 +128,7 @@ export const HomePage = () => {
             borderRadius: 9999,
             border: '1px solid rgba(255, 255, 255, 0.15)'
           }}>
-            <Shield size={13} color="#FDE68A" />
+            <Shield size={13} color="var(--amber-400)" />
             <span style={{ fontSize: '0.7rem', color: '#FFFFFF', fontWeight: 600 }}>
               Trusted by <strong>12,400+</strong> Clients
             </span>
@@ -146,7 +143,7 @@ export const HomePage = () => {
         className="tap-effect shine-sweep"
         style={{
           borderRadius: 20,
-          background: 'var(--grad-navy)',
+          background: 'var(--grad-header)',
           color: '#FFFFFF',
           padding: '12px 16px',
           display: 'flex',
@@ -162,12 +159,12 @@ export const HomePage = () => {
             width: 38,
             height: 38,
             borderRadius: 12,
-            background: 'rgba(30, 123, 90, 0.5)',
-            border: '1px solid rgba(47, 166, 124, 0.6)',
+            background: 'rgba(242, 107, 45, 0.25)',
+            border: '1px solid rgba(255, 181, 71, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#A7F3D0'
+            color: 'var(--amber-400)'
           }}>
             <Shield size={20} />
           </div>
@@ -185,10 +182,8 @@ export const HomePage = () => {
         </div>
 
         <button
-          className="btn btn-xs"
+          className="btn btn-xs btn-ghost"
           style={{
-            background: '#FFFFFF',
-            color: '#0F2A44',
             padding: '7px 14px',
             fontSize: '0.74rem',
             fontWeight: 800,
@@ -246,8 +241,8 @@ export const HomePage = () => {
           style={{
             padding: '14px 16px',
             borderRadius: 20,
-            background: 'linear-gradient(135deg, #E8F6EF 0%, #D8F2E4 100%)',
-            border: '1.5px solid rgba(30, 123, 90, 0.3)',
+            background: 'var(--grad-warm)',
+            border: '1.5px solid rgba(232, 84, 30, 0.25)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -259,7 +254,7 @@ export const HomePage = () => {
               width: 36,
               height: 36,
               borderRadius: 12,
-              background: '#1E7B5A',
+              background: 'var(--orange-600)',
               color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
@@ -269,14 +264,14 @@ export const HomePage = () => {
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#0F2A44' }}>
+                <span style={{ fontSize: '0.84rem', fontWeight: 800, color: 'var(--navy-900)' }}>
                   Repair #{activeBooking.id}
                 </span>
                 <span className="badge badge-mint" style={{ fontSize: '0.62rem' }}>
                   Step {activeBooking.currentStep}/9
                 </span>
               </div>
-              <div style={{ fontSize: '0.72rem', color: '#1E7B5A', fontWeight: 600 }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--orange-600)', fontWeight: 600 }}>
                 {activeBooking.applianceName} • Tech: {activeBooking.technician?.name || 'Marcus'}
               </div>
             </div>
@@ -285,14 +280,14 @@ export const HomePage = () => {
           <span
             className="btn btn-xs glow-pulse-primary"
             style={{
-              background: '#1E7B5A',
+              background: 'var(--grad-cta)',
               color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
               gap: 4
             }}
           >
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#A7F3D0' }} />
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#FFFFFF' }} />
             Track Live &gt;
           </span>
         </div>
@@ -304,14 +299,14 @@ export const HomePage = () => {
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <Sparkles size={18} color="#1E7B5A" />
-            <h3 style={{ fontSize: '1.1rem', color: '#0F2A44' }}>
+            <Sparkles size={18} color="var(--orange-600)" />
+            <h3 style={{ fontSize: '1.1rem', color: 'var(--navy-900)' }}>
               Our Recommended Services
             </h3>
           </div>
           <button
             onClick={() => navigate('/services')}
-            style={{ fontSize: '0.76rem', color: '#1E7B5A', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 2 }}
+            style={{ fontSize: '0.76rem', color: 'var(--orange-600)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 2 }}
           >
             View All &gt;
           </button>
@@ -344,8 +339,8 @@ export const HomePage = () => {
                     position: 'absolute',
                     top: 8,
                     left: 8,
-                    background: 'rgba(15, 42, 68, 0.85)',
-                    color: '#A7F3D0',
+                    background: 'rgba(14, 26, 54, 0.85)',
+                    color: 'var(--amber-400)',
                     fontSize: '0.6rem',
                     border: '1px solid rgba(255,255,255,0.2)'
                   }}
@@ -375,7 +370,7 @@ export const HomePage = () => {
 
               {/* Content */}
               <div style={{ padding: '10px 12px 14px 12px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <div style={{ fontSize: '0.65rem', color: '#7E92A2', fontWeight: 600, textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase' }}>
                   {app.tag}
                 </div>
 
@@ -383,7 +378,7 @@ export const HomePage = () => {
                   fontFamily: 'var(--font-serif)',
                   fontSize: '0.9rem',
                   fontWeight: 700,
-                  color: '#0F2A44',
+                  color: 'var(--navy-900)',
                   lineHeight: 1.25,
                   margin: '2px 0 6px 0',
                   minHeight: 36
@@ -392,10 +387,10 @@ export const HomePage = () => {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 10 }}>
-                  <span style={{ fontSize: '0.94rem', fontWeight: 800, color: '#0F2A44' }}>
+                  <span style={{ fontSize: '0.94rem', fontWeight: 800, color: 'var(--navy-900)' }}>
                     ${app.diagnosticFee}
                   </span>
-                  <span style={{ fontSize: '0.68rem', color: '#1E7B5A', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--orange-600)', fontWeight: 600 }}>
                     Diagnostic
                   </span>
                 </div>
@@ -432,7 +427,7 @@ export const HomePage = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          boxShadow: 'var(--shadow-glow-orange)'
+          boxShadow: 'var(--glow-orange)'
         }}
       >
         <div>
@@ -451,8 +446,8 @@ export const HomePage = () => {
           href={`tel:${COMPANY_INFO.phoneRaw}`}
           className="btn tap-effect"
           style={{
-            background: '#FFFFFF',
-            color: '#E8541E',
+            background: 'var(--navy-900)',
+            color: '#FFFFFF',
             padding: '10px 14px',
             fontSize: '0.8rem',
             fontWeight: 800,
@@ -468,7 +463,7 @@ export const HomePage = () => {
           3-Step "How It Works" Flow
           -------------------------------------------------------------------------- */}
       <div className="card-white" style={{ padding: '18px 16px', borderRadius: 24 }}>
-        <h3 style={{ fontSize: '1.05rem', color: '#0F2A44', marginBottom: 12 }}>
+        <h3 style={{ fontSize: '1.05rem', color: 'var(--navy-900)', marginBottom: 12 }}>
           How Apex Repair Works
         </h3>
 
@@ -478,8 +473,8 @@ export const HomePage = () => {
               width: 28,
               height: 28,
               borderRadius: '50%',
-              background: '#E8F6EF',
-              color: '#1E7B5A',
+              background: 'var(--orange-50)',
+              color: 'var(--orange-600)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -490,10 +485,10 @@ export const HomePage = () => {
               1
             </div>
             <div>
-              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: '#0F2A44' }}>
+              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                 Book Your 3-Hour Slot
               </div>
-              <div style={{ fontSize: '0.72rem', color: '#64748B', lineHeight: 1.35 }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
                 Choose your appliance, brand, and preferred morning or afternoon window. Zero upfront payment required.
               </div>
             </div>
@@ -504,8 +499,8 @@ export const HomePage = () => {
               width: 28,
               height: 28,
               borderRadius: '50%',
-              background: '#E8F6EF',
-              color: '#1E7B5A',
+              background: 'var(--orange-50)',
+              color: 'var(--orange-600)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -516,10 +511,10 @@ export const HomePage = () => {
               2
             </div>
             <div>
-              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: '#0F2A44' }}>
+              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                 Master Diagnostic & Upfront Quote
               </div>
-              <div style={{ fontSize: '0.72rem', color: '#64748B', lineHeight: 1.35 }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
                 Our technician inspects your machine with digital telemetry and submits an itemized quote. The $79 fee is credited 100% to repair!
               </div>
             </div>
@@ -530,8 +525,8 @@ export const HomePage = () => {
               width: 28,
               height: 28,
               borderRadius: '50%',
-              background: '#E8F6EF',
-              color: '#1E7B5A',
+              background: 'var(--orange-50)',
+              color: 'var(--orange-600)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -542,10 +537,10 @@ export const HomePage = () => {
               3
             </div>
             <div>
-              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: '#0F2A44' }}>
+              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                 OEM Repair & 90-Day Guarantee
               </div>
-              <div style={{ fontSize: '0.72rem', color: '#64748B', lineHeight: 1.35 }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
                 Parts are installed from our fully stocked vans. Completed jobs receive a certified 90-day parts & labor warranty.
               </div>
             </div>

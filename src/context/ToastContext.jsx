@@ -29,18 +29,18 @@ export const ToastProvider = ({ children }) => {
       <div className="toast-stack" aria-live="polite">
         {toasts.map((t) => {
           let Icon = CheckCircle2;
-          let color = '#1E7B5A';
+          let color = 'var(--success)';
           let bgClass = 'glass-strong';
 
           if (t.type === 'error') {
             Icon = XCircle;
-            color = '#DC2626';
+            color = 'var(--danger)';
           } else if (t.type === 'warning') {
             Icon = AlertCircle;
-            color = '#D97706';
+            color = 'var(--amber-400)';
           } else if (t.type === 'info') {
             Icon = Info;
-            color = '#0F2A44';
+            color = 'var(--navy-800)';
           }
 
           return (
@@ -49,7 +49,7 @@ export const ToastProvider = ({ children }) => {
               className={`toast-item ${bgClass}`}
               style={{
                 borderLeft: `4px solid ${color}`,
-                boxShadow: '0 8px 24px rgba(15, 42, 68, 0.12)'
+                boxShadow: 'var(--shadow-md)'
               }}
             >
               <Icon size={20} color={color} style={{ flexShrink: 0 }} />

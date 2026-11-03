@@ -60,13 +60,13 @@ export const ReviewModal = ({ isOpen, onClose, onSubmitReview, technicianName = 
                   </button>
                 ))}
               </div>
-              <div style={{ fontSize: '0.74rem', color: '#1E7B5A', fontWeight: 700, marginTop: 6 }}>
+              <div style={{ fontSize: '0.74rem', color: 'var(--orange-600)', fontWeight: 700, marginTop: 6 }}>
                 {rating === 5 ? 'Exceptional 5-Star Craftsmanship' : `${rating} Stars Selected`}
               </div>
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#0F2A44', marginBottom: 6 }}>
+              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: 6 }}>
                 Comments or Technician Notes
               </label>
               <textarea

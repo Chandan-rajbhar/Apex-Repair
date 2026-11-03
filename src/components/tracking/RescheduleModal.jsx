@@ -58,12 +58,12 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
                     style={{
                       padding: '10px 12px',
                       borderRadius: 14,
-                      background: selectedDate === d.label ? '#E8F6EF' : '#FFFFFF',
-                      border: selectedDate === d.label ? '2px solid #1E7B5A' : '1px solid #CBD5E1',
+                      background: selectedDate === d.label ? 'var(--orange-50)' : '#FFFFFF',
+                      border: selectedDate === d.label ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                       textAlign: 'left'
                     }}
                   >
-                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0F2A44' }}>{d.label}</div>
+                    <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--navy-900)' }}>{d.label}</div>
                     <div style={{ fontSize: '0.66rem', color: '#7E92A2' }}>{d.sub}</div>
                   </button>
                 ))}
@@ -71,7 +71,7 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#0F2A44', marginBottom: 8 }}>
+              <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: 8 }}>
                 Select Preferred 3-Hour Arrival Window
               </label>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -84,8 +84,8 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
                       justifyContent: 'space-between',
                       padding: '10px 14px',
                       borderRadius: 14,
-                      background: selectedSlot === slot.label ? '#E8F6EF' : '#FFFFFF',
-                      border: selectedSlot === slot.label ? '2px solid #1E7B5A' : '1px solid #CBD5E1',
+                      background: selectedSlot === slot.label ? 'var(--orange-50)' : '#FFFFFF',
+                      border: selectedSlot === slot.label ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                       cursor: 'pointer'
                     }}
                   >
@@ -95,13 +95,13 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
                         name="reschedule-slot"
                         checked={selectedSlot === slot.label}
                         onChange={() => setSelectedSlot(slot.label)}
-                        style={{ accentColor: '#1E7B5A' }}
+                        style={{ accentColor: 'var(--orange-600)' }}
                       />
-                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0F2A44' }}>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                         {slot.label}
                       </span>
                     </div>
-                    <span className="badge badge-mint" style={{ fontSize: '0.62rem' }}>
+                    <span className="badge badge-warm" style={{ fontSize: '0.62rem' }}>
                       {slot.tag}
                     </span>
                   </label>

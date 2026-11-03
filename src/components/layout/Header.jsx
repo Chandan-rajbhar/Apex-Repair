@@ -29,7 +29,7 @@ export const Header = () => {
       desc: activeBooking.currentStep === 4 ? 'Van en route • ETA 12 mins' : `Currently in step ${activeBooking.currentStep}/9`,
       time: 'Just now',
       icon: Truck,
-      color: '#1E7B5A',
+      color: 'var(--orange-600)',
       link: '/track'
     } : null,
     {
@@ -38,7 +38,7 @@ export const Header = () => {
       desc: 'Master technicians available in your zip code until 9 PM.',
       time: '1h ago',
       icon: Shield,
-      color: '#0F2A44',
+      color: 'var(--navy-800)',
       link: '/services'
     },
     {
@@ -47,7 +47,7 @@ export const Header = () => {
       desc: 'All completed repairs covered with 100% parts & labor warranty.',
       time: 'Today',
       icon: CheckCircle2,
-      color: '#B45309',
+      color: 'var(--amber-400)',
       link: '/more'
     }
   ].filter(Boolean);

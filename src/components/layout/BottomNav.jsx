@@ -71,7 +71,7 @@ export const BottomNav = () => {
                     width: 7,
                     height: 7,
                     borderRadius: '50%',
-                    background: '#10B981',
+                    background: 'var(--amber-400)',
                     border: '1.5px solid #FFFFFF'
                   }}
                 />

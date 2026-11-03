@@ -1,0 +1,303 @@
+:root {
+  /* ===== Brand colors (from Apex screenshot) ===== */
+  --navy-950: #0E1A36;
+  --navy-900: #16264A;   /* headings */
+  --navy-800: #223F6B;
+  --navy-700: #2F5082;   /* header mid */
+  --navy-600: #3C5F94;
+  --navy-100: #E6EDF8;
+  --navy-50:  #F1F5FB;
+
+  --orange-500: #F26B2D;
+  --orange-600: #E8541E; /* main CTA */
+  --orange-700: #C93E10;
+  --amber-400:  #FFB547; /* active underline, small accents */
+  --amber-200:  #FFE2B0;
+  --orange-50:  #FFF3EB;
+
+  --success: #1FA971;    /* only for completed/verified states */
+  --danger:  #D93A3A;
+
+  --bg-page:   #F6F8FC;
+  --surface:   #FFFFFF;
+  --border:    #E3E9F3;
+  --text:      #16264A;
+  --text-muted:#4A5A78;
+
+  /* ===== Gradients ===== */
+  --grad-header:  linear-gradient(135deg, #223F6B 0%, #2F5082 50%, #3C5F94 100%);
+  --grad-navy:    linear-gradient(145deg, #0E1A36 0%, #223F6B 55%, #3C5F94 100%);
+  --grad-hero:    radial-gradient(circle at 15% 0%, rgba(255,255,255,.22), transparent 45%), var(--grad-navy);
+  --grad-cta:     linear-gradient(135deg, #FF8A4C 0%, #E8541E 55%, #C93E10 100%);
+  --grad-soft:    linear-gradient(160deg, #FFFFFF 0%, #F1F5FB 100%);
+  --grad-warm:    linear-gradient(160deg, #FFF3EB 0%, #FFE2B0 140%);
+  --grad-page:
+    radial-gradient(60% 40% at 90% 0%, rgba(242,107,45,.10), transparent 70%),
+    radial-gradient(50% 40% at 0% 20%, rgba(60,95,148,.12), transparent 70%),
+    linear-gradient(180deg, #F6F8FC 0%, #FFFFFF 100%);
+  --grad-text:    linear-gradient(135deg, #FF8A4C, #E8541E 60%, #C93E10);
+
+  /* ===== Shadows & glow ===== */
+  --shadow-sm: 0 2px 8px rgba(22,38,74,.08);
+  --shadow-md: 0 10px 30px rgba(22,38,74,.12);
+  --shadow-lg: 0 24px 60px rgba(22,38,74,.18);
+  --glow-orange: 0 8px 24px rgba(232,84,30,.38);
+  --glow-navy:   0 8px 24px rgba(47,80,130,.35);
+
+  /* Compatibility mappings for complete theme transition */
+  --primary-500: var(--orange-500);
+  --primary-600: var(--orange-600);
+  --primary-700: var(--orange-700);
+  --primary-50:  var(--orange-50);
+  --primary-100: var(--orange-50);
+  --mint-tint:   var(--navy-50);
+  --mint-soft:   var(--orange-50);
+  --grad-primary: var(--grad-cta);
+  --grad-mint:    var(--grad-soft);
+  --shadow-glow-primary: var(--glow-orange);
+}
+
+body { background: var(--grad-page); color: var(--text); }
+
+/* Root container desktop background override with navy & orange glows */
+#root {
+  background: var(--grad-page) !important;
+}
+
+/* ===== Glass ===== */
+.glass {
+  background: rgba(255,255,255,.62);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), var(--shadow-md);
+}
+.glass-dark {
+  background: rgba(34,63,107,.55);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), var(--shadow-md);
+  color: #fff;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgba(255,255,255,.92); }
+  .glass-dark { background: rgba(34,63,107,.94); }
+}
+
+/* ===== Glossy buttons ===== */
+.btn-primary, .btn-cta {
+  position: relative; overflow: hidden; isolation: isolate;
+  color: #fff !important; border: 0;
+  background: var(--grad-cta) !important;
+  box-shadow: var(--glow-orange), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.12) !important;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-primary::before, .btn-cta::before {           /* top gloss */
+  content: ""; position: absolute; inset: 0 0 50% 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,0));
+  border-radius: inherit;
+}
+.btn-primary::after, .btn-cta::after {             /* moving shine disabled to remove flashing */
+  display: none !important;
+}
+.btn-primary:hover, .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(232,84,30,.45), inset 0 1px 0 rgba(255,255,255,.5) !important; }
+.btn-primary:active, .btn-cta:active { transform: scale(.98); }
+
+.btn-navy {
+  position: relative; overflow: hidden; color: #fff !important;
+  background: var(--grad-header) !important;
+  box-shadow: var(--glow-navy), inset 0 1px 0 rgba(255,255,255,.3) !important;
+}
+.btn-ghost {
+  background: var(--grad-soft) !important; color: var(--navy-900) !important;
+  border: 1px solid var(--border) !important; box-shadow: var(--shadow-sm), inset 0 1px 0 #fff !important;
+}
+
+.btn-outline-primary {
+  background: transparent !important;
+  color: var(--orange-600) !important;
+  border: 1.5px solid var(--orange-600) !important;
+}
+.btn-outline-primary:hover {
+  background: var(--orange-50) !important;
+}
+
+/* ===== Cards ===== */
+.card, .card-white {
+  position: relative; background: var(--grad-soft);
+  border: 1px solid var(--border); border-radius: 24px;
+  box-shadow: var(--shadow-sm), inset 0 1px 0 #fff;
+}
+.card::before, .card-white::before {               /* top-edge gloss */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.7), transparent 38%);
+  opacity: .6;
+}
+.card-featured {                                   /* orange gradient border */
+  border: 1.5px solid transparent;
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(135deg,#FFB547,#E8541E,#2F5082) border-box;
+}
+
+/* ===== Header / nav / hero ===== */
+.app-header {
+  background: var(--grad-header) !important;
+  color: #fff !important;
+  box-shadow: var(--shadow-md) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.15) !important;
+}
+.app-header .brand-title {
+  color: #FFFFFF !important;
+}
+.app-header .brand-title span {
+  color: var(--amber-400) !important;
+}
+.app-header .brand-tagline {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+.app-header .brand-icon-wrap {
+  background: var(--grad-cta) !important;
+  box-shadow: var(--glow-orange) !important;
+}
+.app-header .icon-btn-header {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #FFFFFF !important;
+}
+.app-header .header-login-btn {
+  background: var(--grad-cta) !important;
+  box-shadow: var(--glow-orange) !important;
+}
+.app-header .header-avatar-btn {
+  background: var(--grad-cta) !important;
+  border-color: #FFFFFF !important;
+  box-shadow: var(--glow-orange) !important;
+}
+
+/* Bottom Nav bar */
+.bottom-nav-container {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+}
+.nav-item {
+  color: var(--text-muted) !important;
+}
+.nav-item.active, .nav-active {
+  color: var(--orange-600) !important;
+}
+.nav-item.active svg {
+  stroke: var(--orange-600) !important;
+}
+.nav-active-dot {
+  background: var(--amber-400) !important;
+  box-shadow: 0 0 8px rgba(255, 181, 71, 0.8) !important;
+}
+.center-book-btn {
+  background: var(--grad-cta) !important;
+  box-shadow: var(--glow-orange), inset 0 1px 0 rgba(255,255,255,0.45) !important;
+}
+.center-book-label {
+  color: var(--orange-600) !important;
+}
+
+.hero { background: var(--grad-hero); color: #fff; position: relative; overflow: hidden; }
+.text-gradient { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Filter chips */
+.filter-chip.active {
+  background: var(--navy-900) !important;
+  color: #FFFFFF !important;
+  border-color: var(--navy-900) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Quick tile icons */
+.tile-icon-box {
+  background: var(--orange-50) !important;
+  color: var(--orange-600) !important;
+}
+
+/* Badges */
+.badge-mint {
+  background: var(--orange-50) !important;
+  color: var(--orange-700) !important;
+  border: 1px solid rgba(232, 84, 30, 0.22) !important;
+}
+.badge-navy {
+  background: var(--navy-100) !important;
+  color: var(--navy-900) !important;
+  border: 1px solid rgba(22, 38, 74, 0.18) !important;
+}
+.badge-gold, .badge-warm {
+  background: var(--orange-50) !important;
+  color: var(--orange-700) !important;
+  border: 1px solid rgba(255, 181, 71, 0.35) !important;
+}
+.badge-green-pill, .badge-success {
+  background: rgba(31, 169, 113, 0.12) !important;
+  color: var(--success) !important;
+  border: 1px solid rgba(31, 169, 113, 0.25) !important;
+}
+
+/* Floating Chat Trigger */
+.floating-chat-trigger {
+  background: var(--grad-cta) !important;
+  box-shadow: var(--glow-orange) !important;
+  border: 2px solid rgba(255,255,255,0.6) !important;
+}
+
+/* Glow rings */
+.glow-pulse-primary {
+  animation: pulseRingOrange 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1) !important;
+}
+
+@keyframes pulseRingOrange {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 84, 30, 0.65), 0 8px 24px rgba(232, 84, 30, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(232, 84, 30, 0), 0 8px 24px rgba(232, 84, 30, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 84, 30, 0), 0 8px 24px rgba(232, 84, 30, 0.35);
+  }
+}
+
+/* Status / Timeline Stepper */
+.step-done {
+  background: linear-gradient(135deg, #34C48A, #1FA971) !important;
+  color: #fff !important;
+}
+.step-current {
+  background: var(--grad-cta) !important;
+  color: #fff !important;
+  animation: pulseRing 2s infinite !important;
+}
+.step-next {
+  background: var(--navy-50) !important;
+  color: var(--text-muted) !important;
+}
+
+/* Background Blobs (Soft navy & warm orange glow) */
+.bg-blob-1 {
+  background: #F26B2D !important;
+  opacity: 0.16 !important;
+}
+.bg-blob-2 {
+  background: #2F5082 !important;
+  opacity: 0.20 !important;
+}
+.bg-blob-3 {
+  background: #FFB547 !important;
+  opacity: 0.15 !important;
+}
+
+@keyframes shineSweep { 0%, 100% { display: none; opacity: 0; } }
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(232,84,30,.45); }
+  100% { box-shadow: 0 0 0 14px rgba(232,84,30,0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary::after, .btn-cta::after, .step-current, .glow-pulse-primary { animation: none !important; }
+}

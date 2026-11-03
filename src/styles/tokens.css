@@ -1,74 +1,91 @@
 /* ==========================================================================
-   Apex Appliance Repair - Design Tokens
+   Apex Appliance Repair - Design Tokens (Navy & Orange Theme)
    ========================================================================== */
 
 :root {
-  /* Brand Palette */
-  --primary-50: #F2FBF7;
-  --primary-100: #E1F6ED;
-  --primary-200: #C1EDD9;
-  --primary-300: #8EDBB8;
-  --primary-400: #4FC293;
-  --primary-500: #2FA67C;
-  --primary-600: #1E7B5A; /* Base Primary Green */
-  --primary-700: #145A42;
-  --primary-800: #0F3F2F;
-  --primary-900: #09261C;
-
-  /* Navy Shades */
-  --navy-50: #F1F5FB;
-  --navy-100: #E1EAF4;
-  --navy-200: #C2D5E8;
+  /* ===== Brand colors (Apex Professional Navy + Orange) ===== */
+  --navy-950: #0E1A36;
+  --navy-900: #16264A;   /* headings */
+  --navy-800: #223F6B;
+  --navy-700: #2F5082;   /* header mid */
+  --navy-600: #3C5F94;
   --navy-500: #386A94;
-  --navy-700: #17405F;
-  --navy-800: #12334D;
-  --navy-900: #0F2A44; /* Base Dark Navy */
-  --navy-950: #091929;
+  --navy-200: #C2D5E8;
+  --navy-100: #E6EDF8;
+  --navy-50:  #F1F5FB;
+
+  --orange-500: #F26B2D;
+  --orange-600: #E8541E; /* main CTA */
+  --orange-700: #C93E10;
+  --amber-400:  #FFB547; /* active underline, small accents */
+  --amber-200:  #FFE2B0;
+  --orange-50:  #FFF3EB;
+
+  --success: #1FA971;    /* only for completed/verified states */
+  --danger:  #D93A3A;
+
+  --bg-page:   #F6F8FC;
+  --surface:   #FFFFFF;
+  --border:    #E3E9F3;
+  --text:      #16264A;
+  --text-main: #16264A;
+  --text-secondary: #4A5A78;
+  --text-muted:#4A5A78;
+  --text-light: #FFFFFF;
+
+  --border-light: rgba(22, 38, 74, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.7);
+  --border-glass-dark: rgba(255, 255, 255, 0.18);
+
+  /* Primary Brand Aliases -> Orange CTA */
+  --primary-50:  var(--orange-50);
+  --primary-100: var(--amber-200);
+  --primary-500: var(--orange-500);
+  --primary-600: var(--orange-600);
+  --primary-700: var(--orange-700);
 
   /* Accent & Utility */
-  --mint-tint: #E8F6EF;
-  --mint-soft: #F2FBF7;
-  --page-bg: #F1F5FB;
-  --gold-accent: #FDE68A;
-  --gold-dark: #B45309;
-  --gold-amber: #D97706;
-  --cta-orange: #E8541E;
-  --cta-orange-hover: #FF7A3D;
-  --cta-orange-dark: #C73E10;
-
-  /* Neutrals */
-  --text-main: #0F2A44;
-  --text-secondary: #4A5D6E;
-  --text-muted: #7E92A2;
-  --text-light: #FFFFFF;
-  --border-light: rgba(15, 42, 68, 0.08);
-  --border-glass: rgba(255, 255, 255, 0.65);
-  --border-glass-dark: rgba(255, 255, 255, 0.15);
+  --mint-tint:   var(--navy-50);
+  --mint-soft:   var(--orange-50);
+  --gold-accent: var(--amber-400);
+  --gold-dark:   #B45309;
+  --gold-amber:  var(--amber-400);
+  --cta-orange:  var(--orange-600);
+  --cta-orange-hover: var(--orange-500);
+  --cta-orange-dark:  var(--orange-700);
 
   /* Gradients */
-  --grad-primary: linear-gradient(135deg, #2FA67C 0%, #1E7B5A 55%, #145A42 100%);
-  --grad-navy: linear-gradient(135deg, #0F2A44 0%, #17405F 50%, #1E7B5A 120%);
-  --grad-hero: radial-gradient(circle at 20% 0%, rgba(255,255,255,0.22), transparent 50%),
-               linear-gradient(135deg, #0F2A44 0%, #17405F 45%, #1E7B5A 100%);
-  --grad-cta: linear-gradient(135deg, #FF7A3D 0%, #E8541E 60%, #C73E10 100%);
-  --grad-mint: linear-gradient(160deg, #F2FBF7 0%, #DDF3E8 100%);
-  --grad-gold: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-  --grad-card-soft: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
-  --grad-page: linear-gradient(180deg, #F1F5FB 0%, #EBF4F0 100%);
-  --grad-skeleton: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  --grad-header:  linear-gradient(135deg, #223F6B 0%, #2F5082 50%, #3C5F94 100%);
+  --grad-navy:    linear-gradient(145deg, #0E1A36 0%, #223F6B 55%, #3C5F94 100%);
+  --grad-hero:    radial-gradient(circle at 15% 0%, rgba(255,255,255,.22), transparent 45%), linear-gradient(145deg, #0E1A36 0%, #223F6B 55%, #3C5F94 100%);
+  --grad-cta:     linear-gradient(135deg, #FF8A4C 0%, #E8541E 55%, #C93E10 100%);
+  --grad-primary: var(--grad-cta);
+  --grad-soft:    linear-gradient(160deg, #FFFFFF 0%, #F1F5FB 100%);
+  --grad-warm:    linear-gradient(160deg, #FFF3EB 0%, #FFE2B0 140%);
+  --grad-mint:    var(--grad-soft);
+  --grad-gold:    var(--grad-warm);
+  --grad-card-soft: var(--grad-soft);
+  --grad-page:
+    radial-gradient(60% 40% at 90% 0%, rgba(242,107,45,.10), transparent 70%),
+    radial-gradient(50% 40% at 0% 20%, rgba(60,95,148,.12), transparent 70%),
+    linear-gradient(180deg, #F6F8FC 0%, #FFFFFF 100%);
+  --grad-text:    linear-gradient(135deg, #FF8A4C, #E8541E 60%, #C93E10);
+  --grad-skeleton: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(230,237,248,0.7) 50%, rgba(255,255,255,0) 100%);
 
   /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Elevation & Shadows */
-  --shadow-xs: 0 1px 3px rgba(15, 42, 68, 0.05);
-  --shadow-sm: 0 4px 12px rgba(15, 42, 68, 0.06);
-  --shadow-md: 0 10px 24px rgba(15, 42, 68, 0.09);
-  --shadow-lg: 0 18px 38px rgba(15, 42, 68, 0.12);
-  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 12px 30px rgba(15, 42, 68, 0.1);
-  --shadow-glow-primary: 0 0 24px rgba(30, 123, 90, 0.45);
-  --shadow-glow-orange: 0 0 20px rgba(232, 84, 30, 0.4);
+  --shadow-xs: 0 1px 3px rgba(22, 38, 74, 0.05);
+  --shadow-sm: 0 2px 8px rgba(22, 38, 74, 0.08);
+  --shadow-md: 0 10px 30px rgba(22, 38, 74, 0.12);
+  --shadow-lg: 0 24px 60px rgba(22, 38, 74, 0.18);
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.9), var(--shadow-md);
+  --shadow-glow-primary: var(--glow-orange);
+  --shadow-glow-orange: var(--glow-orange);
+  --glow-orange: 0 8px 24px rgba(232, 84, 30, 0.38);
+  --glow-navy:   0 8px 24px rgba(47, 80, 130, 0.35);
 
   /* Border Radii */
   --radius-xs: 8px;
@@ -83,4 +100,3 @@
   --nav-height: 72px;
   --header-height: 64px;
 }
-

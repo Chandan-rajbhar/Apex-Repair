@@ -39,19 +39,19 @@ export const ChatHeader = ({ onClose }) => {
             width: 10,
             height: 10,
             borderRadius: '50%',
-            background: '#10B981',
+            background: 'var(--amber-400)',
             border: '2px solid #FFFFFF'
           }} />
         </div>
 
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <span style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0F2A44' }}>
+            <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--navy-900)' }}>
               Apex Live Dispatch
             </span>
-            <ShieldCheck size={14} color="#1E7B5A" />
+            <ShieldCheck size={14} color="var(--orange-600)" />
           </div>
-          <div style={{ fontSize: '0.68rem', color: '#1E7B5A', fontWeight: 600 }}>
+          <div style={{ fontSize: '0.68rem', color: 'var(--orange-600)', fontWeight: 600 }}>
             Online • Avg reply: &lt; 2 mins
           </div>
         </div>
@@ -68,8 +68,8 @@ export const ChatHeader = ({ onClose }) => {
             width: 32,
             height: 32,
             borderRadius: '50%',
-            background: '#E8F6EF',
-            color: '#1E7B5A',
+            background: 'var(--orange-50)',
+            color: 'var(--orange-600)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'

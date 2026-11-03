@@ -175,16 +175,16 @@ export const ChatWidget = () => {
             {/* Pinned Linked Booking Chip if applicable */}
             {linkedBooking && (
               <div style={{
-                background: '#E8F6EF',
-                borderBottom: '1px solid rgba(30, 123, 90, 0.2)',
+                background: 'var(--orange-50)',
+                borderBottom: '1px solid rgba(232, 84, 30, 0.2)',
                 padding: '8px 16px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <ShieldCheck size={16} color="#1E7B5A" />
-                  <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#1E7B5A' }}>
+                  <ShieldCheck size={16} color="var(--orange-600)" />
+                  <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--orange-700)' }}>
                     Linked to Booking #{linkedBooking.id} ({linkedBooking.applianceName})
                   </span>
                 </div>
@@ -193,7 +193,7 @@ export const ChatWidget = () => {
                     closeChat();
                     navigate('/track');
                   }}
-                  style={{ fontSize: '0.72rem', color: '#0F2A44', fontWeight: 700, textDecoration: 'underline' }}
+                  style={{ fontSize: '0.72rem', color: 'var(--navy-900)', fontWeight: 700, textDecoration: 'underline' }}
                 >
                   View Tracker
                 </button>
@@ -202,11 +202,11 @@ export const ChatWidget = () => {
 
             {/* Guest Onboarding Gate (optional) */}
             {!isAuthenticated && !hasSubmittedGuestInfo && messages.length <= 1 ? (
-              <div style={{ padding: 18, background: 'rgba(255,255,255,0.7)', borderBottom: '1px solid rgba(15,42,68,0.06)' }}>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F2A44', marginBottom: 6 }}>
+              <div style={{ padding: 18, background: 'rgba(255,255,255,0.7)', borderBottom: '1px solid var(--border)' }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--navy-900)', marginBottom: 6 }}>
                   Quick Dispatch Identification
                 </div>
-                <div style={{ fontSize: '0.72rem', color: '#4A5D6E', marginBottom: 10 }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: 10 }}>
                   Enter your name to connect with a technician or track an appointment.
                 </div>
                 <form onSubmit={handleGuestSubmit} style={{ display: 'flex', gap: 6 }}>
@@ -215,7 +215,7 @@ export const ChatWidget = () => {
                     placeholder="Your Name"
                     value={guestName}
                     onChange={(e) => setGuestName(e.target.value)}
-                    style={{ flex: 1, height: 38, padding: '0 10px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: '0.82rem' }}
+                    style={{ flex: 1, height: 38, padding: '0 10px', borderRadius: 10, border: '1px solid var(--border)', fontSize: '0.82rem' }}
                     required
                   />
                   <input
@@ -223,7 +223,7 @@ export const ChatWidget = () => {
                     placeholder="Phone (optional)"
                     value={guestPhone}
                     onChange={(e) => setGuestPhone(e.target.value)}
-                    style={{ flex: 1, height: 38, padding: '0 10px', borderRadius: 10, border: '1px solid #CBD5E1', fontSize: '0.82rem' }}
+                    style={{ flex: 1, height: 38, padding: '0 10px', borderRadius: 10, border: '1px solid var(--border)', fontSize: '0.82rem' }}
                   />
                   <button type="submit" className="btn btn-primary btn-xs" style={{ padding: '0 14px' }}>
                     Start
@@ -246,9 +246,9 @@ export const ChatWidget = () => {
                 margin: '0 auto 14px auto',
                 padding: '6px 14px',
                 borderRadius: 9999,
-                background: 'rgba(15, 42, 68, 0.04)',
+                background: 'rgba(22, 38, 74, 0.05)',
                 fontSize: '0.68rem',
-                color: '#7E92A2',
+                color: 'var(--text-muted)',
                 maxWidth: '90%'
               }}>
                 🔒 Encrypted Diagnostic Channel • 90-Day Parts & Labor Guarantee
@@ -269,15 +269,15 @@ export const ChatWidget = () => {
                     padding: '8px 14px',
                     borderRadius: '16px 16px 16px 4px',
                     background: '#FFFFFF',
-                    boxShadow: '0 2px 8px rgba(15,42,68,0.06)',
+                    boxShadow: 'var(--shadow-sm)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: 4
                   }}>
-                    <span style={{ fontSize: '0.72rem', color: '#7E92A2', fontWeight: 600 }}>Alex is typing</span>
-                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#1E7B5A', animation: 'pulse 1s infinite' }} />
-                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#1E7B5A', animation: 'pulse 1s infinite 0.2s' }} />
-                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#1E7B5A', animation: 'pulse 1s infinite 0.4s' }} />
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600 }}>Alex is typing</span>
+                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--orange-600)', animation: 'pulse 1s infinite' }} />
+                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--orange-600)', animation: 'pulse 1s infinite 0.2s' }} />
+                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--orange-600)', animation: 'pulse 1s infinite 0.4s' }} />
                   </div>
                 </div>
               )}
@@ -292,8 +292,8 @@ export const ChatWidget = () => {
                 display: 'flex',
                 gap: 6,
                 overflowX: 'auto',
-                borderTop: '1px solid rgba(15, 42, 68, 0.05)',
-                background: 'rgba(255, 255, 255, 0.6)'
+                borderTop: '1px solid var(--border)',
+                background: 'rgba(255, 255, 255, 0.7)'
               }} className="no-scrollbar">
                 {lastBotMsg.quickChips.map((chip, idx) => (
                   <button
@@ -305,11 +305,11 @@ export const ChatWidget = () => {
                       padding: '6px 12px',
                       borderRadius: 9999,
                       background: '#FFFFFF',
-                      border: '1.5px solid rgba(30, 123, 90, 0.35)',
-                      color: '#1E7B5A',
+                      border: '1.5px solid rgba(232, 84, 30, 0.35)',
+                      color: 'var(--orange-600)',
                       fontSize: '0.76rem',
                       fontWeight: 700,
-                      boxShadow: '0 2px 6px rgba(15, 42, 68, 0.04)'
+                      boxShadow: 'var(--shadow-xs)'
                     }}
                   >
                     {chip}
@@ -322,19 +322,19 @@ export const ChatWidget = () => {
             {selectedFile && (
               <div style={{
                 padding: '6px 14px',
-                background: '#E8F6EF',
+                background: 'var(--orange-50)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                borderTop: '1px solid rgba(30, 123, 90, 0.2)'
+                borderTop: '1px solid rgba(232, 84, 30, 0.2)'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <ImageIcon size={16} color="#1E7B5A" />
-                  <span style={{ fontSize: '0.72rem', color: '#1E7B5A', fontWeight: 600 }}>
+                  <ImageIcon size={16} color="var(--orange-600)" />
+                  <span style={{ fontSize: '0.72rem', color: 'var(--orange-700)', fontWeight: 600 }}>
                     {selectedFile.name} ({selectedFile.size})
                   </span>
                 </div>
-                <button onClick={() => setSelectedFile(null)} style={{ color: '#1E7B5A' }}>
+                <button onClick={() => setSelectedFile(null)} style={{ color: 'var(--orange-600)' }}>
                   <X size={15} />
                 </button>
               </div>

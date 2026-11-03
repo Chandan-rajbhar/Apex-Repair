@@ -30,7 +30,7 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
                 width: 32,
                 height: 32,
                 borderRadius: 8,
-                background: 'var(--grad-primary)',
+                background: 'var(--grad-header)',
                 color: '#fff',
                 display: 'flex',
                 alignItems: 'center',
@@ -40,7 +40,7 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
                 AP
               </div>
               <div>
-                <h3 style={{ fontSize: '1.15rem', color: '#0F2A44' }}>Official Invoice & Receipt</h3>
+                <h3 style={{ fontSize: '1.15rem', color: 'var(--navy-900)' }}>Official Invoice & Receipt</h3>
                 <div style={{ fontSize: '0.68rem', color: '#7E92A2' }}>Booking #{booking.id}</div>
               </div>
             </div>
@@ -69,12 +69,12 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
             {/* Meta */}
             <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #E2E8F0', paddingBottom: 12, marginBottom: 12 }}>
               <div>
-                <div style={{ fontSize: '0.84rem', fontWeight: 800, color: '#0F2A44' }}>{COMPANY_INFO.name}</div>
+                <div style={{ fontSize: '0.84rem', fontWeight: 800, color: 'var(--navy-900)' }}>{COMPANY_INFO.name}</div>
                 <div style={{ fontSize: '0.7rem', color: '#64748B' }}>Licensed & Certified Appliance Dispatch</div>
                 <div style={{ fontSize: '0.7rem', color: '#64748B' }}>Phone: {COMPANY_INFO.phone}</div>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <span className="badge badge-mint">PAID & VERIFIED</span>
+                <span className="badge badge-success">PAID & VERIFIED</span>
                 <div style={{ fontSize: '0.68rem', color: '#7E92A2', marginTop: 4 }}>
                   Date: {new Date().toLocaleDateString()}
                 </div>
@@ -91,7 +91,7 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
 
             {/* Line Items Table */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', fontWeight: 700, color: '#0F2A44', borderBottom: '1px solid #CBD5E1', paddingBottom: 4 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', fontWeight: 700, color: 'var(--navy-900)', borderBottom: '1px solid #CBD5E1', paddingBottom: 4 }}>
                 <span>Item Description</span>
                 <span>Amount</span>
               </div>
@@ -113,9 +113,9 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
                 <span>Sales Tax</span>
                 <span>${quote?.tax?.toFixed(2)}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.96rem', fontWeight: 800, color: '#0F2A44' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.96rem', fontWeight: 800, color: 'var(--navy-900)' }}>
                 <span>Total Cleared</span>
-                <span style={{ color: '#1E7B5A' }}>${quote?.total?.toFixed(2)}</span>
+                <span style={{ color: 'var(--orange-600)' }}>${quote?.total?.toFixed(2)}</span>
               </div>
             </div>
 
@@ -124,14 +124,14 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
               marginTop: 14,
               padding: 10,
               borderRadius: 12,
-              background: '#E8F6EF',
-              border: '1px dashed #1E7B5A',
+              background: 'var(--orange-50)',
+              border: '1px dashed var(--orange-600)',
               display: 'flex',
               alignItems: 'center',
               gap: 8
             }}>
-              <ShieldCheck size={20} color="#1E7B5A" />
-              <div style={{ fontSize: '0.68rem', color: '#1E7B5A', lineHeight: 1.3 }}>
+              <ShieldCheck size={20} color="var(--orange-600)" />
+              <div style={{ fontSize: '0.68rem', color: 'var(--orange-600)', lineHeight: 1.3 }}>
                 <strong>90-Day Factory Warranty Active:</strong> All replacement components and craftsmanship guaranteed through{' '}
                 {new Date(Date.now() + 7776000000).toLocaleDateString()}.
               </div>

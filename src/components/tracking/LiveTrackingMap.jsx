@@ -43,8 +43,8 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
           gap: 6,
           boxShadow: '0 4px 12px rgba(15, 42, 68, 0.1)'
         }}>
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', animation: 'pulse 1.2s infinite' }} />
-          <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#0F2A44' }}>
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--amber-400)', animation: 'pulse 1.2s infinite' }} />
+          <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--navy-900)' }}>
             GPS LIVE TRACKING
           </span>
         </div>
@@ -57,8 +57,8 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
           gap: 5,
           boxShadow: '0 4px 12px rgba(15, 42, 68, 0.1)'
         }}>
-          <Clock size={14} color="#1E7B5A" />
-          <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#1E7B5A' }}>
+          <Clock size={14} color="var(--orange-600)" />
+          <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--orange-600)' }}>
             ETA {countdown} Mins
           </span>
         </div>
@@ -80,8 +80,8 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
 
             {/* Gradient along the transit route */}
             <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1E7B5A" />
-              <stop offset="100%" stopColor="#4FC293" />
+              <stop offset="0%" stopColor="#E8541E" />
+              <stop offset="100%" stopColor="#FFB547" />
             </linearGradient>
 
             {/* Pulsing ring filter */}
@@ -132,7 +132,7 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
           {/* Animated Van Location Along Curve */}
           <g>
             {/* Radar Pulsing circle */}
-            <circle cx="190" cy="115" r="18" fill="rgba(30, 123, 90, 0.25)">
+            <circle cx="190" cy="115" r="18" fill="rgba(232, 84, 30, 0.25)">
               <animate
                 attributeName="r"
                 values="12;28;12"
@@ -149,10 +149,10 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
 
             {/* Van Pin Box */}
             <g transform="translate(176, 102)">
-              <rect width="28" height="26" rx="8" fill="#1E7B5A" filter="url(#glow)" />
+              <rect width="28" height="26" rx="8" fill="#E8541E" filter="url(#glow)" />
               <path d="M6 13 L12 13 L15 17 L22 17 L22 21 L6 21 Z" fill="#FFFFFF" opacity="0.9" />
-              <circle cx="9" cy="21" r="2" fill="#0F2A44" />
-              <circle cx="19" cy="21" r="2" fill="#0F2A44" />
+              <circle cx="9" cy="21" r="2" fill="#16264A" />
+              <circle cx="19" cy="21" r="2" fill="#16264A" />
             </g>
           </g>
         </svg>
@@ -173,9 +173,9 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
           border: '1px solid rgba(15, 42, 68, 0.08)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Navigation size={15} color="#1E7B5A" style={{ transform: 'rotate(45deg)' }} />
+            <Navigation size={15} color="var(--orange-600)" style={{ transform: 'rotate(45deg)' }} />
             <div>
-              <div style={{ fontSize: '0.74rem', fontWeight: 800, color: '#0F2A44' }}>
+              <div style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--navy-900)' }}>
                 On Route: 1.8 miles away
               </div>
               <div style={{ fontSize: '0.66rem', color: '#7E92A2' }}>
@@ -183,7 +183,7 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
               </div>
             </div>
           </div>
-          <span className="badge badge-mint" style={{ fontSize: '0.64rem' }}>
+          <span className="badge badge-warm" style={{ fontSize: '0.64rem' }}>
             Dispatch Speed 28mph
           </span>
         </div>

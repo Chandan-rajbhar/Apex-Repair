@@ -56,8 +56,8 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                 width: 64,
                 height: 64,
                 borderRadius: '50%',
-                background: '#E8F6EF',
-                color: '#1E7B5A',
+                background: 'rgba(31, 169, 113, 0.12)',
+                color: 'var(--success)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -65,10 +65,10 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
               }}>
                 <CheckCircle2 size={38} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', color: '#0F2A44', marginBottom: 6 }}>
+              <h3 style={{ fontSize: '1.3rem', color: 'var(--navy-900)', marginBottom: 6 }}>
                 Payment Approved!
               </h3>
-              <p style={{ fontSize: '0.8rem', color: '#4A5D6E' }}>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                 ${quote.total?.toFixed(2)} received. Your 90-day warranty certificate is now active.
               </p>
             </div>
@@ -78,7 +78,7 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
               <div style={{
                 padding: '14px 18px',
                 borderRadius: 18,
-                background: '#F1F5FB',
+                background: 'var(--navy-50)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -86,13 +86,13 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
               }}>
                 <div>
                   <div style={{ fontSize: '0.74rem', color: '#7E92A2' }}>Total Amount Due</div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#1E7B5A' }}>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--orange-600)' }}>
                     ${quote.total?.toFixed(2)}
                   </div>
                 </div>
-                <div style={{ fontSize: '0.7rem', color: '#0F2A44', textAlign: 'right' }}>
+                <div style={{ fontSize: '0.7rem', color: 'var(--navy-900)', textAlign: 'right' }}>
                   <div style={{ fontWeight: 700 }}>Includes Parts + Labor</div>
-                  <div style={{ color: '#1E7B5A' }}>Diagnostic fee credited</div>
+                  <div style={{ color: 'var(--orange-600)' }}>Diagnostic fee credited</div>
                 </div>
               </div>
 
@@ -104,16 +104,16 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                   style={{
                     padding: '10px 4px',
                     borderRadius: 14,
-                    background: method === 'card' ? '#E8F6EF' : '#FFFFFF',
-                    border: method === 'card' ? '2px solid #1E7B5A' : '1px solid #CBD5E1',
+                    background: method === 'card' ? 'var(--orange-50)' : '#FFFFFF',
+                    border: method === 'card' ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     gap: 4
                   }}
                 >
-                  <CreditCard size={18} color={method === 'card' ? '#1E7B5A' : '#7E92A2'} />
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#0F2A44' }}>Card</span>
+                  <CreditCard size={18} color={method === 'card' ? 'var(--orange-600)' : '#7E92A2'} />
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--navy-900)' }}>Card</span>
                 </button>
 
                 <button
@@ -122,16 +122,16 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                   style={{
                     padding: '10px 4px',
                     borderRadius: 14,
-                    background: method === 'apple_pay' ? '#E8F6EF' : '#FFFFFF',
-                    border: method === 'apple_pay' ? '2px solid #1E7B5A' : '1px solid #CBD5E1',
+                    background: method === 'apple_pay' ? 'var(--orange-50)' : '#FFFFFF',
+                    border: method === 'apple_pay' ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     gap: 4
                   }}
                 >
-                  <Smartphone size={18} color={method === 'apple_pay' ? '#1E7B5A' : '#7E92A2'} />
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#0F2A44' }}>Digital Pay</span>
+                  <Smartphone size={18} color={method === 'apple_pay' ? 'var(--orange-600)' : '#7E92A2'} />
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--navy-900)' }}>Digital Pay</span>
                 </button>
 
                 <button
@@ -140,16 +140,16 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                   style={{
                     padding: '10px 4px',
                     borderRadius: 14,
-                    background: method === 'cash' ? '#E8F6EF' : '#FFFFFF',
-                    border: method === 'cash' ? '2px solid #1E7B5A' : '1px solid #CBD5E1',
+                    background: method === 'cash' ? 'var(--orange-50)' : '#FFFFFF',
+                    border: method === 'cash' ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     gap: 4
                   }}
                 >
-                  <DollarSign size={18} color={method === 'cash' ? '#1E7B5A' : '#7E92A2'} />
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#0F2A44' }}>Pay Tech</span>
+                  <DollarSign size={18} color={method === 'cash' ? 'var(--orange-600)' : '#7E92A2'} />
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--navy-900)' }}>Pay Tech</span>
                 </button>
               </div>
 
@@ -242,8 +242,8 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                 <div style={{
                   padding: 14,
                   borderRadius: 14,
-                  background: '#E8F6EF',
-                  color: '#1E7B5A',
+                  background: 'var(--orange-50)',
+                  color: 'var(--orange-600)',
                   fontSize: '0.76rem',
                   lineHeight: 1.4,
                   marginBottom: 16

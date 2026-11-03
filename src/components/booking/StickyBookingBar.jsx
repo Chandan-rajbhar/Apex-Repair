@@ -13,7 +13,7 @@ export const StickyBookingBar = ({
     <div className="sticky-confirm-bar glass-strong">
       <div className="confirm-bar-meta">
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <ShieldCheck size={13} color="#1E7B5A" />
+          <ShieldCheck size={13} color="var(--orange-600)" />
           <span className="confirm-bar-label">Diagnostic Fee</span>
         </div>
         <div className="confirm-bar-price">

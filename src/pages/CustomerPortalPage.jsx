@@ -79,7 +79,7 @@ export const CustomerPortalPage = () => {
             width: 88,
             height: 88,
             borderRadius: '50%',
-            background: 'var(--primary-600)',
+            background: 'var(--grad-header)',
             color: '#FFFFFF',
             fontSize: '1.8rem',
             fontWeight: 800,
@@ -87,7 +87,7 @@ export const CustomerPortalPage = () => {
             alignItems: 'center',
             justifyContent: 'center',
             border: '4px solid #FFFFFF',
-            boxShadow: '0 8px 24px rgba(30, 123, 90, 0.35)'
+            boxShadow: 'var(--glow-navy)'
           }}>
             {user.initials || 'SY'}
           </div>
@@ -102,7 +102,7 @@ export const CustomerPortalPage = () => {
               width: 28,
               height: 28,
               borderRadius: '50%',
-              background: '#0F2A44',
+              background: 'var(--navy-900)',
               color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
@@ -186,8 +186,8 @@ export const CustomerPortalPage = () => {
           className="tap-effect"
           style={{
             borderRadius: 22,
-            background: 'linear-gradient(135deg, #F2FBF7 0%, #E2F5EC 100%)',
-            border: '1.5px solid rgba(30, 123, 90, 0.3)',
+            background: 'var(--grad-warm)',
+            border: '1.5px solid rgba(232, 84, 30, 0.25)',
             padding: '16px 16px',
             boxShadow: 'var(--shadow-sm)',
             cursor: 'pointer'
@@ -199,20 +199,20 @@ export const CustomerPortalPage = () => {
                 width: 36,
                 height: 36,
                 borderRadius: 12,
-                background: '#E8F6EF',
-                color: '#1E7B5A',
+                background: 'var(--orange-50)',
+                color: 'var(--orange-600)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: '1px solid rgba(30, 123, 90, 0.2)'
+                border: '1px solid rgba(232, 84, 30, 0.2)'
               }}>
                 <Truck size={18} />
               </div>
               <div>
-                <div style={{ fontSize: '0.86rem', fontWeight: 800, color: '#0F2A44' }}>
+                <div style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--navy-900)' }}>
                   Order #{activeBooking.id}
                 </div>
-                <div style={{ fontSize: '0.68rem', color: '#B45309', fontWeight: 700 }}>
+                <div style={{ fontSize: '0.68rem', color: 'var(--orange-700)', fontWeight: 700 }}>
                   ⚡ {activeBooking.currentStep === 4 ? 'En Route (Live GPS)' : 'Pending Verification'}
                 </div>
               </div>
@@ -221,7 +221,7 @@ export const CustomerPortalPage = () => {
             <span
               className="btn btn-xs glow-pulse-primary"
               style={{
-                background: '#1E7B5A',
+                background: 'var(--grad-cta)',
                 color: '#FFFFFF',
                 borderRadius: 9999,
                 fontSize: '0.72rem',
@@ -230,12 +230,12 @@ export const CustomerPortalPage = () => {
                 gap: 5
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#A7F3D0' }} />
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#FFFFFF' }} />
               Track Live &gt;
             </span>
           </div>
 
-          <div style={{ fontSize: '0.72rem', color: '#4A5D6E', lineHeight: 1.35, marginTop: 4 }}>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.35, marginTop: 4 }}>
             {activeBooking.brand} {activeBooking.applianceName} &bull; Tech: <strong>{activeBooking.technician?.name || 'Marcus V.'}</strong>
           </div>
         </div>
@@ -293,18 +293,18 @@ export const CustomerPortalPage = () => {
           <div style={{
             padding: '10px 12px',
             borderRadius: 14,
-            background: '#F1F5FB',
+            background: 'var(--navy-50)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Wrench size={16} color="#1E7B5A" />
+              <Wrench size={16} color="var(--orange-600)" />
               <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0F2A44' }}>
+                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                   Samsung French-Door Refrigerator
                 </div>
-                <div style={{ fontSize: '0.68rem', color: '#7E92A2' }}>
+                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
                   Model: RF28R7351SR &bull; S/N: 9482103
                 </div>
               </div>
@@ -315,18 +315,18 @@ export const CustomerPortalPage = () => {
           <div style={{
             padding: '10px 12px',
             borderRadius: 14,
-            background: '#F1F5FB',
+            background: 'var(--navy-50)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Wrench size={16} color="#1E7B5A" />
+              <Wrench size={16} color="var(--orange-600)" />
               <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0F2A44' }}>
+                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--navy-900)' }}>
                   LG Smart Front-Load Washer
                 </div>
-                <div style={{ fontSize: '0.68rem', color: '#7E92A2' }}>
+                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
                   Model: WM4000HBA &bull; S/N: 7219044
                 </div>
               </div>

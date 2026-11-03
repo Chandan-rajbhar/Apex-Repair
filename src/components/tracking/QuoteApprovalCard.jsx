@@ -41,8 +41,8 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
             width: 32,
             height: 32,
             borderRadius: 10,
-            background: isPending ? '#FFEDD5' : '#E8F6EF',
-            color: isPending ? '#E8541E' : '#1E7B5A',
+            background: isPending ? 'var(--orange-50)' : 'var(--navy-50)',
+            color: isPending ? 'var(--orange-600)' : 'var(--navy-800)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
@@ -50,7 +50,7 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
             <FileCheck size={17} />
           </div>
           <div>
-            <h4 style={{ fontSize: '0.92rem', color: '#0F2A44', fontWeight: 800 }}>
+            <h4 style={{ fontSize: '0.92rem', color: 'var(--navy-900)', fontWeight: 800 }}>
               Physical Diagnostic & Repair Quote
             </h4>
             <div style={{ fontSize: '0.68rem', color: '#7E92A2' }}>
@@ -59,23 +59,23 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
           </div>
         </div>
 
-        {isApproved && <span className="badge badge-mint"><CheckCircle2 size={12} /> Approved</span>}
+        {isApproved && <span className="badge badge-success"><CheckCircle2 size={12} /> Approved</span>}
         {isDeclined && <span className="badge badge-orange"><XCircle size={12} /> Declined</span>}
-        {isPending && <span className="badge badge-orange" style={{ background: '#FFEDD5', color: '#C2410C' }}>Action Required</span>}
+        {isPending && <span className="badge badge-orange">Action Required</span>}
       </div>
 
       {/* Diagnosis Title */}
       <div style={{
         padding: '10px 12px',
         borderRadius: 14,
-        background: '#F1F5FB',
+        background: 'var(--navy-50)',
         marginBottom: 14,
         fontSize: '0.78rem',
-        color: '#0F2A44',
+        color: 'var(--navy-900)',
         fontWeight: 700,
         lineHeight: 1.35
       }}>
-        <span style={{ color: '#1E7B5A', fontWeight: 800 }}>Identified: </span>
+        <span style={{ color: 'var(--orange-600)', fontWeight: 800 }}>Identified: </span>
         {quote.diagnosisTitle}
       </div>
 
@@ -89,7 +89,7 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
               justifyContent: 'space-between',
               alignItems: 'center',
               fontSize: '0.78rem',
-              color: item.waived ? '#1E7B5A' : '#4A5D6E',
+              color: item.waived ? 'var(--success)' : 'var(--text-muted)',
               paddingBottom: 6,
               borderBottom: '1px dashed rgba(15, 42, 68, 0.08)'
             }}
@@ -116,12 +116,12 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
           alignItems: 'center',
           fontSize: '1.05rem',
           fontWeight: 800,
-          color: '#0F2A44',
+          color: 'var(--navy-900)',
           paddingTop: 8,
           borderTop: '2px solid rgba(15, 42, 68, 0.1)'
         }}>
           <span>Authorized Total</span>
-          <span style={{ color: '#1E7B5A' }}>${quote.total?.toFixed(2)}</span>
+          <span style={{ color: 'var(--orange-600)' }}>${quote.total?.toFixed(2)}</span>
         </div>
       </div>
 
@@ -132,8 +132,8 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
         gap: 6,
         padding: '8px 10px',
         borderRadius: 12,
-        background: '#E8F6EF',
-        color: '#1E7B5A',
+        background: 'var(--orange-50)',
+        color: 'var(--orange-600)',
         fontSize: '0.72rem',
         fontWeight: 600,
         marginBottom: isPending ? 14 : 0
@@ -171,7 +171,7 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
             style={{ padding: 20 }}
           >
             <div className="sheet-drag-handle" />
-            <h3 style={{ fontSize: '1.15rem', color: '#0F2A44', margin: '10px 0 6px 0' }}>
+            <h3 style={{ fontSize: '1.15rem', color: 'var(--navy-900)', margin: '10px 0 6px 0' }}>
               Decline Quote Reason
             </h3>
             <p style={{ fontSize: '0.74rem', color: '#64748B', marginBottom: 14 }}>
@@ -188,12 +188,12 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
                     gap: 10,
                     padding: '10px 12px',
                     borderRadius: 12,
-                    background: declineReason === r ? '#E8F6EF' : '#FFFFFF',
-                    border: declineReason === r ? '1.5px solid #1E7B5A' : '1px solid #E2E8F0',
+                    background: declineReason === r ? 'var(--orange-50)' : '#FFFFFF',
+                    border: declineReason === r ? '1.5px solid var(--orange-600)' : '1px solid #E2E8F0',
                     cursor: 'pointer',
                     fontSize: '0.8rem',
                     fontWeight: 600,
-                    color: '#0F2A44'
+                    color: 'var(--navy-900)'
                   }}
                 >
                   <input
@@ -201,7 +201,7 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
                     name="decline-reason"
                     checked={declineReason === r}
                     onChange={() => setDeclineReason(r)}
-                    style={{ accentColor: '#1E7B5A' }}
+                    style={{ accentColor: 'var(--orange-600)' }}
                   />
                   <span>{r}</span>
                 </label>

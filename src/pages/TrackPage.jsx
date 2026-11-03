@@ -84,19 +84,19 @@ export const TrackPage = () => {
           width: 60,
           height: 60,
           borderRadius: '50%',
-          background: '#E8F6EF',
+          background: 'var(--orange-50)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           margin: '0 auto 16px auto',
-          color: '#1E7B5A'
+          color: 'var(--orange-600)'
         }}>
           <Truck size={30} />
         </div>
-        <h2 style={{ fontSize: '1.3rem', color: '#0F2A44', marginBottom: 6 }}>
+        <h2 style={{ fontSize: '1.3rem', color: 'var(--navy-900)', marginBottom: 6 }}>
           No Active Repair Orders
         </h2>
-        <p style={{ fontSize: '0.8rem', color: '#64748B', maxWidth: 300, margin: '0 auto 18px auto' }}>
+        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', maxWidth: 300, margin: '0 auto 18px auto' }}>
           Look up an existing appointment using your Booking ID (e.g. AR-1024) or phone number.
         </p>
 
@@ -106,7 +106,7 @@ export const TrackPage = () => {
             placeholder="Enter Booking ID (e.g. AR-1024)"
             value={searchId}
             onChange={(e) => setSearchId(e.target.value)}
-            style={{ flex: 1, height: 42, padding: '0 12px', borderRadius: 12, border: '1px solid #CBD5E1' }}
+            style={{ flex: 1, height: 42, padding: '0 12px', borderRadius: 12, border: '1px solid var(--border)' }}
           />
           <button type="submit" className="btn btn-primary btn-sm">
             Lookup
@@ -157,9 +157,9 @@ export const TrackPage = () => {
                 borderRadius: 9999,
                 fontSize: '0.74rem',
                 fontWeight: 700,
-                background: bookingToDisplay.id === b.id ? '#1E7B5A' : '#FFFFFF',
-                color: bookingToDisplay.id === b.id ? '#FFFFFF' : '#0F2A44',
-                border: '1px solid rgba(15, 42, 68, 0.1)',
+                background: bookingToDisplay.id === b.id ? 'var(--navy-900)' : '#FFFFFF',
+                color: bookingToDisplay.id === b.id ? '#FFFFFF' : 'var(--navy-900)',
+                border: '1px solid var(--border)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6
@@ -181,7 +181,7 @@ export const TrackPage = () => {
           borderRadius: 24,
           padding: '18px 18px',
           boxShadow: 'var(--shadow-sm)',
-          border: '1.5px solid rgba(30, 123, 90, 0.25)'
+          border: '1.5px solid rgba(232, 84, 30, 0.25)'
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
@@ -189,10 +189,10 @@ export const TrackPage = () => {
             <span className="badge badge-mint" style={{ marginBottom: 4 }}>
               LIVE TRACKING &bull; STEP {bookingToDisplay.currentStep}/9
             </span>
-            <h2 style={{ fontSize: '1.3rem', color: '#0F2A44', marginTop: 2 }}>
+            <h2 style={{ fontSize: '1.3rem', color: 'var(--navy-900)', marginTop: 2 }}>
               {bookingToDisplay.brand} {bookingToDisplay.applianceName}
             </h2>
-            <div style={{ fontSize: '0.72rem', color: '#7E92A2' }}>
+            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
               Booking #{bookingToDisplay.id} &bull; {bookingToDisplay.date} ({bookingToDisplay.timeSlot})
             </div>
           </div>
@@ -204,10 +204,10 @@ export const TrackPage = () => {
               showToast('Simulated progression advanced by 1 step', 'info');
             }}
             className="btn btn-outline btn-xs tap-effect"
-            style={{ display: 'flex', alignItems: 'center', gap: 4, background: '#F1F5FB' }}
+            style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'var(--navy-50)' }}
             title="Fast forward to next tracking status"
           >
-            <FastForward size={13} color="#1E7B5A" />
+            <FastForward size={13} color="var(--orange-600)" />
             <span>Simulate Step</span>
           </button>
         </div>
@@ -216,19 +216,19 @@ export const TrackPage = () => {
         <div style={{
           padding: '10px 14px',
           borderRadius: 14,
-          background: 'linear-gradient(135deg, #E8F6EF 0%, #D8F2E4 100%)',
+          background: 'var(--grad-warm)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           marginBottom: 12
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', animation: 'pulse 1.2s infinite' }} />
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--orange-600)', animation: 'pulse 1.2s infinite' }} />
             <div>
-              <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#1E7B5A' }}>
+              <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--orange-700)' }}>
                 {currentStatusObj.label}
               </div>
-              <div style={{ fontSize: '0.68rem', color: '#0F2A44', lineHeight: 1.25 }}>
+              <div style={{ fontSize: '0.68rem', color: 'var(--navy-900)', lineHeight: 1.25 }}>
                 {currentStatusObj.desc}
               </div>
             </div>
@@ -236,8 +236,8 @@ export const TrackPage = () => {
         </div>
 
         {/* Service Address */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.74rem', color: '#4A5D6E' }}>
-          <MapPin size={15} color="#1E7B5A" style={{ flexShrink: 0 }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+          <MapPin size={15} color="var(--orange-600)" style={{ flexShrink: 0 }} />
           <span>{bookingToDisplay.address}</span>
         </div>
       </div>
@@ -284,7 +284,7 @@ export const TrackPage = () => {
             className="btn btn-outline tap-effect"
             style={{ padding: '8px 10px', fontSize: '0.76rem', justifyContent: 'flex-start' }}
           >
-            <MessageSquare size={16} color="#1E7B5A" />
+            <MessageSquare size={16} color="var(--orange-600)" />
             Chat About Repair
           </button>
 

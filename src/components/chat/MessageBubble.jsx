@@ -11,9 +11,9 @@ export const MessageBubble = ({ message, onActionClick }) => {
         margin: '8px auto',
         padding: '6px 12px',
         borderRadius: 9999,
-        background: '#E8F6EF',
-        border: '1px solid rgba(30, 123, 90, 0.2)',
-        color: '#1E7B5A',
+        background: 'var(--orange-50)',
+        border: '1px solid rgba(232, 84, 30, 0.2)',
+        color: 'var(--orange-700)',
         fontSize: '0.72rem',
         fontWeight: 600,
         textAlign: 'center',
@@ -34,7 +34,7 @@ export const MessageBubble = ({ message, onActionClick }) => {
     }}>
       {/* Sender Name if agent */}
       {!isUser && message.senderName && (
-        <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#4A5D6E', marginBottom: 3, marginLeft: 4 }}>
+        <span style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: 3, marginLeft: 4 }}>
           {message.senderName}
         </span>
       )}
@@ -46,9 +46,9 @@ export const MessageBubble = ({ message, onActionClick }) => {
           maxWidth: '82%',
           padding: '10px 14px',
           borderRadius: isUser ? '20px 20px 4px 20px' : '20px 20px 20px 4px',
-          background: isUser ? 'var(--grad-primary)' : 'rgba(255, 255, 255, 0.9)',
-          color: isUser ? '#FFFFFF' : '#0F2A44',
-          boxShadow: isUser ? '0 4px 14px rgba(30, 123, 90, 0.28)' : '0 4px 14px rgba(15, 42, 68, 0.08)',
+          background: isUser ? 'var(--grad-cta)' : 'rgba(255, 255, 255, 0.9)',
+          color: isUser ? '#FFFFFF' : 'var(--navy-900)',
+          boxShadow: isUser ? 'var(--glow-orange)' : 'var(--shadow-sm)',
           position: 'relative'
         }}
       >
@@ -64,7 +64,7 @@ export const MessageBubble = ({ message, onActionClick }) => {
                   maxHeight: 160,
                   objectFit: 'cover',
                   borderRadius: 12,
-                  border: isUser ? '1px solid rgba(255,255,255,0.3)' : '1px solid rgba(15,42,68,0.1)'
+                  border: isUser ? '1px solid rgba(255,255,255,0.3)' : '1px solid var(--border)'
                 }}
               />
             ) : (
@@ -74,9 +74,9 @@ export const MessageBubble = ({ message, onActionClick }) => {
                 gap: 8,
                 padding: '8px 10px',
                 borderRadius: 10,
-                background: isUser ? 'rgba(255,255,255,0.2)' : '#F1F5FB'
+                background: isUser ? 'rgba(255,255,255,0.2)' : 'var(--navy-50)'
               }}>
-                <FileText size={18} color={isUser ? '#FFFFFF' : '#1E7B5A'} />
+                <FileText size={18} color={isUser ? '#FFFFFF' : 'var(--orange-600)'} />
                 <span style={{ fontSize: '0.74rem', fontWeight: 600, wordBreak: 'break-all' }}>
                   {message.attachment.name}
                 </span>
@@ -105,14 +105,14 @@ export const MessageBubble = ({ message, onActionClick }) => {
         }}>
           <span style={{
             fontSize: '0.62rem',
-            color: isUser ? 'rgba(255, 255, 255, 0.8)' : '#7E92A2'
+            color: isUser ? 'rgba(255, 255, 255, 0.85)' : 'var(--text-muted)'
           }}>
             {message.timestamp}
           </span>
           {isUser && (
             <span>
               {message.status === 'seen' ? (
-                <CheckCheck size={13} color="#A7F3D0" />
+                <CheckCheck size={13} color="var(--amber-400)" />
               ) : message.status === 'delivered' ? (
                 <CheckCheck size={13} color="rgba(255,255,255,0.7)" />
               ) : (

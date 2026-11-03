@@ -67,13 +67,13 @@ export const TrackingStepper = ({ currentStep = 4, timeline = [] }) => {
                     zIndex: 2,
                     transition: 'all 0.3s ease',
                     background: isCompleted
-                      ? 'var(--grad-primary)'
+                      ? 'var(--success)'
                       : isCurrent
-                      ? '#1E7B5A'
-                      : '#FFFFFF',
-                    color: (isCompleted || isCurrent) ? '#FFFFFF' : '#94A3B8',
-                    border: isUpcoming ? '2px solid #E2E8F0' : '2px solid #FFFFFF',
-                    boxShadow: isCurrent ? '0 4px 14px rgba(30, 123, 90, 0.4)' : '0 2px 6px rgba(15,42,68,0.06)'
+                      ? 'var(--grad-cta)'
+                      : 'var(--navy-50)',
+                    color: (isCompleted || isCurrent) ? '#FFFFFF' : 'var(--text-muted)',
+                    border: isUpcoming ? '2px solid var(--border)' : '2px solid #FFFFFF',
+                    boxShadow: isCurrent ? 'var(--glow-orange)' : 'var(--shadow-xs)'
                   }}
                 >
                   {isCompleted ? (
@@ -90,7 +90,7 @@ export const TrackingStepper = ({ currentStep = 4, timeline = [] }) => {
                       width: 2.5,
                       flex: 1,
                       margin: '3px 0',
-                      background: isCompleted ? '#1E7B5A' : '#E2E8F0',
+                      background: isCompleted ? 'var(--success)' : 'var(--border)',
                       transition: 'background 0.3s ease'
                     }}
                   />
@@ -103,14 +103,14 @@ export const TrackingStepper = ({ currentStep = 4, timeline = [] }) => {
                   <span style={{
                     fontSize: '0.86rem',
                     fontWeight: isCurrent ? 800 : (isCompleted ? 700 : 500),
-                    color: isCurrent ? '#1E7B5A' : (isCompleted ? '#0F2A44' : '#94A3B8')
+                    color: isCurrent ? 'var(--orange-600)' : (isCompleted ? 'var(--navy-900)' : 'var(--text-muted)')
                   }}>
                     {status.label}
                   </span>
                   <span style={{
                     fontSize: '0.68rem',
                     fontWeight: 600,
-                    color: isCurrent ? '#1E7B5A' : '#7E92A2'
+                    color: isCurrent ? 'var(--orange-600)' : 'var(--text-muted)'
                   }}>
                     {timestamp}
                   </span>
@@ -119,7 +119,7 @@ export const TrackingStepper = ({ currentStep = 4, timeline = [] }) => {
                 <div style={{
                   fontSize: '0.72rem',
                   lineHeight: 1.35,
-                  color: isCurrent ? '#0F2A44' : '#64748B',
+                  color: isCurrent ? 'var(--navy-900)' : 'var(--text-muted)',
                   marginTop: 2
                 }}>
                   {status.desc}
@@ -131,14 +131,14 @@ export const TrackingStepper = ({ currentStep = 4, timeline = [] }) => {
                     marginTop: 6,
                     padding: '4px 10px',
                     borderRadius: 9999,
-                    background: '#E8F6EF',
+                    background: 'var(--orange-50)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 6,
-                    border: '1px solid rgba(30, 123, 90, 0.25)'
+                    border: '1px solid rgba(232, 84, 30, 0.25)'
                   }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1E7B5A', animation: 'pulse 1.2s infinite' }} />
-                    <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#1E7B5A' }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--orange-600)', animation: 'pulse 1.2s infinite' }} />
+                    <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--orange-700)' }}>
                       Active Status • Telemetry Live
                     </span>
                   </div>

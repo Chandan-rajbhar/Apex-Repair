@@ -60,12 +60,12 @@ export const SettingsModal = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: '#E8F6EF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1E7B5A' }}>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'var(--orange-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--orange-600)' }}>
                   {soundMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#0F2A44' }}>Audio Feedback</div>
-                  <div style={{ fontSize: '0.72rem', color: '#7E92A2' }}>Web Audio chimes for chat & alerts</div>
+                  <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--navy-900)' }}>Audio Feedback</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Web Audio chimes for chat & alerts</div>
                 </div>
               </div>
               <button
@@ -110,18 +110,18 @@ export const SettingsModal = () => {
               style={{
                 padding: '14px 16px',
                 borderRadius: 18,
-                border: '1.5px dashed rgba(30, 123, 90, 0.4)',
-                background: 'rgba(232, 246, 239, 0.4)'
+                border: '1.5px dashed rgba(232, 84, 30, 0.4)',
+                background: 'rgba(255, 243, 235, 0.6)'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <ShieldCheck size={18} color="#1E7B5A" />
-                  <span style={{ fontSize: '0.86rem', fontWeight: 800, color: '#1E7B5A' }}>
+                  <ShieldCheck size={18} color="var(--orange-600)" />
+                  <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--orange-600)' }}>
                     Status Progression Simulator
                   </span>
                 </div>
-                <span className="badge badge-mint" style={{ fontSize: '0.62rem' }}>Test Engine</span>
+                <span className="badge badge-warm" style={{ fontSize: '0.62rem' }}>Test Engine</span>
               </div>
               <p style={{ fontSize: '0.72rem', color: '#4A5D6E', marginBottom: 12, lineHeight: 1.35 }}>
                 Simulates real-world technician dispatch through all 9 statuses. Statuses auto-advance every 25 seconds and sync across tabs.

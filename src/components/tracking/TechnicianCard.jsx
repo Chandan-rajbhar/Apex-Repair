@@ -19,8 +19,8 @@ export const TechnicianCard = ({ technician, bookingId }) => {
               height: 58,
               borderRadius: '50%',
               objectFit: 'cover',
-              border: '2.5px solid #1E7B5A',
-              boxShadow: '0 4px 12px rgba(30, 123, 90, 0.25)'
+              border: '2.5px solid var(--orange-600)',
+              boxShadow: '0 4px 12px rgba(232, 84, 30, 0.25)'
             }}
           />
           <span style={{
@@ -30,7 +30,7 @@ export const TechnicianCard = ({ technician, bookingId }) => {
             width: 12,
             height: 12,
             borderRadius: '50%',
-            background: '#10B981',
+            background: 'var(--amber-400)',
             border: '2px solid #FFFFFF'
           }} />
         </div>
@@ -38,22 +38,22 @@ export const TechnicianCard = ({ technician, bookingId }) => {
         {/* Info */}
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <h4 style={{ fontSize: '0.98rem', fontWeight: 800, color: '#0F2A44' }}>
+            <h4 style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--navy-900)' }}>
               {technician.name}
             </h4>
-            <ShieldCheck size={16} color="#1E7B5A" />
+            <ShieldCheck size={16} color="var(--orange-600)" />
           </div>
 
-          <div style={{ fontSize: '0.72rem', color: '#1E7B5A', fontWeight: 600 }}>
+          <div style={{ fontSize: '0.72rem', color: 'var(--orange-600)', fontWeight: 600 }}>
             {technician.title}
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: '0.74rem', fontWeight: 700, color: '#0F2A44' }}>
-              <Star size={14} fill="#F59E0B" color="#F59E0B" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: '0.74rem', fontWeight: 700, color: 'var(--navy-900)' }}>
+              <Star size={14} fill="var(--amber-400)" color="var(--amber-400)" />
               <span>{technician.rating}</span>
             </div>
-            <span style={{ fontSize: '0.7rem', color: '#7E92A2' }}>
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
               • {technician.completedJobs} Jobs
             </span>
           </div>
@@ -65,18 +65,18 @@ export const TechnicianCard = ({ technician, bookingId }) => {
         marginTop: 12,
         padding: '8px 12px',
         borderRadius: 12,
-        background: '#F1F5FB',
+        background: 'var(--navy-50)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         fontSize: '0.72rem',
-        color: '#4A5D6E'
+        color: 'var(--text-muted)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <Truck size={14} color="#1E7B5A" />
+          <Truck size={14} color="var(--orange-600)" />
           <span>Vehicle: {technician.vehicle}</span>
         </div>
-        <span style={{ fontWeight: 700, color: '#0F2A44' }}>GPS Active</span>
+        <span style={{ fontWeight: 700, color: 'var(--navy-900)' }}>GPS Active</span>
       </div>
 
       {/* Actions */}
@@ -86,7 +86,7 @@ export const TechnicianCard = ({ technician, bookingId }) => {
           className="btn btn-outline tap-effect"
           style={{ flex: 1, height: 40, fontSize: '0.78rem', padding: '0 12px' }}
         >
-          <Phone size={15} color="#1E7B5A" />
+          <Phone size={15} color="var(--orange-600)" />
           Call Marcus
         </a>
 
