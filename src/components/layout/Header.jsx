@@ -1,15 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, Wrench, Shield, CheckCircle2, AlertTriangle, Truck } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { Bell, Wrench, Shield, CheckCircle2, Truck, Search, Heart } from 'lucide-react';
 import { useBooking } from '../../context/BookingContext';
 
 export const Header = () => {
-  const { user, isAuthenticated, setAuthModalOpen } = useAuth();
-  const { activeBooking, bookings } = useBooking();
+  const { activeBooking } = useBooking();
   const [showNotifications, setShowNotifications] = useState(false);
+  const [savedCount, setSavedCount] = useState(2);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  // Sync saved repairs count from localStorage
+  useEffect(() => {
+    const updateSaved = () => {
+      try {
+        const s = localStorage.getItem('apex_saved_repairs');
+        if (s) {
+          const parsed = JSON.parse(s);
+          if (Array.isArray(parsed)) {
+            setSavedCount(parsed.length);
+          }
+        }
+      } catch {}
+    };
+    updateSaved();
+    window.addEventListener('storage', updateSaved);
+    return () => window.removeEventListener('storage', updateSaved);
+  }, []);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -57,29 +74,86 @@ export const Header = () => {
       {/* Brand Logo Left */}
       <Link to="/" className="header-brand" aria-label="Apex Appliance Repair Home">
         <div className="brand-icon-wrap shine-sweep">
-          <Wrench size={20} strokeWidth={2} />
+          <Wrench size={18} strokeWidth={2} />
         </div>
         <div className="brand-text-col">
           <div className="brand-title" style={{ fontSize: '15px', fontWeight: 700 }}>
             APEX <span>REPAIR</span>
           </div>
-          <div className="brand-tagline" style={{ fontSize: '12px', fontWeight: 600 }}>
+          <div className="brand-tagline" style={{ fontSize: '11px', fontWeight: 600 }}>
             Precision Care
           </div>
         </div>
       </Link>
 
-      {/* Header Actions Right */}
-      <div className="header-actions" ref={dropdownRef}>
-        {/* Notification Bell */}
+      {/* Header Actions Right (Search, Heart with count, Bell with dot) */}
+      <div className="header-actions" ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        {/* 1. Search Icon Button */}
         <button
-          className="icon-btn-header"
+          className="icon-btn-header tap-effect"
+          onClick={() => navigate('/services')}
+          aria-label="Search services"
+          title="Search"
+          style={{ width: 32, height: 32, background: 'transparent', border: 'none', padding: 0 }}
+        >
+          <Search size={19} strokeWidth={2} />
+        </button>
+
+        {/* 2. Heart / Saved Icon Button with Count Badge */}
+        <button
+          className="icon-btn-header tap-effect"
+          onClick={() => navigate('/more?sub=saved-items')}
+          aria-label="View saved repairs"
+          title="Saved Repairs"
+          style={{ width: 32, height: 32, background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
+        >
+          <Heart size={19} strokeWidth={2} />
+          <span
+            style={{
+              position: 'absolute',
+              top: 1,
+              right: 1,
+              minWidth: 15,
+              height: 15,
+              borderRadius: 9999,
+              background: '#FF5A36',
+              color: '#FFFFFF',
+              fontSize: '9px',
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '0 3px',
+              border: '1.5px solid #0B1F5C',
+              lineHeight: 1,
+              boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
+            }}
+          >
+            {savedCount || 2}
+          </span>
+        </button>
+
+        {/* 3. Notification Bell with Indicator Dot */}
+        <button
+          className="icon-btn-header tap-effect"
           onClick={() => setShowNotifications(!showNotifications)}
           aria-label="View notifications"
           title="Notifications"
+          style={{ width: 32, height: 32, background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
         >
-          <Bell size={20} strokeWidth={2} />
-          <span className="header-notification-dot" />
+          <Bell size={19} strokeWidth={2} />
+          <span
+            style={{
+              position: 'absolute',
+              top: 4,
+              right: 5,
+              width: 7,
+              height: 7,
+              borderRadius: '50%',
+              background: '#FF5A36',
+              border: '1.5px solid #0B1F5C'
+            }}
+          />
         </button>
 
         {/* Notifications Dropdown Card */}
@@ -148,27 +222,6 @@ export const Header = () => {
               })}
             </div>
           </div>
-        )}
-
-        {/* User Pill / Initials Avatar */}
-        {isAuthenticated && user ? (
-          <Link
-            to="/portal"
-            className="header-avatar-btn tap-effect"
-            aria-label="Open Patient & Customer Portal"
-            title={`${user.name} - Customer Portal`}
-          >
-            {user.initials || 'SY'}
-            <span className="avatar-online-dot" />
-          </Link>
-        ) : (
-          <button
-            onClick={() => setAuthModalOpen(true)}
-            className="header-login-btn tap-effect shine-sweep"
-            aria-label="Sign In or Register"
-          >
-            Log In
-          </button>
         )}
       </div>
     </header>

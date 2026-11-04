@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { BottomNav } from './BottomNav';
 import { ChatWidget } from '../chat/ChatWidget';
@@ -11,6 +11,8 @@ import { useMouseGlow } from '../../hooks/useMouseGlow';
 export const AppLayout = () => {
   // Activate pointer-follow lighting on desktop
   useMouseGlow();
+  const location = useLocation();
+  const isBookPage = location.pathname === '/book';
 
   return (
     <>
@@ -31,11 +33,11 @@ export const AppLayout = () => {
           <Outlet />
         </main>
 
-        {/* Floating Live Chat Button & Panel */}
-        <ChatWidget />
+        {/* Floating Live Chat Button & Panel (Hidden on Book page) */}
+        {!isBookPage && <ChatWidget />}
 
-        {/* Floating Glass Bottom Navigation */}
-        <BottomNav />
+        {/* Floating Glass Bottom Navigation (Hidden on Book page per spec) */}
+        {!isBookPage && <BottomNav />}
 
         {/* Modals & Bottom Sheets */}
         <AuthModal />

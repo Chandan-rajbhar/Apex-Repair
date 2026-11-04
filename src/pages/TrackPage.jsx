@@ -1,37 +1,32 @@
 import React, { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  Search,
+  ArrowLeft,
   Truck,
-  Calendar,
-  Clock,
   MapPin,
-  MessageSquare,
   Phone,
-  FileText,
-  RotateCcw,
+  MessageSquare,
+  Shield,
+  Check,
   CheckCircle2,
-  XCircle,
-  AlertCircle,
-  Printer,
-  FastForward,
   Star,
-  ShieldCheck,
-  CreditCard
+  ChevronDown,
+  Printer,
+  Calendar,
+  AlertTriangle,
+  RotateCcw
 } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
 import { useChat } from '../context/ChatContext';
 import { useToast } from '../context/ToastContext';
-import { LiveTrackingMap } from '../components/tracking/LiveTrackingMap';
-import { TrackingStepper } from '../components/tracking/TrackingStepper';
-import { TechnicianCard } from '../components/tracking/TechnicianCard';
-import { QuoteApprovalCard } from '../components/tracking/QuoteApprovalCard';
-import { PaymentModal } from '../components/tracking/PaymentModal';
-import { InvoiceModal } from '../components/tracking/InvoiceModal';
 import { RescheduleModal } from '../components/tracking/RescheduleModal';
+import { InvoiceModal } from '../components/tracking/InvoiceModal';
 import { ReviewModal } from '../components/tracking/ReviewModal';
-import { TRACKING_STATUSES } from '../data/mockData';
+import { COMPANY_INFO } from '../data/appliancesData';
 
 export const TrackPage = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const {
     bookings,
     activeBooking,
@@ -40,7 +35,6 @@ export const TrackPage = () => {
     advanceActiveStep,
     approveQuote,
     declineQuote,
-    payInvoice,
     reschedule,
     cancelBooking
   } = useBooking();
@@ -48,38 +42,22 @@ export const TrackPage = () => {
   const { openChatWithBooking } = useChat();
   const { showToast } = useToast();
 
-  const [searchId, setSearchId] = useState('');
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [showInvoiceModal, setShowInvoiceModal] = useState(false);
+  // Hidden developer flag for demo advancement (accessible via ?dev=true or double tap)
+  const isDevMode = searchParams.get('dev') === 'true';
+
+  // Modals
   const [showRescheduleModal, setShowRescheduleModal] = useState(false);
+  const [showInvoiceModal, setShowInvoiceModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [cancelReason, setCancelReason] = useState('Found another repair company');
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (!searchId.trim()) return;
-
-    const found = bookings.find(
-      (b) =>
-        b.id.toLowerCase() === searchId.trim().toLowerCase() ||
-        b.customerPhone.includes(searchId.trim()) ||
-        b.customerEmail.toLowerCase() === searchId.trim().toLowerCase()
-    );
-
-    if (found) {
-      setSelectedBookingId(found.id);
-      showToast(`Loaded Booking #${found.id}`, 'success');
-    } else {
-      showToast('No booking found matching that ID or phone.', 'warning');
-    }
-  };
+  const [isQuoteApproved, setIsQuoteApproved] = useState(false);
 
   const bookingToDisplay = activeBooking;
 
   if (!bookingToDisplay) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 32, textAlign: 'center', padding: '16px 0' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: '24px 0 100px 0', textAlign: 'center' }}>
         <div style={{
           width: 64,
           height: 64,
@@ -94,46 +72,18 @@ export const TrackPage = () => {
           <Truck size={32} strokeWidth={2} />
         </div>
         <div>
-          <div style={{
-            fontSize: '12px',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#14308F',
-            marginBottom: 4
-          }}>
-            REPAIR STATUS
-          </div>
-          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 6px 0', lineHeight: 1.25 }}>
+          <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 6px 0', lineHeight: 1.25 }}>
             No Active Repair Orders
           </h2>
-          <p style={{ fontSize: '14px', color: '#5B6478', maxWidth: 320, margin: '0 auto', lineHeight: 1.5 }}>
-            Look up an existing appointment using your Booking ID (e.g. AR-1024) or phone number.
+          <p style={{ fontSize: '14px', color: '#5B6478', maxWidth: 300, margin: '0 auto 16px auto', lineHeight: 1.5 }}>
+            You don't currently have an active repair scheduled.
           </p>
-        </div>
-
-        <form onSubmit={handleSearch} style={{ maxWidth: 340, width: '100%', margin: '0 auto', display: 'flex', gap: 8 }}>
-          <input
-            type="text"
-            placeholder="Enter Booking ID (e.g. AR-1024)"
-            value={searchId}
-            onChange={(e) => setSearchId(e.target.value)}
-            style={{
-              flex: 1,
-              height: 44,
-              padding: '0 16px',
-              borderRadius: 12,
-              border: '1px solid #E3E7F2',
-              fontSize: '14px',
-              outline: 'none'
-            }}
-          />
           <button
-            type="submit"
+            onClick={() => navigate('/book')}
             className="tap-effect"
             style={{
               height: 44,
-              padding: '0 20px',
+              padding: '0 24px',
               borderRadius: 9999,
               background: '#0B1F5C',
               color: '#FFFFFF',
@@ -143,391 +93,752 @@ export const TrackPage = () => {
               cursor: 'pointer'
             }}
           >
-            Lookup
+            Book a Repair
           </button>
-        </form>
+        </div>
       </div>
     );
   }
 
-  const currentStatusObj = TRACKING_STATUSES.find((s) => s.id === bookingToDisplay.currentStep) || TRACKING_STATUSES[0];
+  // Map 9 internal steps to the 6 spec steps
+  // 1: Booked, 2: Technician assigned, 3: On the way, 4: Diagnosis and quote, 5: Repair in progress, 6: Completed
+  const currentStep6 = (() => {
+    const s = bookingToDisplay.currentStep;
+    if (s <= 2) return 1;
+    if (s === 3) return 2;
+    if (s === 4) return 3;
+    if (s === 5 || s === 6) return 4;
+    if (s === 7 || s === 8) return 5;
+    return 6;
+  })();
+
+  const isQuoteReady = (currentStep6 === 4 && bookingToDisplay.currentStep === 6) || (bookingToDisplay.quote && !bookingToDisplay.quoteApproved && currentStep6 === 4);
+  const quoteHasBeenApproved = isQuoteApproved || bookingToDisplay.quoteApproved || currentStep6 >= 5;
+
+  // Status Headline & Big ETA Text
+  const statusHeadline = (() => {
+    switch (currentStep6) {
+      case 1:
+        return 'Booking confirmed';
+      case 2:
+        return 'Technician assigned';
+      case 3:
+        return 'Technician is on the way';
+      case 4:
+        return isQuoteReady ? 'Repair quote ready' : 'Diagnosis in progress';
+      case 5:
+        return 'Repair in progress';
+      case 6:
+      default:
+        return 'Repair completed';
+    }
+  })();
+
+  const etaMinutes = bookingToDisplay.technician?.etaMinutes || 11;
+
+  // 6 Steps Timeline Definition
+  const SIX_STEPS = [
+    {
+      id: 1,
+      title: 'Booked',
+      desc: 'Appointment confirmed and registered in dispatch queue.',
+      time: 'Today, 9:30 AM'
+    },
+    {
+      id: 2,
+      title: 'Technician assigned',
+      desc: 'Senior specialist Marcus Vance assigned with OEM parts.',
+      time: '10:45 AM'
+    },
+    {
+      id: 3,
+      title: 'On the way',
+      desc: 'Service van en route to your service address.',
+      time: '11:18 AM'
+    },
+    {
+      id: 4,
+      title: 'Diagnosis and quote',
+      desc: 'Inspecting unit components and preparing itemized quote.',
+      time: '11:42 AM'
+    },
+    {
+      id: 5,
+      title: 'Repair in progress',
+      desc: 'Installing OEM replacement parts and safety testing.',
+      time: '12:15 PM'
+    },
+    {
+      id: 6,
+      title: 'Completed',
+      desc: 'Repair complete, payment processed, 90-day warranty issued.',
+      time: '1:00 PM'
+    }
+  ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 100 }}>
       {/* --------------------------------------------------------------------------
-          Top Search & Lookup Bar
+          1. HEADER (Back arrow & Title "Track repair")
           -------------------------------------------------------------------------- */}
-      <form onSubmit={handleSearch} style={{ position: 'relative', width: '100%' }}>
-        <Search size={20} strokeWidth={2} color="#7A8299" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-        <input
-          type="text"
-          value={searchId}
-          onChange={(e) => setSearchId(e.target.value)}
-          placeholder={`Lookup by Booking ID (Current: #${bookingToDisplay.id})...`}
-          style={{
-            width: '100%',
-            height: 44,
-            padding: '0 84px 0 46px',
-            borderRadius: 12,
-            border: '1px solid #E3E7F2',
-            background: '#FFFFFF',
-            fontSize: '14px',
-            outline: 'none',
-            boxSizing: 'border-box'
-          }}
-        />
-        <button
-          type="submit"
-          className="tap-effect"
-          style={{
-            position: 'absolute',
-            right: 4,
-            top: 4,
-            bottom: 4,
-            height: 36,
-            padding: '0 16px',
-            borderRadius: 8,
-            background: '#0B1F5C',
-            color: '#FFFFFF',
-            fontSize: '13px',
-            fontWeight: 600,
-            border: 'none',
-            cursor: 'pointer'
-          }}
-        >
-          Find
-        </button>
-      </form>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <button
+            onClick={() => navigate(-1)}
+            className="tap-effect"
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: '50%',
+              background: '#FFFFFF',
+              border: '1px solid #E3E7F2',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: '#0A0A0F',
+              padding: 0
+            }}
+            aria-label="Go back"
+          >
+            <ArrowLeft size={18} strokeWidth={2} />
+          </button>
+          <h1 style={{ fontSize: '22px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.2 }}>
+            Track repair
+          </h1>
+        </div>
 
-      {/* --------------------------------------------------------------------------
-          Recent Bookings Switcher Tabs (if user has multiple)
-          -------------------------------------------------------------------------- */}
-      {bookings.length > 1 && (
-        <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 4 }} className="no-scrollbar">
-          {bookings.map((b) => (
-            <button
-              key={b.id}
-              onClick={() => setSelectedBookingId(b.id)}
-              className="tap-effect"
+        {/* Small Booking Switcher Dropdown (only if user has > 1 booking) */}
+        {bookings.length > 1 && (
+          <div style={{ position: 'relative' }}>
+            <select
+              value={bookingToDisplay.id}
+              onChange={(e) => setSelectedBookingId(e.target.value)}
               style={{
-                flexShrink: 0,
                 height: 36,
-                padding: '0 16px',
+                padding: '0 28px 0 12px',
                 borderRadius: 9999,
+                border: '1px solid #E3E7F2',
+                background: '#FFFFFF',
                 fontSize: '12px',
                 fontWeight: 600,
-                background: bookingToDisplay.id === b.id ? '#0B1F5C' : '#FFFFFF',
-                color: bookingToDisplay.id === b.id ? '#FFFFFF' : '#1B2236',
-                border: '1px solid #E3E7F2',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6
+                color: '#0B1F5C',
+                cursor: 'pointer',
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                outline: 'none'
               }}
             >
-              <span>#{b.id}</span>
-              <span style={{ opacity: 0.8 }}>({b.applianceName})</span>
-            </button>
-          ))}
+              {bookings.map((b) => (
+                <option key={b.id} value={b.id}>
+                  {b.applianceName}, #{b.id}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={14}
+              color="#0B1F5C"
+              style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Developer Simulate Button (hidden unless isDevMode) */}
+      {isDevMode && (
+        <div style={{ padding: '6px 12px', background: '#FEF3C7', borderRadius: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#92400E' }}>Dev Mode active</span>
+          <button
+            onClick={() => {
+              advanceActiveStep();
+              showToast('Advanced step', 'info');
+            }}
+            style={{ fontSize: '11px', fontWeight: 700, color: '#14308F', background: '#FFFFFF', border: '1px solid #D97706', padding: '2px 8px', borderRadius: 4, cursor: 'pointer' }}
+          >
+            Advance Step (Next) &rarr;
+          </button>
         </div>
       )}
 
       {/* --------------------------------------------------------------------------
-          Active Booking Primary Overview Card
+          2. STATUS CARD (The Main Card)
           -------------------------------------------------------------------------- */}
       <div
         style={{
           background: '#FFFFFF',
           borderRadius: 20,
-          padding: 20,
+          border: '1px solid #E3E7F2',
+          padding: 16,
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
-          border: '1px solid #E3E7F2'
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+        {/* Small gray line: "Samsung Refrigerator and Freezer, #AR-1024" */}
+        <div style={{ fontSize: '13px', color: '#7A8299' }}>
+          {bookingToDisplay.brand} {bookingToDisplay.applianceName}, #{bookingToDisplay.id}
+        </div>
+
+        {/* Large headline (22px, weight 600) */}
+        <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
+          {statusHeadline}
+        </h2>
+
+        {/* Big ETA / Schedule line */}
+        {currentStep6 === 3 ? (
           <div>
-            <div style={{
-              fontSize: '12px',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.08em',
-              color: '#14308F',
-              marginBottom: 4
-            }}>
-              LIVE TRACKING &bull; STEP {bookingToDisplay.currentStep}/9
+            <div style={{ fontSize: '18px', fontWeight: 600, color: '#14308F' }}>
+              Arrives in {etaMinutes} min
             </div>
-            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
-              {bookingToDisplay.brand} {bookingToDisplay.applianceName}
-            </h2>
-            <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 4 }}>
-              Booking #{bookingToDisplay.id} &bull; {bookingToDisplay.date} ({bookingToDisplay.timeSlot})
+            <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+              Today, {bookingToDisplay.timeSlot || '11:00 AM to 2:00 PM'}
             </div>
           </div>
-
-          {/* Simulate Next Step Button for instant demo testing */}
-          <button
-            onClick={() => {
-              advanceActiveStep();
-              showToast('Simulated progression advanced by 1 step', 'info');
-            }}
-            className="tap-effect"
-            style={{
-              height: 36,
-              padding: '0 12px',
-              borderRadius: 8,
-              border: '1px solid #E3E7F2',
-              background: '#F8FAFC',
-              fontSize: '12px',
-              fontWeight: 600,
-              color: '#14308F',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 4,
-              cursor: 'pointer'
-            }}
-            title="Fast forward to next tracking status"
-          >
-            <FastForward size={14} color="#14308F" strokeWidth={2} />
-            <span>Simulate</span>
-          </button>
-        </div>
-
-        {/* Current status pill */}
-        <div style={{
-          padding: 12,
-          borderRadius: 14,
-          background: '#F1F5FB',
-          border: '1px solid #E3E7F2',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: 16
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#14308F' }} />
-            <div>
-              <div style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
-                {currentStatusObj.label}
-              </div>
-              <div style={{ fontSize: '13px', color: '#5B6478', lineHeight: 1.4 }}>
-                {currentStatusObj.desc}
-              </div>
+        ) : currentStep6 === 6 ? (
+          <div>
+            <div style={{ fontSize: '16px', fontWeight: 600, color: '#16A34A', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <CheckCircle2 size={18} color="#16A34A" />
+              <span>All repairs cleared & warranty active</span>
+            </div>
+            <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+              Completed today at {bookingToDisplay.date}
             </div>
           </div>
+        ) : (
+          <div>
+            <div style={{ fontSize: '16px', fontWeight: 600, color: '#14308F' }}>
+              Scheduled for {bookingToDisplay.date || 'Today'}
+            </div>
+            <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+              Window: {bookingToDisplay.timeSlot || '11:00 AM to 2:00 PM'}
+            </div>
+          </div>
+        )}
+
+        {/* Compact progress bar with 6 segments (filled navy #14308F, rest #E3E7F2) */}
+        <div style={{ display: 'flex', gap: 4, width: '100%', margin: '4px 0' }}>
+          {[1, 2, 3, 4, 5, 6].map((seg) => (
+            <div
+              key={seg}
+              style={{
+                flex: 1,
+                height: 5,
+                borderRadius: 9999,
+                background: seg <= currentStep6 ? '#14308F' : '#E3E7F2',
+                transition: 'background 0.3s ease'
+              }}
+            />
+          ))}
         </div>
 
-        {/* Service Address */}
+        {/* Divider */}
+        <div style={{ height: 1, background: '#EEF1F8' }} />
+
+        {/* Address with pin icon */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '14px', color: '#5B6478' }}>
           <MapPin size={18} strokeWidth={2} color="#14308F" style={{ flexShrink: 0 }} />
-          <span>{bookingToDisplay.address}</span>
+          <span>{bookingToDisplay.address || '742 Evergreen Terr, Suite 4B, Springfield, IL'}</span>
         </div>
       </div>
 
       {/* --------------------------------------------------------------------------
-          Live Animated SVG Route Map (Only active if Step >= 4 and Step < 8)
+          3. MAP CARD (ONLY while the technician is on the way: Step 3)
           -------------------------------------------------------------------------- */}
-      {bookingToDisplay.currentStep >= 3 && bookingToDisplay.currentStep <= 5 && (
-        <LiveTrackingMap
-          etaMinutes={bookingToDisplay.technician?.etaMinutes || 12}
-          vehicle={bookingToDisplay.technician?.vehicle || 'Ford Transit #TX-482'}
-        />
+      {currentStep6 === 3 && (
+        <div
+          style={{
+            position: 'relative',
+            height: 200,
+            borderRadius: 20,
+            overflow: 'hidden',
+            border: '1px solid #E3E7F2',
+            background: '#F0F4FA',
+            boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
+          }}
+        >
+          {/* One small chip at top-left: "ETA 11 min" */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 12,
+              left: 12,
+              zIndex: 10,
+              background: '#0B1F5C',
+              color: '#FFFFFF',
+              fontSize: '12px',
+              fontWeight: 600,
+              padding: '4px 12px',
+              borderRadius: 9999,
+              boxShadow: '0 2px 8px rgba(11,31,92,0.2)'
+            }}
+          >
+            ETA {etaMinutes} min
+          </div>
+
+          {/* SVG Map Graphic with route, van marker, and destination pin */}
+          <svg viewBox="0 0 400 200" style={{ width: '100%', height: '100%' }}>
+            {/* Soft map roads */}
+            <path d="M 0 50 L 400 60" stroke="#E2E8F0" strokeWidth="8" fill="none" />
+            <path d="M 0 160 L 400 140" stroke="#E2E8F0" strokeWidth="8" fill="none" />
+            <path d="M 90 0 L 80 200" stroke="#E2E8F0" strokeWidth="8" fill="none" />
+            <path d="M 310 0 L 320 200" stroke="#E2E8F0" strokeWidth="8" fill="none" />
+
+            {/* Live Blue Route Line */}
+            <path
+              d="M 60 145 C 130 140, 160 80, 240 85 S 310 130, 335 90"
+              stroke="#14308F"
+              strokeWidth="4"
+              strokeDasharray="6,4"
+              fill="none"
+            />
+
+            {/* Technician Van Marker */}
+            <g transform="translate(195, 75)">
+              <circle r="16" fill="rgba(20, 48, 143, 0.15)" />
+              <circle r="12" fill="#14308F" />
+              <rect x="-6" y="-5" width="12" height="10" rx="2" fill="#FFFFFF" />
+              <circle cx="-2" cy="5" r="2" fill="#0B1F5C" />
+              <circle cx="4" cy="5" r="2" fill="#0B1F5C" />
+            </g>
+
+            {/* Destination Pin Marker */}
+            <g transform="translate(335, 72)">
+              <circle r="14" fill="rgba(220, 38, 38, 0.15)" />
+              <path d="M 0 0 C -4 -4 -7 -8 -7 -12 A 7 7 0 0 1 7 -12 C 7 -8 4 -4 0 0 Z" fill="#DC2626" />
+              <circle cx="0" cy="-12" r="2.5" fill="#FFFFFF" />
+            </g>
+          </svg>
+        </div>
       )}
 
       {/* --------------------------------------------------------------------------
-          Technician Card
+          5. QUOTE CARD (only when status = Quote ready, or collapsed if approved)
+          Placed FIRST above technician per spec when Quote ready
           -------------------------------------------------------------------------- */}
-      <TechnicianCard
-        technician={bookingToDisplay.technician}
-        bookingId={bookingToDisplay.id}
-      />
+      {isQuoteReady && (
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 20,
+            border: '1px solid #E3E7F2',
+            padding: 16,
+            boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12
+          }}
+        >
+          {quoteHasBeenApproved ? (
+            /* Collapsed into a single row */
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <CheckCircle2 size={18} color="#16A34A" />
+                <span style={{ fontSize: '15px', fontWeight: 600, color: '#0A0A0F' }}>
+                  Quote approved, $281.88
+                </span>
+              </div>
+              <span style={{ fontSize: '12px', fontWeight: 600, color: '#16A34A', background: '#DCFCE7', padding: '2px 8px', borderRadius: 9999 }}>
+                Authorized
+              </span>
+            </div>
+          ) : (
+            /* Full Quote Card */
+            <>
+              {/* Title & Tag */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ fontSize: '16px', fontWeight: 600, color: '#0A0A0F' }}>
+                  Repair quote
+                </div>
+                <span style={{ fontSize: '11px', fontWeight: 600, color: '#14308F', background: '#E8ECF8', padding: '3px 8px', borderRadius: 9999 }}>
+                  Needs your approval
+                </span>
+              </div>
+
+              {/* One line summary of finding */}
+              <div style={{ fontSize: '13px', color: '#5B6478', lineHeight: 1.4 }}>
+                Defrost thermistor sensor and defrost thermostat failure.
+              </div>
+
+              {/* Line items as rows */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: '14px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#5B6478' }}>Parts (sensor probe & cutoff switch)</span>
+                  <span style={{ fontWeight: 500, color: '#0A0A0F' }}>$178.50</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#5B6478' }}>Labor</span>
+                  <span style={{ fontWeight: 500, color: '#0A0A0F' }}>$165.00</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', color: '#16A34A' }}>
+                  <span>Diagnostic fee credit</span>
+                  <span style={{ fontWeight: 600 }}>-$79.00</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#5B6478' }}>Tax</span>
+                  <span style={{ fontWeight: 500, color: '#0A0A0F' }}>$17.38</span>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div style={{ height: 1, background: '#EEF1F8' }} />
+
+              {/* Total large right-aligned */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '16px', fontWeight: 600, color: '#0A0A0F' }}>Total</span>
+                <span style={{ fontSize: '20px', fontWeight: 700, color: '#0B1F5C' }}>$281.88</span>
+              </div>
+
+              {/* Warranty badge row */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '13px', color: '#5B6478' }}>
+                <Shield size={16} color="#16A34A" />
+                <span>Includes 90-day parts and labor warranty</span>
+              </div>
+
+              {/* Buttons */}
+              <button
+                onClick={() => {
+                  setIsQuoteApproved(true);
+                  approveQuote(bookingToDisplay.id);
+                  showToast('Quote approved! Repair work is underway.', 'success');
+                }}
+                className="tap-effect"
+                style={{
+                  height: 48,
+                  width: '100%',
+                  borderRadius: 9999,
+                  background: '#0B1F5C',
+                  color: '#FFFFFF',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(11,31,92,0.25)'
+                }}
+              >
+                Approve repair
+              </button>
+
+              <button
+                onClick={() => {
+                  declineQuote(bookingToDisplay.id, 'Customer declined estimate');
+                  showToast('Quote declined. Technician has been informed.', 'info');
+                }}
+                className="tap-effect"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#7A8299',
+                  fontSize: '13px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  padding: '4px 0',
+                  textAlign: 'center'
+                }}
+              >
+                Decline
+              </button>
+            </>
+          )}
+        </div>
+      )}
 
       {/* --------------------------------------------------------------------------
-          Interactive Quote Approval Card (Step 6 or active quote)
+          4. TECHNICIAN CARD (after a technician is assigned: Step >= 2)
           -------------------------------------------------------------------------- */}
-      <QuoteApprovalCard
-        quote={bookingToDisplay.quote}
-        isStep6={bookingToDisplay.currentStep === 6}
-        onApprove={() => approveQuote(bookingToDisplay.id)}
-        onDecline={(reason) => declineQuote(bookingToDisplay.id, reason)}
-      />
+      {currentStep6 >= 2 && currentStep6 <= 5 && (
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: 20,
+            border: '1px solid #E3E7F2',
+            padding: 16,
+            boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 14
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            {/* 48px circle photo */}
+            <div
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                background: '#0B1F5C',
+                color: '#FFFFFF',
+                fontSize: '18px',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}
+            >
+              MV
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: '16px', fontWeight: 600, color: '#0A0A0F', lineHeight: 1.25 }}>
+                {bookingToDisplay.technician?.name || 'Marcus Vance'}
+              </div>
+              <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+                Senior appliance specialist
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '13px', color: '#0A0A0F', marginTop: 2 }}>
+                <Star size={14} fill="#F59E0B" color="#F59E0B" />
+                <span style={{ fontWeight: 600 }}>4.98</span>
+                <span style={{ color: '#7A8299' }}>&bull; 1,420 jobs</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Two equal buttons: Call (outline) & Chat (glossy navy) */}
+          <div style={{ display: 'flex', gap: 10 }}>
+            <button
+              onClick={() => { window.location.href = `tel:${COMPANY_INFO.phoneRaw}`; }}
+              className="tap-effect"
+              style={{
+                flex: 1,
+                height: 44,
+                borderRadius: 9999,
+                background: '#FFFFFF',
+                border: '1px solid #E3E7F2',
+                color: '#0A0A0F',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 6
+              }}
+            >
+              <Phone size={16} strokeWidth={2} />
+              <span>Call</span>
+            </button>
+
+            <button
+              onClick={() => openChatWithBooking(bookingToDisplay.id)}
+              className="tap-effect"
+              style={{
+                flex: 1,
+                height: 44,
+                borderRadius: 9999,
+                background: '#0B1F5C',
+                border: 'none',
+                color: '#FFFFFF',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 6,
+                boxShadow: '0 4px 12px rgba(11,31,92,0.2)'
+              }}
+            >
+              <MessageSquare size={16} strokeWidth={2} />
+              <span>Chat</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* --------------------------------------------------------------------------
-          Customer Action Center Pills
+          6. TIMELINE CARD (Exactly 6 steps)
           -------------------------------------------------------------------------- */}
-      {/* --------------------------------------------------------------------------
-          Customer Action Center Pills
-          -------------------------------------------------------------------------- */}
-      <div style={{
-        background: '#FFFFFF',
-        padding: 16,
-        borderRadius: 20,
-        border: '1px solid #E3E7F2',
-        boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
-      }}>
-        <div style={{ fontSize: '15px', fontWeight: 600, color: '#0A0A0F', marginBottom: 16 }}>
-          Customer Management & Self-Service
+      <div
+        style={{
+          background: '#FFFFFF',
+          borderRadius: 20,
+          border: '1px solid #E3E7F2',
+          padding: 16,
+          boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 16
+        }}
+      >
+        <div style={{ fontSize: '16px', fontWeight: 600, color: '#0A0A0F' }}>
+          Repair progress
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 14 }}>
-          <button
-            onClick={() => openChatWithBooking(bookingToDisplay.id)}
-            className="tap-effect"
-            style={{
-              height: 44,
-              padding: '0 12px',
-              fontSize: '13px',
-              fontWeight: 600,
-              borderRadius: 12,
-              background: '#F8FAFC',
-              border: '1px solid #E3E7F2',
-              color: '#0A0A0F',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              cursor: 'pointer'
-            }}
-          >
-            <MessageSquare size={18} strokeWidth={2} color="#14308F" />
-            <span>Chat Triage</span>
-          </button>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {SIX_STEPS.map((step, idx) => {
+            const isCompleted = step.id < currentStep6;
+            const isCurrent = step.id === currentStep6;
+            const isUpcoming = step.id > currentStep6;
+            const isLast = idx === SIX_STEPS.length - 1;
 
+            return (
+              <div key={step.id} style={{ display: 'flex', gap: 12, position: 'relative' }}>
+                {/* Left column: 24px circle and joining vertical line */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 24, flexShrink: 0 }}>
+                  <div
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: '50%',
+                      background: isCompleted ? '#2E9E6B' : isCurrent ? '#14308F' : '#E3E7F2',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#FFFFFF',
+                      boxShadow: isCurrent ? '0 0 0 4px rgba(20, 48, 143, 0.15)' : 'none',
+                      zIndex: 2
+                    }}
+                  >
+                    {isCompleted ? (
+                      <Check size={14} strokeWidth={3} />
+                    ) : isCurrent ? (
+                      <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#FFFFFF' }} />
+                    ) : null}
+                  </div>
+
+                  {!isLast && (
+                    <div
+                      style={{
+                        width: 2,
+                        flex: 1,
+                        minHeight: isCurrent ? 36 : 24,
+                        background: isCompleted ? '#2E9E6B' : '#E3E7F2',
+                        margin: '2px 0'
+                      }}
+                    />
+                  )}
+                </div>
+
+                {/* Right column: Title, time and optional description */}
+                <div style={{ flex: 1, paddingBottom: isLast ? 0 : isCurrent ? 14 : 10 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{
+                      fontSize: '14px',
+                      fontWeight: isCurrent ? 700 : isCompleted ? 600 : 500,
+                      color: isUpcoming ? '#7A8299' : '#0A0A0F'
+                    }}>
+                      {step.title}
+                    </span>
+                    <span style={{ fontSize: '13px', color: '#7A8299' }}>
+                      {isUpcoming ? '--' : step.time}
+                    </span>
+                  </div>
+
+                  {/* Show description only for the current step */}
+                  {isCurrent && (
+                    <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2, lineHeight: 1.4 }}>
+                      {step.desc}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* --------------------------------------------------------------------------
+          7. HELP ROW (Bottom)
+          -------------------------------------------------------------------------- */}
+      {currentStep6 === 6 ? (
+        /* Completed Status: Two buttons "View invoice" and "Rate technician" */
+        <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
           <button
             onClick={() => setShowInvoiceModal(true)}
             className="tap-effect"
             style={{
+              flex: 1,
               height: 44,
-              padding: '0 12px',
-              fontSize: '13px',
-              fontWeight: 600,
-              borderRadius: 12,
-              background: '#F8FAFC',
+              borderRadius: 9999,
+              background: '#FFFFFF',
               border: '1px solid #E3E7F2',
               color: '#0A0A0F',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
+              fontSize: '14px',
+              fontWeight: 600,
               cursor: 'pointer'
             }}
           >
-            <Printer size={18} strokeWidth={2} color="#14308F" />
-            <span>Print Invoice</span>
+            View invoice
           </button>
-
-          <button
-            onClick={() => setShowRescheduleModal(true)}
-            className="tap-effect"
-            style={{
-              height: 44,
-              padding: '0 12px',
-              fontSize: '13px',
-              fontWeight: 600,
-              borderRadius: 12,
-              background: '#F8FAFC',
-              border: '1px solid #E3E7F2',
-              color: '#0A0A0F',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              cursor: 'pointer'
-            }}
-          >
-            <Calendar size={18} strokeWidth={2} color="#14308F" />
-            <span>Reschedule</span>
-          </button>
-
           <button
             onClick={() => setShowReviewModal(true)}
             className="tap-effect"
             style={{
+              flex: 1,
               height: 44,
-              padding: '0 12px',
-              fontSize: '13px',
+              borderRadius: 9999,
+              background: '#0B1F5C',
+              color: '#FFFFFF',
+              border: 'none',
+              fontSize: '14px',
               fontWeight: 600,
-              borderRadius: 12,
-              background: '#F8FAFC',
-              border: '1px solid #E3E7F2',
-              color: '#0A0A0F',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
               cursor: 'pointer'
             }}
           >
-            <Star size={18} strokeWidth={2} color="#14308F" />
-            <span>Review Tech</span>
+            Rate technician
           </button>
-
-          {/* Pay bill if completed or quote approved */}
-          {bookingToDisplay.currentStep >= 7 && (
+        </div>
+      ) : (
+        /* Active Status: Reschedule, Need help?, and Cancel appointment */
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center', marginTop: 4 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 24, width: '100%' }}>
             <button
-              onClick={() => setShowPaymentModal(true)}
+              onClick={() => setShowRescheduleModal(true)}
               className="tap-effect"
               style={{
-                gridColumn: 'span 2',
-                height: 44,
-                padding: '0 20px',
-                borderRadius: 9999,
-                background: '#0B1F5C',
-                color: '#FFFFFF',
+                background: 'none',
+                border: 'none',
+                color: '#14308F',
                 fontSize: '14px',
                 fontWeight: 600,
-                border: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                cursor: 'pointer'
+                cursor: 'pointer',
+                padding: '4px 8px'
               }}
             >
-              <CreditCard size={18} strokeWidth={2} />
-              <span>
-                {bookingToDisplay.currentStep === 9 ? 'Receipt Cleared ($' + bookingToDisplay.quote?.total + ')' : 'Pay Balance ($' + bookingToDisplay.quote?.total + ')'}
-              </span>
+              Reschedule
             </button>
-          )}
+            <button
+              onClick={() => navigate('/more?sub=support')}
+              className="tap-effect"
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#14308F',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                padding: '4px 8px'
+              }}
+            >
+              Need help?
+            </button>
+          </div>
 
-          {bookingToDisplay.currentStep <= 4 && !bookingToDisplay.isCancelled && (
+          {/* Cancel appointment (hidden once technician has started repair: step 5) */}
+          {currentStep6 < 5 && (
             <button
               onClick={() => setShowCancelModal(true)}
               className="tap-effect"
               style={{
-                gridColumn: 'span 2',
-                height: 44,
-                fontSize: '14px',
-                fontWeight: 600,
-                color: '#DC2626',
-                background: 'transparent',
+                background: 'none',
                 border: 'none',
-                cursor: 'pointer'
+                color: '#C62828',
+                fontSize: '13px',
+                fontWeight: 500,
+                cursor: 'pointer',
+                padding: '4px 8px'
               }}
             >
-              Cancel This Service Appointment
+              Cancel appointment
             </button>
           )}
         </div>
-      </div>
-
-      {/* --------------------------------------------------------------------------
-          Vertical Stepper (9 Statuses with timestamps & glow)
-          -------------------------------------------------------------------------- */}
-      <TrackingStepper
-        currentStep={bookingToDisplay.currentStep}
-        timeline={bookingToDisplay.timeline}
-      />
+      )}
 
       {/* --------------------------------------------------------------------------
           MODALS
           -------------------------------------------------------------------------- */}
-      <PaymentModal
-        isOpen={showPaymentModal}
-        onClose={() => setShowPaymentModal(false)}
-        quote={bookingToDisplay.quote}
-        onPaySuccess={(method) => payInvoice(bookingToDisplay.id, method)}
-      />
-
       <InvoiceModal
         isOpen={showInvoiceModal}
         onClose={() => setShowInvoiceModal(false)}
@@ -546,8 +857,8 @@ export const TrackPage = () => {
         isOpen={showReviewModal}
         onClose={() => setShowReviewModal(false)}
         technicianName={bookingToDisplay.technician?.name || 'Marcus Vance'}
-        onSubmitReview={({ rating, comment }) => {
-          showToast(`Thank you for rating Marcus ${rating} stars!`, 'success');
+        onSubmitReview={({ rating }) => {
+          showToast(`Thank you for rating ${rating} stars!`, 'success');
         }}
       />
 
@@ -555,34 +866,60 @@ export const TrackPage = () => {
       {showCancelModal && (
         <div className="sheet-backdrop" onClick={() => setShowCancelModal(false)}>
           <div
-            className="sheet-container glass-strong card-gloss"
+            className="sheet-container"
             onClick={(e) => e.stopPropagation()}
-            style={{ padding: 20 }}
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '24px 24px 0 0',
+              padding: 20,
+              maxWidth: 480,
+              margin: '0 auto'
+            }}
           >
-            <div className="sheet-drag-handle" />
-            <h3 style={{ fontSize: '1.2rem', color: '#0F2A44', margin: '10px 0 6px 0' }}>
+            <div style={{ width: 40, height: 4, borderRadius: 2, background: '#E2E8F0', margin: '0 auto 16px auto' }} />
+            <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 6px 0' }}>
               Cancel Appointment #{bookingToDisplay.id}?
             </h3>
-            <p style={{ fontSize: '0.78rem', color: '#64748B', marginBottom: 14 }}>
-              Are you sure? Our master technician Marcus is already allocated for this route.
+            <p style={{ fontSize: '14px', color: '#5B6478', margin: '0 0 16px 0', lineHeight: 1.5 }}>
+              Are you sure you want to cancel? If your plans have changed, you can reschedule for free.
             </p>
 
-            <div style={{ display: 'flex', gap: 10 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <button
                 onClick={() => {
                   cancelBooking(bookingToDisplay.id, cancelReason);
                   setShowCancelModal(false);
+                  showToast('Appointment cancelled successfully', 'info');
                 }}
-                className="btn btn-block btn-primary"
-                style={{ background: '#DC2626' }}
+                className="tap-effect"
+                style={{
+                  height: 44,
+                  borderRadius: 9999,
+                  background: '#DC2626',
+                  color: '#FFFFFF',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
               >
                 Yes, Cancel Appointment
               </button>
               <button
                 onClick={() => setShowCancelModal(false)}
-                className="btn btn-outline"
+                className="tap-effect"
+                style={{
+                  height: 44,
+                  borderRadius: 9999,
+                  background: '#FFFFFF',
+                  color: '#0A0A0F',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  border: '1px solid #E3E7F2',
+                  cursor: 'pointer'
+                }}
               >
-                Keep Booking
+                Keep Appointment
               </button>
             </div>
           </div>
@@ -591,4 +928,3 @@ export const TrackPage = () => {
     </div>
   );
 };
-

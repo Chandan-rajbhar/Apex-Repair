@@ -4,7 +4,6 @@ import {
   Wrench,
   Shield,
   Truck,
-  Sparkles,
   PhoneCall,
   ArrowRight,
   Star,
@@ -32,43 +31,47 @@ import { useToast } from '../context/ToastContext';
 const FEATURED_SERVICES = [
   {
     code: 'AC-01',
-    name: 'AC repair and service',
+    name: 'AC repair',
     price: '49',
     tag: 'Same-day',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/ac.jpg',
+    alt: 'Technician servicing an air conditioner',
     appliance: 'Air Conditioners',
     categoryKey: 'cooling',
     desc: 'Certified split AC diagnostics, refrigerant pressure check, condenser coil deep clean, compressor load testing, and digital PCB repair.'
   },
   {
     code: 'WM-02',
-    name: 'Washing machine repair',
+    name: 'Washing machine',
     price: '39',
     tag: 'Same-day',
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/washer.jpg',
+    alt: 'Technician repairing a washing machine',
     appliance: 'Washing Machines',
     categoryKey: 'washers',
     desc: 'Front-load & top-load drum balance calibration, drain pump clearing, high-speed spin leak elimination, and direct-drive motor coupling overhaul.'
   },
   {
-    code: 'RF-03',
-    name: 'Refrigerator repair',
+    code: 'DW-03',
+    name: 'Dishwasher',
     price: '45',
     tag: 'Same-day',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
-    appliance: 'Refrigerators',
-    categoryKey: 'refrigerators',
-    desc: 'Inverter compressor testing, dual evaporator defrosting, magnetic door seal restoration, and electronic thermistor sensor calibration.'
+    image: '/images/services/dishwasher.jpg',
+    alt: 'Technician repairing a dishwasher',
+    appliance: 'Dishwashers',
+    categoryKey: 'dishwashers',
+    desc: 'Restore sparkling clean dishes with precision dishwasher repair. We service circulation wash impellers, float switch sensors, drain valves, door latches, and electronic control modules.'
   },
   {
-    code: 'EL-04',
-    name: 'Electronics repair',
-    price: '35',
-    tag: '48-hour',
-    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=600&q=80',
-    appliance: 'Electronics & Microwaves',
-    categoryKey: 'microwaves',
-    desc: 'High-voltage diode & capacitor safety check, control board precision soldering, magnetron inspection, and digital touch panel circuit renewal.'
+    code: 'OV-04',
+    name: 'Oven and range',
+    price: '45',
+    tag: 'Next-day',
+    image: '/images/services/oven.jpg',
+    alt: 'Technician repairing an oven and range',
+    appliance: 'Ovens & Ranges',
+    categoryKey: 'ovens-ranges',
+    desc: 'Precision culinary appliance service for gas ranges, electric ovens, dual-fuel cooktops, and induction surfaces. Calibrate exact temperature probe accuracy and replace high-voltage spark modules.'
   }
 ];
 
@@ -79,7 +82,6 @@ export const HomePage = () => {
   const { showToast } = useToast();
 
   const [activeTab, setActiveTab] = useState('ALL');
-  const [searchQuery, setSearchQuery] = useState('');
   const [savedServices, setSavedServices] = useState(['AC-01']);
   const [selectedServiceDetail, setSelectedServiceDetail] = useState(null);
   const [activeModal, setActiveModal] = useState(null); // 'invoices' | 'support' | null
@@ -117,85 +119,42 @@ export const HomePage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
       {/* --------------------------------------------------------------------------
-          1. Pill Search Bar & Category Chips
+          1. Category Filter Chips
           -------------------------------------------------------------------------- */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <div style={{ position: 'relative', width: '100%' }}>
-          <Search
-            size={20}
-            strokeWidth={2}
-            color="#14308F"
-            style={{
-              position: 'absolute',
-              left: 16,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              pointerEvents: 'none'
-            }}
-          />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && searchQuery.trim()) {
-                navigate(`/services?search=${encodeURIComponent(searchQuery.trim())}`);
-              }
-            }}
-            placeholder="Search for Washing Machines, Refrigerators, AC..."
-            style={{
-              width: '100%',
-              height: 44,
-              padding: '0 16px 0 44px',
-              borderRadius: 9999,
-              border: '1px solid #E3E7F2',
-              background: '#FFFFFF',
-              fontSize: '14px',
-              fontWeight: 400,
-              color: '#0A0A0F',
-              boxShadow: '0 2px 8px rgba(10,20,60,0.04)',
-              outline: 'none',
-              boxSizing: 'border-box'
-            }}
-          />
-        </div>
-
-        {/* Category Horizontal Filter Chips */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          overflowX: 'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-          padding: '2px 0'
-        }}>
-          {['ALL', 'DEALS', 'LAUNDRY', 'COOLING', 'KITCHEN'].map((tab) => {
-            const isActive = activeTab === tab;
-            return (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className="tap-effect"
-                style={{
-                  height: 36,
-                  padding: '0 16px',
-                  borderRadius: 9999,
-                  background: isActive ? '#0B1F5C' : '#FFFFFF',
-                  color: isActive ? '#FFFFFF' : '#1B2236',
-                  border: isActive ? '1px solid #0B1F5C' : '1px solid #E3E7F2',
-                  fontSize: '12px',
-                  fontWeight: isActive ? 600 : 500,
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  boxShadow: isActive ? '0 2px 8px rgba(11,31,92,0.2)' : 'none'
-                }}
-              >
-                {tab}
-              </button>
-            );
-          })}
-        </div>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        overflowX: 'auto',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        padding: '2px 0'
+      }}>
+        {['ALL', 'DEALS', 'LAUNDRY', 'COOLING', 'KITCHEN'].map((tab) => {
+          const isActive = activeTab === tab;
+          return (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className="tap-effect"
+              style={{
+                height: 36,
+                padding: '0 16px',
+                borderRadius: 9999,
+                background: isActive ? '#0B1F5C' : '#FFFFFF',
+                color: isActive ? '#FFFFFF' : '#1B2236',
+                border: isActive ? '1px solid #0B1F5C' : '1px solid #E3E7F2',
+                fontSize: '12px',
+                fontWeight: isActive ? 600 : 500,
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                boxShadow: isActive ? '0 2px 8px rgba(11,31,92,0.2)' : 'none'
+              }}
+            >
+              {tab}
+            </button>
+          );
+        })}
       </div>
 
       {/* --------------------------------------------------------------------------
@@ -230,6 +189,34 @@ export const HomePage = () => {
           }}
         />
 
+        {/* 50% OFF Circular Badge in Top-Right Corner */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 12,
+            right: 12,
+            width: 52,
+            height: 52,
+            borderRadius: '50%',
+            background: 'rgba(255, 255, 255, 0.18)',
+            border: '1.5px solid rgba(255, 255, 255, 0.45)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            boxShadow: '0 4px 14px rgba(4, 10, 34, 0.25)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            color: '#FFFFFF',
+            zIndex: 4,
+            pointerEvents: 'none'
+          }}
+        >
+          <span style={{ fontSize: '13px', fontWeight: 800, lineHeight: 1.05 }}>50%</span>
+          <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', opacity: 0.95 }}>OFF</span>
+        </div>
+
         {/* Left Column (about 60%): Text & Actions */}
         <div
           style={{
@@ -249,7 +236,7 @@ export const HomePage = () => {
               fontWeight: 600,
               color: '#FFFFFF',
               lineHeight: 1.25,
-              margin: '0 0 12px 0',
+              margin: '0 0 16px 0',
               padding: 0
             }}
           >
@@ -257,30 +244,7 @@ export const HomePage = () => {
             appliance repair
           </h2>
 
-          {/* 2. Offer Pill */}
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 28,
-              padding: '0 12px',
-              borderRadius: 9999,
-              background: 'rgba(255, 255, 255, 0.15)',
-              border: '1px solid rgba(255, 255, 255, 0.35)',
-              color: '#FFFFFF',
-              fontSize: '12px',
-              fontWeight: 600,
-              lineHeight: 1,
-              whiteSpace: 'nowrap',
-              marginBottom: 16,
-              boxSizing: 'border-box'
-            }}
-          >
-            Up to $50 off
-          </div>
-
-          {/* 3. Primary Button */}
+          {/* 2. Primary Button */}
           <button
             onClick={() => navigate('/book')}
             className="tap-effect"
@@ -412,7 +376,7 @@ export const HomePage = () => {
 
         {/* 3. Invoices */}
         <div
-          onClick={() => setActiveModal('invoices')}
+          onClick={() => navigate('/more?sub=invoices')}
           className="quick-action-card tap-effect"
         >
           <div style={{
@@ -434,7 +398,7 @@ export const HomePage = () => {
 
         {/* 4. Support */}
         <div
-          onClick={() => setActiveModal('support')}
+          onClick={() => navigate('/more?sub=support')}
           className="quick-action-card tap-effect"
         >
           <div style={{
@@ -509,7 +473,7 @@ export const HomePage = () => {
           </button>
         </div>
 
-        {/* 2-Column Grid (Rule 1 & 6: 14px gap, equal minmax(0, 1fr) columns) */}
+        {/* 2-Column Grid (14px gap, equal minmax(0, 1fr) columns) */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
@@ -523,29 +487,28 @@ export const HomePage = () => {
                 onClick={() => setSelectedServiceDetail(item)}
                 className="featured-repair-card tap-effect"
               >
-                {/* Rule 4: Photo on top, height 115px */}
+                {/* Photo on top: height 115px, full card width, object-fit cover */}
                 <div style={{ position: 'relative', width: '100%', height: 115, overflow: 'hidden' }}>
                   <img
                     src={item.image}
-                    alt={item.name}
+                    alt={item.alt || item.name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
-                  {/* Subtle navy gradient overlay */}
+                  {/* Light navy gradient overlay on bottom 30% */}
                   <div style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(180deg, transparent 40%, rgba(11, 31, 92, 0.25) 100%)',
+                    background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.25) 100%)',
                     pointerEvents: 'none'
                   }} />
 
-                  {/* Rule 4: Icon buttons on photo (40px circles, 8px from top/right, 8px between) */}
+                  {/* 36px white circle heart button 8px from top and right */}
                   <div style={{
                     position: 'absolute',
                     top: 8,
                     right: 8,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 8,
                     zIndex: 2
                   }}>
                     <button
@@ -555,8 +518,8 @@ export const HomePage = () => {
                       }}
                       className="tap-effect"
                       style={{
-                        width: 40,
-                        height: 40,
+                        width: 36,
+                        height: 36,
                         borderRadius: '50%',
                         background: '#FFFFFF',
                         border: 'none',
@@ -570,7 +533,7 @@ export const HomePage = () => {
                       aria-label={isSaved ? "Saved" : "Save repair"}
                     >
                       <Heart
-                        size={20}
+                        size={18}
                         strokeWidth={2}
                         color={isSaved ? "#E11D48" : "#7A8299"}
                         fill={isSaved ? "#E11D48" : "none"}
@@ -579,7 +542,7 @@ export const HomePage = () => {
                   </div>
                 </div>
 
-                {/* Rule 4: Text area padding 12px */}
+                {/* Text area padding 12px */}
                 <div style={{
                   padding: 12,
                   display: 'flex',
@@ -587,22 +550,31 @@ export const HomePage = () => {
                   flex: 1,
                   boxSizing: 'border-box'
                 }}>
-                  {/* Row 1: Code left (13px weight 600), Value right (13px weight 600), space-between */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  {/* Row 1: Code on left (12px, weight 600, navy), "From $49" on right (12px, weight 600, dark), 6px margin below */}
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: 6
+                  }}>
                     <span style={{
-                      fontSize: '13px',
+                      fontSize: '12px',
                       fontWeight: 600,
                       color: '#14308F',
                       fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace'
                     }}>
                       {item.code}
                     </span>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F' }}>
+                    <span style={{
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      color: '#0A0A0F'
+                    }}>
                       From ${item.price}
                     </span>
                   </div>
 
-                  {/* Row 2: Title (15px weight 600, single line with ellipsis) */}
+                  {/* Row 2: Service name (15px, weight 600, single line with ellipsis, line-height 1.3) */}
                   <div style={{
                     fontSize: '15px',
                     fontWeight: 600,
@@ -610,16 +582,15 @@ export const HomePage = () => {
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
-                    lineHeight: 1.25,
-                    marginTop: 4
+                    lineHeight: 1.3
                   }}>
                     {item.name}
                   </div>
 
-                  {/* Thin divider line (#EEF1F8, 12px above and below) */}
-                  <div style={{ height: 1, background: '#EEF1F8', margin: '12px 0' }} />
+                  {/* Thin divider line (#EEF1F8, 10px above and below) */}
+                  <div style={{ height: 1, background: '#EEF1F8', margin: '10px 0' }} />
 
-                  {/* Row 3: Gray tag left (13px), Details + arrow right (14px weight 600 navy) */}
+                  {/* Row 3: Gray tag left (13px), Details + arrow right (13px, weight 600, navy) */}
                   <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -630,7 +601,7 @@ export const HomePage = () => {
                       {item.tag}
                     </span>
                     <span style={{
-                      fontSize: '14px',
+                      fontSize: '13px',
                       fontWeight: 600,
                       color: '#14308F',
                       display: 'inline-flex',
@@ -644,42 +615,6 @@ export const HomePage = () => {
               </div>
             );
           })}
-        </div>
-      </div>
-
-      {/* --------------------------------------------------------------------------
-          Offer Strip
-          -------------------------------------------------------------------------- */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 12,
-        padding: 12,
-        borderRadius: 20,
-        background: '#FFFFFF',
-        border: '1px solid #E3E7F2',
-        boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
-      }}>
-        <div style={{
-          width: 36,
-          height: 36,
-          borderRadius: 10,
-          background: '#E8ECF8',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#14308F',
-          flexShrink: 0
-        }}>
-          <Sparkles size={20} strokeWidth={2} />
-        </div>
-        <div style={{
-          width: 1,
-          height: 24,
-          background: '#EEF1F8'
-        }} />
-        <div style={{ fontSize: '14px', color: '#0A0A0F', lineHeight: 1.5 }}>
-          <strong>$79 Diagnostic Waived</strong> on all repairs over $150 with code <span style={{ color: '#14308F', fontWeight: 600 }}>APEXCARE</span>
         </div>
       </div>
 

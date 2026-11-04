@@ -175,26 +175,37 @@ body {
   color: rgba(255, 255, 255, 0.75) !important;
 }
 .app-header .brand-icon-wrap {
-  width: 34px !important;
-  height: 34px !important;
-  border-radius: 10px !important;
-  background: rgba(255, 255, 255, 0.16) !important;
-  border: 1px solid rgba(255, 255, 255, 0.28) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 9px !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
   color: #FFFFFF !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 .app-header .icon-btn-header {
-  width: 44px !important;
-  height: 44px !important;
-  background: rgba(255, 255, 255, 0.16) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
+  width: 32px !important;
+  height: 32px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   color: #FFFFFF !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  padding: 0 !important;
+  position: relative !important;
+  transition: opacity 0.15s ease, transform 0.15s ease !important;
+}
+.app-header .icon-btn-header:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50% !important;
+}
+.app-header .icon-btn-header:active {
+  transform: scale(0.92) !important;
 }
 .app-header .header-notification-dot {
   background: var(--amber-400) !important;
