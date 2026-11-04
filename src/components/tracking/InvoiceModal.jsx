@@ -40,8 +40,8 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
                 AP
               </div>
               <div>
-                <h3 style={{ fontSize: '1.15rem', color: 'var(--navy-900)' }}>Official Invoice & Receipt</h3>
-                <div style={{ fontSize: '0.68rem', color: '#7E92A2' }}>Booking #{booking.id}</div>
+                <h3 style={{ fontSize: 'var(--fs-title)', color: 'var(--navy-900)', fontWeight: 700 }}>Official Invoice & Receipt</h3>
+                <div style={{ fontSize: 'var(--fs-small)', color: '#7E92A2' }}>Booking #{booking.id}</div>
               </div>
             </div>
             <div style={{ display: 'flex', gap: 6 }}>
@@ -62,8 +62,8 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
           <div style={{
             background: '#FFFFFF',
             border: '1px solid rgba(15, 42, 68, 0.1)',
-            borderRadius: 18,
-            padding: 16,
+            borderRadius: 'var(--radius)',
+            padding: 'var(--space-3)',
             marginBottom: 16
           }} id="printable-invoice">
             {/* Meta */}
@@ -142,11 +142,15 @@ export const InvoiceModal = ({ isOpen, onClose, booking }) => {
             <button
               onClick={handlePrint}
               className="btn btn-primary tap-effect shine-sweep"
-              style={{ flex: 1 }}
+              style={{ flex: 1, height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)' }}
             >
               <Printer size={16} /> Print / Download PDF
             </button>
-            <button onClick={onClose} className="btn btn-outline" style={{ flex: 1 }}>
+            <button
+              onClick={onClose}
+              className="btn btn-outline"
+              style={{ flex: 1, height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)' }}
+            >
               Done
             </button>
           </div>

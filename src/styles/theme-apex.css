@@ -560,8 +560,10 @@ body {
   gap: clamp(4px, 1.2vw, 6px) !important;
   position: relative !important;
   cursor: pointer !important;
-  padding: clamp(6px, 2vw, 8px) 4px !important;
+  padding: clamp(6px, 2vw, 8px) clamp(4px, 1.5vw, 6px) !important;
   box-sizing: border-box !important;
+  text-decoration: none !important;
+  color: inherit !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
 }
 

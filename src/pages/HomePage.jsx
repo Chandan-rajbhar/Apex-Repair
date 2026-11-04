@@ -305,6 +305,7 @@ export const HomePage = () => {
 
       {/* --------------------------------------------------------------------------
           3. Quick Action Cards (4 equal columns, fluid sizing)
+          FINAL CARDS: Book, Call to book, Invoices, Support
           -------------------------------------------------------------------------- */}
       <div style={{
         display: 'grid',
@@ -328,36 +329,18 @@ export const HomePage = () => {
           }}>
             <CalendarPlus size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.2, whiteSpace: 'nowrap' }}>
             Book
           </span>
         </div>
 
-        {/* 2. Track */}
-        <div
-          onClick={() => navigate('/track')}
+        {/* 2. Call to book */}
+        <a
+          href="tel:+18773582046"
+          aria-label="Call to book a repair, (877) 358-2046"
           className="quick-action-card tap-effect"
+          style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          {activeBooking && (
-            <div style={{
-              position: 'absolute',
-              top: 'clamp(4px, 1.2vw, 6px)',
-              right: 'clamp(4px, 1.2vw, 6px)',
-              width: 'clamp(15px, 4vw, 18px)',
-              height: 'clamp(15px, 4vw, 18px)',
-              borderRadius: '50%',
-              background: '#14308F',
-              color: '#FFFFFF',
-              fontSize: 'clamp(9px, 2.4vw, 11px)',
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              lineHeight: 1
-            }}>
-              1
-            </div>
-          )}
           <div style={{
             width: 'clamp(32px, 9vw, 40px)',
             height: 'clamp(32px, 9vw, 40px)',
@@ -368,12 +351,12 @@ export const HomePage = () => {
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            <Truck size={20} strokeWidth={2} color="#14308F" />
+            <Phone size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
-            Track
+          <span style={{ fontSize: 12, fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.2, whiteSpace: 'nowrap' }}>
+            Call to book
           </span>
-        </div>
+        </a>
 
         {/* 3. Invoices */}
         <div
@@ -392,7 +375,7 @@ export const HomePage = () => {
           }}>
             <Receipt size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.2, whiteSpace: 'nowrap' }}>
             Invoices
           </span>
         </div>
@@ -414,7 +397,7 @@ export const HomePage = () => {
           }}>
             <Headset size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.2, whiteSpace: 'nowrap' }}>
             Support
           </span>
         </div>

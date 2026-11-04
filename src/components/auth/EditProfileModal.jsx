@@ -38,7 +38,7 @@ export const EditProfileModal = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <div>
               <span className="badge badge-mint">PORTAL SETTINGS</span>
-              <h2 style={{ fontSize: '1.35rem', color: '#0F2A44', marginTop: 4 }}>Edit Profile</h2>
+              <h2 style={{ fontSize: 'var(--fs-title)', color: '#0F2A44', marginTop: 4, fontWeight: 700 }}>Edit Profile</h2>
             </div>
             <button onClick={() => setProfileModalOpen(false)} className="icon-btn-header">
               <X size={18} />
@@ -58,12 +58,12 @@ export const EditProfileModal = () => {
                   onChange={(e) => setName(e.target.value)}
                   style={{
                     width: '100%',
-                    height: 44,
-                    borderRadius: 14,
+                    height: 'var(--btn-h)',
+                    borderRadius: 'var(--radius)',
                     border: '1px solid rgba(15, 42, 68, 0.14)',
                     padding: '0 14px 0 42px',
                     background: '#FFFFFF',
-                    fontSize: '0.9rem'
+                    fontSize: 'var(--fs-body)'
                   }}
                   required
                 />
@@ -82,12 +82,12 @@ export const EditProfileModal = () => {
                   onChange={(e) => setPhone(e.target.value)}
                   style={{
                     width: '100%',
-                    height: 44,
-                    borderRadius: 14,
+                    height: 'var(--btn-h)',
+                    borderRadius: 'var(--radius)',
                     border: '1px solid rgba(15, 42, 68, 0.14)',
                     padding: '0 14px 0 42px',
                     background: '#FFFFFF',
-                    fontSize: '0.9rem'
+                    fontSize: 'var(--fs-body)'
                   }}
                   required
                 />
@@ -106,12 +106,12 @@ export const EditProfileModal = () => {
                   onChange={(e) => setAddress(e.target.value)}
                   style={{
                     width: '100%',
-                    height: 44,
-                    borderRadius: 14,
+                    height: 'var(--btn-h)',
+                    borderRadius: 'var(--radius)',
                     border: '1px solid rgba(15, 42, 68, 0.14)',
                     padding: '0 14px 0 42px',
                     background: '#FFFFFF',
-                    fontSize: '0.9rem'
+                    fontSize: 'var(--fs-body)'
                   }}
                   required
                 />
@@ -129,12 +129,12 @@ export const EditProfileModal = () => {
                   onChange={(e) => setCity(e.target.value)}
                   style={{
                     width: '100%',
-                    height: 44,
-                    borderRadius: 14,
+                    height: 'var(--btn-h)',
+                    borderRadius: 'var(--radius)',
                     border: '1px solid rgba(15, 42, 68, 0.14)',
                     padding: '0 14px',
                     background: '#FFFFFF',
-                    fontSize: '0.9rem'
+                    fontSize: 'var(--fs-body)'
                   }}
                   required
                 />
@@ -150,12 +150,12 @@ export const EditProfileModal = () => {
                   onChange={(e) => setZip(e.target.value)}
                   style={{
                     width: '100%',
-                    height: 44,
-                    borderRadius: 14,
+                    height: 'var(--btn-h)',
+                    borderRadius: 'var(--radius)',
                     border: '1px solid rgba(15, 42, 68, 0.14)',
                     padding: '0 14px',
                     background: '#FFFFFF',
-                    fontSize: '0.9rem'
+                    fontSize: 'var(--fs-body)'
                   }}
                   required
                 />
@@ -165,7 +165,7 @@ export const EditProfileModal = () => {
             <button
               type="submit"
               className="btn btn-primary btn-block tap-effect shine-sweep"
-              style={{ height: 48, marginTop: 8 }}
+              style={{ height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)', marginTop: 8 }}
             >
               <Check size={18} /> Save Changes
             </button>

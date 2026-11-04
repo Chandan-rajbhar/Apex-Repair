@@ -27,9 +27,9 @@ const iconMap = {
 
 export const TrackingStepper = ({ currentStep = 4, timeline = [] }) => {
   return (
-    <div className="card-white card-gloss" style={{ padding: '20px 18px', borderRadius: 24 }}>
+    <div className="card-white card-gloss" style={{ padding: 'var(--space-3)', borderRadius: 'var(--radius)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
-        <h3 style={{ fontSize: '1.05rem', color: '#0F2A44' }}>
+        <h3 style={{ fontSize: 'var(--fs-card)', color: '#0F2A44' }}>
           Diagnostic & Repair Timeline
         </h3>
         <span className="badge badge-mint">

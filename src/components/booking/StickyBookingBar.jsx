@@ -32,8 +32,10 @@ export const StickyBookingBar = ({
             disabled={!isValid}
             className="btn btn-primary tap-effect shine-sweep"
             style={{
-              padding: '12px 20px',
-              fontSize: '0.88rem',
+              padding: '0 var(--space-3)',
+              height: 'var(--btn-h)',
+              borderRadius: 'var(--radius)',
+              fontSize: 'var(--fs-body)',
               opacity: isValid ? 1 : 0.5
             }}
           >
@@ -46,8 +48,10 @@ export const StickyBookingBar = ({
             disabled={!isValid || isSubmitting}
             className="btn btn-primary tap-effect shine-sweep"
             style={{
-              padding: '12px 22px',
-              fontSize: '0.88rem',
+              padding: '0 var(--space-3)',
+              height: 'var(--btn-h)',
+              borderRadius: 'var(--radius)',
+              fontSize: 'var(--fs-body)',
               background: 'var(--grad-cta)',
               opacity: isValid ? 1 : 0.5
             }}

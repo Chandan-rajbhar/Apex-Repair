@@ -43,7 +43,7 @@ export const CustomerPortalPage = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)' }}>
       {/* --------------------------------------------------------------------------
           Top Header Bar (Back button, Pill, Settings Gear - Matches Screenshot 1)
           -------------------------------------------------------------------------- */}
@@ -56,7 +56,7 @@ export const CustomerPortalPage = () => {
           <ArrowLeft size={18} />
         </button>
 
-        <span className="badge badge-mint" style={{ letterSpacing: '0.08em', padding: '5px 14px', fontSize: '0.7rem' }}>
+        <span className="badge badge-mint" style={{ letterSpacing: '0.08em', padding: '5px 14px', fontSize: 'var(--fs-small)' }}>
           CLIENT PORTAL
         </span>
 
@@ -76,17 +76,17 @@ export const CustomerPortalPage = () => {
         {/* Large Initials Circle with Camera Badge */}
         <div style={{ position: 'relative', display: 'inline-block', marginBottom: 10 }}>
           <div style={{
-            width: 88,
-            height: 88,
+            width: 'clamp(72px, 18vw, 84px)',
+            height: 'clamp(72px, 18vw, 84px)',
             borderRadius: '50%',
             background: 'var(--grad-header)',
             color: '#FFFFFF',
-            fontSize: '1.8rem',
+            fontSize: 'var(--fs-title)',
             fontWeight: 800,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            border: '4px solid #FFFFFF',
+            border: '3px solid #FFFFFF',
             boxShadow: 'var(--glow-navy)'
           }}>
             {user.initials || 'SY'}
@@ -118,7 +118,7 @@ export const CustomerPortalPage = () => {
 
         {/* User Name */}
         <h1 style={{
-          fontSize: '1.45rem',
+          fontSize: 'var(--fs-title)',
           fontWeight: 800,
           color: '#0F2A44',
           letterSpacing: '0.02em',
@@ -133,8 +133,9 @@ export const CustomerPortalPage = () => {
           onClick={() => setProfileModalOpen(true)}
           className="btn btn-primary tap-effect shine-sweep"
           style={{
-            padding: '8px 20px',
-            fontSize: '0.82rem',
+            height: 'var(--btn-h)',
+            padding: '0 clamp(16px, 5vw, 22px)',
+            fontSize: 'var(--fs-body)',
             borderRadius: 9999,
             display: 'inline-flex',
             alignItems: 'center',
@@ -148,11 +149,11 @@ export const CustomerPortalPage = () => {
       {/* --------------------------------------------------------------------------
           Profile Information Card (Matches Screenshot 1)
           -------------------------------------------------------------------------- */}
-      <div className="card-white" style={{ borderRadius: 22, padding: '16px 18px' }}>
+      <div className="card-white" style={{ borderRadius: 'var(--radius)', padding: 'var(--space-3)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.78rem', color: '#64748B' }}>Phone</span>
-            <strong style={{ fontSize: '0.84rem', color: user.phone ? '#0F2A44' : '#94A3B8', fontStyle: user.phone ? 'normal' : 'italic' }}>
+            <span style={{ fontSize: 'var(--fs-small)', color: '#64748B' }}>Phone</span>
+            <strong style={{ fontSize: 'var(--fs-body)', color: user.phone ? '#0F2A44' : '#94A3B8', fontStyle: user.phone ? 'normal' : 'italic' }}>
               {user.phone || 'Not provided'}
             </strong>
           </div>
@@ -160,8 +161,8 @@ export const CustomerPortalPage = () => {
           <div style={{ height: 1, background: 'rgba(15, 42, 68, 0.06)' }} />
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.78rem', color: '#64748B' }}>Email</span>
-            <strong style={{ fontSize: '0.82rem', color: '#0F2A44' }}>
+            <span style={{ fontSize: 'var(--fs-small)', color: '#64748B' }}>Email</span>
+            <strong style={{ fontSize: 'var(--fs-body)', color: '#0F2A44' }}>
               {user.email}
             </strong>
           </div>
@@ -169,8 +170,8 @@ export const CustomerPortalPage = () => {
           <div style={{ height: 1, background: 'rgba(15, 42, 68, 0.06)' }} />
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.78rem', color: '#64748B' }}>Client Since</span>
-            <strong style={{ fontSize: '0.84rem', color: '#0F2A44' }}>
+            <span style={{ fontSize: 'var(--fs-small)', color: '#64748B' }}>Client Since</span>
+            <strong style={{ fontSize: 'var(--fs-body)', color: '#0F2A44' }}>
               {user.clientSince || '2026'}
             </strong>
           </div>
@@ -185,10 +186,10 @@ export const CustomerPortalPage = () => {
           onClick={() => navigate('/track')}
           className="tap-effect"
           style={{
-            borderRadius: 22,
+            borderRadius: 'var(--radius)',
             background: 'var(--grad-warm)',
             border: '1.5px solid rgba(34, 63, 107, 0.2)',
-            padding: '16px 16px',
+            padding: 'var(--space-3)',
             boxShadow: 'var(--shadow-sm)',
             cursor: 'pointer'
           }}
@@ -198,7 +199,7 @@ export const CustomerPortalPage = () => {
               <div style={{
                 width: 36,
                 height: 36,
-                borderRadius: 12,
+                borderRadius: 'var(--radius-sm, 10px)',
                 background: 'var(--orange-50)',
                 color: 'var(--orange-600)',
                 display: 'flex',
@@ -209,10 +210,10 @@ export const CustomerPortalPage = () => {
                 <Truck size={18} />
               </div>
               <div>
-                <div style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--navy-900)' }}>
+                <div style={{ fontSize: 'var(--fs-card)', fontWeight: 800, color: 'var(--navy-900)' }}>
                   Order #{activeBooking.id}
                 </div>
-                <div style={{ fontSize: '0.68rem', color: 'var(--orange-700)', fontWeight: 700 }}>
+                <div style={{ fontSize: 'var(--fs-small)', color: 'var(--orange-700)', fontWeight: 700 }}>
                   ⚡ {activeBooking.currentStep === 4 ? 'En Route (Live GPS)' : 'Pending Verification'}
                 </div>
               </div>
@@ -224,7 +225,7 @@ export const CustomerPortalPage = () => {
                 background: 'var(--grad-cta)',
                 color: '#FFFFFF',
                 borderRadius: 9999,
-                fontSize: '0.72rem',
+                fontSize: 'var(--fs-small)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 5
@@ -235,7 +236,7 @@ export const CustomerPortalPage = () => {
             </span>
           </div>
 
-          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.35, marginTop: 4 }}>
+          <div style={{ fontSize: 'var(--fs-small)', color: 'var(--text-muted)', lineHeight: 1.35, marginTop: 4 }}>
             {activeBooking.brand} {activeBooking.applianceName} &bull; Tech: <strong>{activeBooking.technician?.name || 'Marcus V.'}</strong>
           </div>
         </div>
@@ -244,7 +245,7 @@ export const CustomerPortalPage = () => {
       {/* --------------------------------------------------------------------------
           4 Quick-Action Tiles (Matches Screenshot 1)
           -------------------------------------------------------------------------- */}
-      <div className="quick-tiles-grid">
+      <div className="quick-tiles-grid" style={{ gap: 'var(--space-2)' }}>
         <div className="quick-tile tap-effect" onClick={() => navigate('/services')}>
           <div className="tile-icon-box">
             <Sparkles size={18} />
@@ -281,9 +282,9 @@ export const CustomerPortalPage = () => {
       {/* --------------------------------------------------------------------------
           Registered Appliances & Warranties (Matches My Prescriptions section)
           -------------------------------------------------------------------------- */}
-      <div className="card-white" style={{ borderRadius: 24, padding: '16px 18px' }}>
+      <div className="card-white" style={{ borderRadius: 'var(--radius)', padding: 'var(--space-3)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <h3 style={{ fontSize: '1.05rem', color: '#0F2A44' }}>
+          <h3 style={{ fontSize: 'var(--fs-card)', color: '#0F2A44' }}>
             Appliances Under Care
           </h3>
           <span className="badge badge-mint">3 Registered</span>
@@ -292,7 +293,7 @@ export const CustomerPortalPage = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{
             padding: '10px 12px',
-            borderRadius: 14,
+            borderRadius: 'var(--radius-sm, 10px)',
             background: 'var(--navy-50)',
             display: 'flex',
             alignItems: 'center',
@@ -301,20 +302,20 @@ export const CustomerPortalPage = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <Wrench size={16} color="var(--orange-600)" />
               <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--navy-900)' }}>
+                <div style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: 'var(--navy-900)' }}>
                   Samsung French-Door Refrigerator
                 </div>
-                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                <div style={{ fontSize: 'var(--fs-small)', color: 'var(--text-muted)' }}>
                   Model: RF28R7351SR &bull; S/N: 9482103
                 </div>
               </div>
             </div>
-            <span className="badge badge-mint" style={{ fontSize: '0.62rem' }}>90-Day Active</span>
+            <span className="badge badge-mint" style={{ fontSize: 'var(--fs-small)' }}>90-Day Active</span>
           </div>
 
           <div style={{
             padding: '10px 12px',
-            borderRadius: 14,
+            borderRadius: 'var(--radius-sm, 10px)',
             background: 'var(--navy-50)',
             display: 'flex',
             alignItems: 'center',
@@ -323,15 +324,15 @@ export const CustomerPortalPage = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <Wrench size={16} color="var(--orange-600)" />
               <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--navy-900)' }}>
+                <div style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: 'var(--navy-900)' }}>
                   LG Smart Front-Load Washer
                 </div>
-                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                <div style={{ fontSize: 'var(--fs-small)', color: 'var(--text-muted)' }}>
                   Model: WM4000HBA &bull; S/N: 7219044
                 </div>
               </div>
             </div>
-            <span className="badge badge-navy" style={{ fontSize: '0.62rem' }}>Verified</span>
+            <span className="badge badge-navy" style={{ fontSize: 'var(--fs-small)' }}>Verified</span>
           </div>
         </div>
       </div>

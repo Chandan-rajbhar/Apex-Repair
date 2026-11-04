@@ -16,7 +16,7 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
     <div
       className="card-white card-gloss"
       style={{
-        borderRadius: 24,
+        borderRadius: 'var(--radius)',
         overflow: 'hidden',
         border: '1px solid rgba(15, 42, 68, 0.1)',
         position: 'relative',

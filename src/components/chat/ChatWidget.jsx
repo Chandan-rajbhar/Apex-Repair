@@ -343,8 +343,8 @@ export const ChatWidget = () => {
                 onClick={() => fileInputRef.current?.click()}
                 className="tap-effect"
                 style={{
-                  width: 38,
-                  height: 38,
+                  width: 'calc(var(--btn-h) - 4px)',
+                  height: 'calc(var(--btn-h) - 4px)',
                   borderRadius: '50%',
                   background: '#F1F5FB',
                   display: 'flex',
@@ -366,12 +366,12 @@ export const ChatWidget = () => {
                 placeholder="Describe your appliance issue..."
                 style={{
                   flex: 1,
-                  height: 42,
+                  height: 'var(--btn-h)',
                   borderRadius: 9999,
                   border: '1px solid rgba(15, 42, 68, 0.12)',
                   padding: '0 16px',
                   background: '#F8FAFC',
-                  fontSize: '0.88rem',
+                  fontSize: 'var(--fs-body)',
                   outline: 'none'
                 }}
               />
@@ -382,8 +382,8 @@ export const ChatWidget = () => {
                 disabled={!inputVal.trim() && !selectedFile}
                 className="btn-primary tap-effect shine-sweep"
                 style={{
-                  width: 42,
-                  height: 42,
+                  width: 'var(--btn-h)',
+                  height: 'var(--btn-h)',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',

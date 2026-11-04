@@ -119,14 +119,14 @@ export const ServicesPage = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)' }}>
       {/* --------------------------------------------------------------------------
           1. Header Section with Title, Subtitle, and View Toggles (Image 1)
           -------------------------------------------------------------------------- */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <div>
           <div style={{
-            fontSize: '12px',
+            fontSize: 'var(--fs-small)',
             fontWeight: 600,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
@@ -136,7 +136,7 @@ export const ServicesPage = () => {
             OUR CATALOG
           </div>
           <h1 style={{
-            fontSize: '20px',
+            fontSize: 'var(--fs-title)',
             fontWeight: 600,
             color: '#0A0A0F',
             lineHeight: 1.25,
@@ -144,7 +144,7 @@ export const ServicesPage = () => {
           }}>
             Appliance Repairs & Products
           </h1>
-          <div style={{ fontSize: '13px', color: '#7A8299', fontWeight: 500 }}>
+          <div style={{ fontSize: 'var(--fs-body)', color: '#7A8299', fontWeight: 500 }}>
             {filteredServices.length} models matching criteria
           </div>
         </div>
@@ -155,7 +155,7 @@ export const ServicesPage = () => {
           alignItems: 'center',
           background: '#F1F5F9',
           padding: 4,
-          borderRadius: 12,
+          borderRadius: 'var(--radius)',
           border: '1px solid #E2E8F0',
           gap: 4
         }}>
@@ -163,9 +163,9 @@ export const ServicesPage = () => {
             onClick={() => setViewMode('grid')}
             className="tap-effect"
             style={{
-              width: 36,
-              height: 36,
-              borderRadius: 8,
+              width: 'clamp(32px, 8.5vw, 36px)',
+              height: 'clamp(32px, 8.5vw, 36px)',
+              borderRadius: 'var(--space-2)',
               border: 'none',
               background: viewMode === 'grid' ? '#FFFFFF' : 'transparent',
               color: viewMode === 'grid' ? '#0B1F5C' : '#7A8299',
@@ -179,15 +179,15 @@ export const ServicesPage = () => {
             aria-label="Grid view"
             title="Grid view"
           >
-            <LayoutGrid size={20} strokeWidth={2} />
+            <LayoutGrid size={18} strokeWidth={2} />
           </button>
           <button
             onClick={() => setViewMode('list')}
             className="tap-effect"
             style={{
-              width: 36,
-              height: 36,
-              borderRadius: 8,
+              width: 'clamp(32px, 8.5vw, 36px)',
+              height: 'clamp(32px, 8.5vw, 36px)',
+              borderRadius: 'var(--space-2)',
               border: 'none',
               background: viewMode === 'list' ? '#FFFFFF' : 'transparent',
               color: viewMode === 'list' ? '#0B1F5C' : '#7A8299',
@@ -201,7 +201,7 @@ export const ServicesPage = () => {
             aria-label="List view"
             title="List view"
           >
-            <List size={20} strokeWidth={2} />
+            <List size={18} strokeWidth={2} />
           </button>
         </div>
       </div>
@@ -209,21 +209,21 @@ export const ServicesPage = () => {
       {/* --------------------------------------------------------------------------
           2. Search Input & Filter Chips Section
           -------------------------------------------------------------------------- */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
         {/* Search Input with Filter Sliders Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
           <div style={{
             position: 'relative',
             flex: 1,
-            height: 44,
+            height: 'var(--btn-h)',
             background: '#FFFFFF',
-            borderRadius: 12,
+            borderRadius: 'var(--radius)',
             border: '1px solid #E3E7F2',
             display: 'flex',
             alignItems: 'center',
             boxShadow: '0 2px 8px rgba(10,20,60,0.04)'
           }}>
-            <Search size={20} strokeWidth={2} color="#7A8299" style={{ position: 'absolute', left: 14, pointerEvents: 'none' }} />
+            <Search size={18} strokeWidth={2} color="#7A8299" style={{ position: 'absolute', left: 14, pointerEvents: 'none' }} />
             <input
               type="text"
               value={searchQuery}
@@ -235,7 +235,7 @@ export const ServicesPage = () => {
                 border: 'none',
                 background: 'transparent',
                 padding: '0 36px 0 42px',
-                fontSize: '14px',
+                fontSize: 'var(--fs-body)',
                 color: '#0A0A0F',
                 outline: 'none'
               }}
@@ -265,9 +265,9 @@ export const ServicesPage = () => {
             onClick={() => setSelectedFilter(selectedFilter === 'All' ? 'REFRIGERATION' : 'All')}
             className="tap-effect"
             style={{
-              width: 44,
-              height: 44,
-              borderRadius: 12,
+              width: 'var(--btn-h)',
+              height: 'var(--btn-h)',
+              borderRadius: 'var(--radius)',
               background: '#FFFFFF',
               border: '1px solid #E3E7F2',
               display: 'flex',
@@ -281,7 +281,7 @@ export const ServicesPage = () => {
             title="Filter options"
             aria-label="Filter options"
           >
-            <SlidersHorizontal size={20} strokeWidth={2} />
+            <SlidersHorizontal size={18} strokeWidth={2} />
           </button>
         </div>
 
@@ -289,7 +289,7 @@ export const ServicesPage = () => {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 'var(--space-2)',
           overflowX: 'auto',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
@@ -304,13 +304,13 @@ export const ServicesPage = () => {
                 onClick={() => setSelectedFilter(f.key)}
                 className="tap-effect"
                 style={{
-                  height: 36,
+                  height: 'clamp(30px, 8vw, 36px)',
                   background: isActive ? '#0B1F5C' : '#FFFFFF',
                   color: isActive ? '#FFFFFF' : '#1B2236',
                   border: isActive ? '1px solid #0B1F5C' : '1px solid #E3E7F2',
-                  padding: '0 16px',
+                  padding: '0 clamp(10px, 3vw, 14px)',
                   borderRadius: 9999,
-                  fontSize: '12px',
+                  fontSize: 'var(--fs-small)',
                   fontWeight: isActive ? 600 : 500,
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
@@ -326,7 +326,7 @@ export const ServicesPage = () => {
         {/* Sort Row */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 2px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ fontSize: '13px', color: '#7A8299' }}>⇅ Sort:</span>
+            <span style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>⇅ Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -335,7 +335,7 @@ export const ServicesPage = () => {
                 borderRadius: 6,
                 border: 'none',
                 background: 'transparent',
-                fontSize: '13px',
+                fontSize: 'var(--fs-small)',
                 fontWeight: 600,
                 color: '#0A0A0F',
                 cursor: 'pointer',
@@ -343,9 +343,9 @@ export const ServicesPage = () => {
               }}
             >
               <option value="featured">Featured</option>
-              <option value="rating">Highest Rated</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
             </select>
           </div>
         </div>
@@ -532,7 +532,7 @@ export const ServicesPage = () => {
         </div>
       ) : (
         /* List View */
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
           {filteredServices.map((app) => {
             const code = SERVICE_CODES[app.id] || `AP-${app.id.slice(0, 2).toUpperCase()}`;
             return (
@@ -540,11 +540,11 @@ export const ServicesPage = () => {
                 key={app.id}
                 className="featured-repair-card tap-effect"
                 style={{
-                  borderRadius: 20,
-                  padding: 12,
+                  borderRadius: 'var(--radius)',
+                  padding: 'var(--space-2)',
                   display: 'flex',
                   flexDirection: 'row',
-                  gap: 12,
+                  gap: 'var(--space-2)',
                   alignItems: 'center',
                   background: '#FFFFFF',
                   border: '1px solid #E3E7F2',
@@ -552,9 +552,9 @@ export const ServicesPage = () => {
                 }}
               >
                 <div style={{
-                  width: 90,
-                  height: 90,
-                  borderRadius: 14,
+                  width: 'clamp(72px, 20vw, 84px)',
+                  height: 'clamp(72px, 20vw, 84px)',
+                  borderRadius: 'var(--radius)',
                   overflow: 'hidden',
                   flexShrink: 0
                 }}>
@@ -566,17 +566,17 @@ export const ServicesPage = () => {
                 </div>
                 <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: '#14308F', fontFamily: 'monospace' }}>
+                    <span style={{ fontSize: 'var(--fs-small)', fontWeight: 600, color: '#14308F', fontFamily: 'monospace' }}>
                       {code}
                     </span>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F' }}>
+                    <span style={{ fontSize: 'var(--fs-small)', fontWeight: 600, color: '#0A0A0F' }}>
                       From ${app.diagnosticFee}
                     </span>
                   </div>
-                  <div style={{ fontSize: '15px', fontWeight: 600, color: '#0A0A0F', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ fontSize: 'var(--fs-card)', fontWeight: 600, color: '#0A0A0F', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {app.name}
                   </div>
-                  <div style={{ fontSize: '13px', color: '#7A8299' }}>
+                  <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>
                     {app.estDuration} • 90-Day Guarantee
                   </div>
                 </div>
@@ -584,9 +584,9 @@ export const ServicesPage = () => {
                   onClick={() => setSelectedServiceForDetail(app)}
                   className="tap-effect"
                   style={{
-                    height: 44,
-                    padding: '0 16px',
-                    fontSize: '14px',
+                    height: 'clamp(36px, 9vw, 40px)',
+                    padding: '0 clamp(12px, 3.5vw, 16px)',
+                    fontSize: 'var(--fs-small)',
                     fontWeight: 600,
                     borderRadius: 9999,
                     background: '#E8ECF8',
@@ -619,11 +619,11 @@ export const ServicesPage = () => {
           >
             <div className="sheet-drag-handle" />
 
-            <div className="sheet-body" style={{ padding: '0 18px 24px 18px' }}>
+            <div className="sheet-body" style={{ padding: '0 var(--space-3) var(--space-3) var(--space-3)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                 <div>
                   <span style={{
-                    fontSize: '11px',
+                    fontSize: 'var(--fs-small)',
                     fontFamily: 'monospace',
                     fontWeight: 700,
                     color: '#14308F',
@@ -633,10 +633,10 @@ export const ServicesPage = () => {
                   }}>
                     {SERVICE_CODES[selectedServiceForDetail.id] || 'AP-01'}
                   </span>
-                  <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0A0A0F', marginTop: 4, marginBottom: 2 }}>
+                  <h2 style={{ fontSize: 'var(--fs-title)', fontWeight: 700, color: '#0A0A0F', marginTop: 4, marginBottom: 2 }}>
                     {selectedServiceForDetail.name}
                   </h2>
-                  <div style={{ fontSize: '12px', color: '#7A8299' }}>
+                  <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>
                     {selectedServiceForDetail.estDuration} • {selectedServiceForDetail.warranty}
                   </div>
                 </div>
@@ -650,7 +650,7 @@ export const ServicesPage = () => {
               </div>
 
               {/* Photo */}
-              <div style={{ width: '100%', height: 140, borderRadius: 14, overflow: 'hidden', marginBottom: 14 }}>
+              <div style={{ width: '100%', aspectRatio: '16 / 9', borderRadius: 'var(--radius)', overflow: 'hidden', marginBottom: 14 }}>
                 <img
                   src={selectedServiceForDetail.image}
                   alt={selectedServiceForDetail.name}
@@ -659,7 +659,7 @@ export const ServicesPage = () => {
               </div>
 
               {/* Description */}
-              <p style={{ fontSize: '13px', color: '#4A5A78', lineHeight: 1.45, marginBottom: 14 }}>
+              <p style={{ fontSize: 'var(--fs-body)', color: '#4A5A78', lineHeight: 1.45, marginBottom: 14 }}>
                 {selectedServiceForDetail.fullDesc || selectedServiceForDetail.shortDesc}
               </p>
 
@@ -667,18 +667,18 @@ export const ServicesPage = () => {
               <div style={{
                 background: '#F8FAFC',
                 border: '1px solid #EEF1F8',
-                borderRadius: 12,
-                padding: '10px 12px',
+                borderRadius: 'var(--radius)',
+                padding: 'var(--space-2)',
                 marginBottom: 14,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
                 <div>
-                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#14308F' }}>
+                  <div style={{ fontSize: 'var(--fs-card)', fontWeight: 700, color: '#14308F' }}>
                     ${selectedServiceForDetail.diagnosticFee} Multi-Point Diagnostic
                   </div>
-                  <div style={{ fontSize: '11px', color: '#7A8299' }}>
+                  <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>
                     100% credited toward total repair bill if approved
                   </div>
                 </div>
@@ -687,12 +687,12 @@ export const ServicesPage = () => {
 
               {/* Common Symptoms */}
               <div style={{ marginBottom: 16 }}>
-                <div style={{ fontSize: '12px', fontWeight: 700, color: '#0A0A0F', marginBottom: 6 }}>
+                <div style={{ fontSize: 'var(--fs-small)', fontWeight: 700, color: '#0A0A0F', marginBottom: 6 }}>
                   Common Symptoms Handled:
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
                   {selectedServiceForDetail.commonIssues.slice(0, 3).map((issue, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '12px', color: '#4A5A78' }}>
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 'var(--fs-small)', color: '#4A5A78' }}>
                       <CheckCircle2 size={13} color="#10B981" style={{ flexShrink: 0 }} />
                       <span>{issue}</span>
                     </div>
@@ -708,8 +708,8 @@ export const ServicesPage = () => {
                 }}
                 className="btn btn-primary btn-block tap-effect shine-sweep"
                 style={{
-                  height: 44,
-                  fontSize: '13px',
+                  height: 'var(--btn-h)',
+                  fontSize: 'var(--fs-body)',
                   fontWeight: 600,
                   borderRadius: 9999,
                   background: '#14308F',

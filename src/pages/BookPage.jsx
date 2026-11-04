@@ -293,11 +293,11 @@ export const BookPage = () => {
   // ============================================================================
   if (step === 6 && confirmedBooking) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '24px 16px 100px 16px', textAlign: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', padding: 'var(--space-3) var(--space-3) var(--page-pad-bottom) var(--space-3)', textAlign: 'center' }}>
         {/* Large Navy Check Icon */}
         <div style={{
-          width: 72,
-          height: 72,
+          width: 'clamp(56px, 15vw, 68px)',
+          height: 'clamp(56px, 15vw, 68px)',
           borderRadius: '50%',
           background: 'linear-gradient(135deg, #0B1F5C 0%, #14308F 100%)',
           color: '#FFFFFF',
@@ -307,14 +307,14 @@ export const BookPage = () => {
           margin: '0 auto',
           boxShadow: '0 8px 24px rgba(11,31,92,0.25)'
         }}>
-          <Check size={36} strokeWidth={3} />
+          <Check size={32} strokeWidth={3} />
         </div>
 
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#0A0A0F', margin: '0 0 6px 0' }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 700, color: '#0A0A0F', margin: '0 0 6px 0' }}>
             Booking confirmed
           </h1>
-          <p style={{ fontSize: '14px', color: '#5B6478', margin: 0 }}>
+          <p style={{ fontSize: 'var(--fs-body)', color: '#5B6478', margin: 0 }}>
             We've assigned master technician Marcus Vance to your repair order.
           </p>
         </div>
@@ -322,27 +322,27 @@ export const BookPage = () => {
         {/* Booking Card */}
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius)',
           border: '1px solid #E3E7F2',
-          padding: 20,
+          padding: 'var(--space-3)',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
           textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
-          gap: 12
+          gap: 'var(--space-2)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '14px', fontFamily: 'monospace', fontWeight: 700, color: '#14308F', background: '#E8ECF8', padding: '4px 10px', borderRadius: 8 }}>
+            <span style={{ fontSize: 'var(--fs-small)', fontFamily: 'monospace', fontWeight: 700, color: '#14308F', background: '#E8ECF8', padding: '4px 10px', borderRadius: 8 }}>
               #{confirmedBooking.id}
             </span>
-            <span style={{ fontSize: '12px', fontWeight: 600, color: '#16A34A', background: '#DCFCE7', padding: '3px 8px', borderRadius: 9999 }}>
+            <span style={{ fontSize: 'var(--fs-small)', fontWeight: 600, color: '#16A34A', background: '#DCFCE7', padding: '3px 8px', borderRadius: 9999 }}>
               Confirmed
             </span>
           </div>
 
           <div style={{ height: 1, background: '#EEF1F8' }} />
 
-          <div style={{ fontSize: '14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ fontSize: 'var(--fs-body)', display: 'flex', flexDirection: 'column', gap: 8 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: '#7A8299' }}>Appliance:</span>
               <span style={{ fontWeight: 600, color: '#0A0A0F' }}>{confirmedBooking.brand} {confirmedBooking.applianceName}</span>
@@ -368,11 +368,11 @@ export const BookPage = () => {
             onClick={() => navigate('/track')}
             className="tap-effect"
             style={{
-              height: 48,
+              height: 'var(--btn-h)',
               borderRadius: 9999,
               background: '#0B1F5C',
               color: '#FFFFFF',
-              fontSize: '15px',
+              fontSize: 'var(--fs-body)',
               fontWeight: 600,
               border: 'none',
               cursor: 'pointer',
@@ -386,11 +386,11 @@ export const BookPage = () => {
             onClick={() => showToast('Calendar reminder added for ' + confirmedBooking.date, 'info')}
             className="tap-effect"
             style={{
-              height: 44,
+              height: 'var(--btn-h)',
               borderRadius: 9999,
               background: '#FFFFFF',
               color: '#0B1F5C',
-              fontSize: '14px',
+              fontSize: 'var(--fs-body)',
               fontWeight: 600,
               border: '1px solid #E3E7F2',
               cursor: 'pointer'
@@ -403,11 +403,11 @@ export const BookPage = () => {
             onClick={() => navigate('/')}
             className="tap-effect"
             style={{
-              height: 36,
+              height: 'clamp(36px, 9vw, 40px)',
               background: 'none',
               border: 'none',
               color: '#7A8299',
-              fontSize: '14px',
+              fontSize: 'var(--fs-body)',
               fontWeight: 500,
               cursor: 'pointer'
             }}
@@ -429,18 +429,18 @@ export const BookPage = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', padding: '0 0 110px 0' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', padding: '0 0 var(--page-pad-bottom) 0' }}>
       {/* --------------------------------------------------------------------------
           TOP WIZARD HEADER & PROGRESS BAR
           -------------------------------------------------------------------------- */}
-      <div style={{ padding: '0 16px 16px 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ padding: '0 var(--space-3) var(--space-2) var(--space-3)', display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <button
             onClick={handleBack}
             className="tap-effect"
             style={{
-              width: 36,
-              height: 36,
+              width: 'clamp(32px, 8.5vw, 36px)',
+              height: 'clamp(32px, 8.5vw, 36px)',
               borderRadius: '50%',
               background: '#FFFFFF',
               border: '1px solid #E3E7F2',
@@ -456,11 +456,11 @@ export const BookPage = () => {
             <ArrowLeft size={18} strokeWidth={2} />
           </button>
 
-          <div style={{ fontSize: '16px', fontWeight: 600, color: '#0A0A0F' }}>
+          <div style={{ fontSize: 'var(--fs-card)', fontWeight: 600, color: '#0A0A0F' }}>
             Book a repair
           </div>
 
-          <span style={{ fontSize: '12px', fontWeight: 600, color: '#7A8299' }}>
+          <span style={{ fontSize: 'var(--fs-small)', fontWeight: 600, color: '#7A8299' }}>
             Step {step} of 5
           </span>
         </div>
@@ -485,9 +485,9 @@ export const BookPage = () => {
       {/* --------------------------------------------------------------------------
           WIZARD STEP BODY
           -------------------------------------------------------------------------- */}
-      <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-        {/* Step Title (22px weight 600) */}
-        <h1 style={{ fontSize: '22px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
+      <div style={{ padding: '0 var(--space-3)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+        {/* Step Title */}
+        <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
           {stepTitles[step - 1]}
         </h1>
 
@@ -581,7 +581,7 @@ export const BookPage = () => {
 
             {/* Brand Dropdown Trigger */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+              <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                 Brand
               </label>
               <button
@@ -589,16 +589,16 @@ export const BookPage = () => {
                 onClick={() => setShowBrandSheet(true)}
                 className="tap-effect"
                 style={{
-                  height: 48,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: errors.brand ? '1.5px solid #C62828' : '1px solid #E3E7F2',
                   background: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   cursor: 'pointer',
-                  fontSize: '15px',
+                  fontSize: 'var(--fs-body)',
                   fontWeight: 500,
                   color: '#0A0A0F'
                 }}
@@ -606,12 +606,12 @@ export const BookPage = () => {
                 <span>{formData.brand || 'Select brand'}</span>
                 <ChevronDown size={18} color="#7A8299" />
               </button>
-              {errors.brand && <div style={{ fontSize: '13px', color: '#C62828' }}>{errors.brand}</div>}
+              {errors.brand && <div style={{ fontSize: 'var(--fs-small)', color: '#C62828' }}>{errors.brand}</div>}
             </div>
 
             {/* Model Number (Optional) */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+              <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                 Model number (optional)
               </label>
               <input
@@ -620,25 +620,25 @@ export const BookPage = () => {
                 onChange={(e) => setFormData(prev => ({ ...prev, modelNumber: e.target.value }))}
                 placeholder="e.g. RF28R7351SG"
                 style={{
-                  height: 48,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
                   background: '#FFFFFF',
-                  fontSize: '15px',
+                  fontSize: 'var(--fs-body)',
                   color: '#0A0A0F',
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
               />
-              <div style={{ fontSize: '13px', color: '#7A8299' }}>
+              <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>
                 Found on the label inside or behind the appliance
               </div>
             </div>
 
             {/* How old is it? */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+              <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                 How old is it?
               </label>
               <div style={{ display: 'flex', gap: 8 }}>
@@ -650,12 +650,12 @@ export const BookPage = () => {
                     className="tap-effect"
                     style={{
                       flex: 1,
-                      height: 44,
-                      borderRadius: 12,
+                      height: 'var(--btn-h)',
+                      borderRadius: 'var(--radius)',
                       background: formData.applianceAge === age ? '#0B1F5C' : '#FFFFFF',
                       color: formData.applianceAge === age ? '#FFFFFF' : '#1B2236',
                       border: formData.applianceAge === age ? '1px solid #0B1F5C' : '1px solid #E3E7F2',
-                      fontSize: '13px',
+                      fontSize: 'var(--fs-small)',
                       fontWeight: 600,
                       cursor: 'pointer'
                     }}
@@ -1027,7 +1027,7 @@ export const BookPage = () => {
 
             {/* Full Name */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+              <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                 Full name <span style={{ color: '#C62828' }}>*</span>
               </label>
               <input
@@ -1036,21 +1036,21 @@ export const BookPage = () => {
                 onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
                 placeholder="e.g. Saurabh Yadav"
                 style={{
-                  height: 48,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: errors.fullName ? '1.5px solid #C62828' : '1px solid #E3E7F2',
-                  fontSize: '15px',
+                  fontSize: 'var(--fs-body)',
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
               />
-              {errors.fullName && <div style={{ fontSize: '13px', color: '#C62828' }}>{errors.fullName}</div>}
+              {errors.fullName && <div style={{ fontSize: 'var(--fs-small)', color: '#C62828' }}>{errors.fullName}</div>}
             </div>
 
             {/* Mobile Number with Country Code */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+              <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                 Mobile number <span style={{ color: '#C62828' }}>*</span>
               </label>
               <div style={{ display: 'flex', gap: 8 }}>
@@ -1058,12 +1058,12 @@ export const BookPage = () => {
                   value={formData.countryCode}
                   onChange={(e) => setFormData(prev => ({ ...prev, countryCode: e.target.value }))}
                   style={{
-                    height: 48,
+                    height: 'var(--btn-h)',
                     width: 76,
-                    borderRadius: 12,
+                    borderRadius: 'var(--radius)',
                     border: '1px solid #E3E7F2',
                     background: '#FFFFFF',
-                    fontSize: '14px',
+                    fontSize: 'var(--fs-body)',
                     fontWeight: 600,
                     padding: '0 6px',
                     outline: 'none'
@@ -1083,25 +1083,25 @@ export const BookPage = () => {
                   placeholder="(877) 225-2046"
                   style={{
                     flex: 1,
-                    height: 48,
-                    padding: '0 16px',
-                    borderRadius: 12,
+                    height: 'var(--btn-h)',
+                    padding: '0 var(--space-3)',
+                    borderRadius: 'var(--radius)',
                     border: errors.phone ? '1.5px solid #C62828' : '1px solid #E3E7F2',
-                    fontSize: '15px',
+                    fontSize: 'var(--fs-body)',
                     outline: 'none',
                     boxSizing: 'border-box'
                   }}
                 />
               </div>
-              <div style={{ fontSize: '13px', color: '#7A8299' }}>
+              <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>
                 We'll send a confirmation and call you before arrival.
               </div>
-              {errors.phone && <div style={{ fontSize: '13px', color: '#C62828' }}>{errors.phone}</div>}
+              {errors.phone && <div style={{ fontSize: 'var(--fs-small)', color: '#C62828' }}>{errors.phone}</div>}
             </div>
 
             {/* Email (Optional) */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+              <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                 Email address (optional)
               </label>
               <input
@@ -1110,11 +1110,11 @@ export const BookPage = () => {
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                 placeholder="demo@apex.com"
                 style={{
-                  height: 48,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
-                  fontSize: '15px',
+                  fontSize: 'var(--fs-body)',
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
@@ -1123,7 +1123,7 @@ export const BookPage = () => {
 
             {/* Street Address */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+              <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                 Street address <span style={{ color: '#C62828' }}>*</span>
               </label>
               <input
@@ -1132,38 +1132,38 @@ export const BookPage = () => {
                 onChange={(e) => setFormData(prev => ({ ...prev, streetAddress: e.target.value }))}
                 placeholder="e.g. 742 Evergreen Terr"
                 style={{
-                  height: 48,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: errors.streetAddress ? '1.5px solid #C62828' : '1px solid #E3E7F2',
-                  fontSize: '15px',
+                  fontSize: 'var(--fs-body)',
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
               />
-              {errors.streetAddress && <div style={{ fontSize: '13px', color: '#C62828' }}>{errors.streetAddress}</div>}
+              {errors.streetAddress && <div style={{ fontSize: 'var(--fs-small)', color: '#C62828' }}>{errors.streetAddress}</div>}
             </div>
 
             {/* Flat & Landmark Row */}
             <div style={{ display: 'flex', gap: 10 }}>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>Flat / Apt</label>
+                <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>Flat / Apt</label>
                 <input
                   type="text"
                   value={formData.apartment}
                   onChange={(e) => setFormData(prev => ({ ...prev, apartment: e.target.value }))}
                   placeholder="Suite 4B"
-                  style={{ height: 48, padding: '0 16px', borderRadius: 12, border: '1px solid #E3E7F2', fontSize: '15px', outline: 'none' }}
+                  style={{ height: 'var(--btn-h)', padding: '0 var(--space-3)', borderRadius: 'var(--radius)', border: '1px solid #E3E7F2', fontSize: 'var(--fs-body)', outline: 'none' }}
                 />
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>Landmark (optional)</label>
+                <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>Landmark (optional)</label>
                 <input
                   type="text"
                   value={formData.landmark}
                   onChange={(e) => setFormData(prev => ({ ...prev, landmark: e.target.value }))}
                   placeholder="Near Park"
-                  style={{ height: 48, padding: '0 16px', borderRadius: 12, border: '1px solid #E3E7F2', fontSize: '15px', outline: 'none' }}
+                  style={{ height: 'var(--btn-h)', padding: '0 var(--space-3)', borderRadius: 'var(--radius)', border: '1px solid #E3E7F2', fontSize: 'var(--fs-body)', outline: 'none' }}
                 />
               </div>
             </div>
@@ -1171,7 +1171,7 @@ export const BookPage = () => {
             {/* City & Postal Code */}
             <div style={{ display: 'flex', gap: 10 }}>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+                <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                   City <span style={{ color: '#C62828' }}>*</span>
                 </label>
                 <input
@@ -1179,12 +1179,12 @@ export const BookPage = () => {
                   value={formData.city}
                   onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
                   placeholder="Springfield"
-                  style={{ height: 48, padding: '0 16px', borderRadius: 12, border: errors.city ? '1.5px solid #C62828' : '1px solid #E3E7F2', fontSize: '15px', outline: 'none' }}
+                  style={{ height: 'var(--btn-h)', padding: '0 var(--space-3)', borderRadius: 'var(--radius)', border: errors.city ? '1.5px solid #C62828' : '1px solid #E3E7F2', fontSize: 'var(--fs-body)', outline: 'none' }}
                 />
-                {errors.city && <div style={{ fontSize: '13px', color: '#C62828' }}>{errors.city}</div>}
+                {errors.city && <div style={{ fontSize: 'var(--fs-small)', color: '#C62828' }}>{errors.city}</div>}
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <label style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>
+                <label style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>
                   Postal code <span style={{ color: '#C62828' }}>*</span>
                 </label>
                 <input
@@ -1192,9 +1192,9 @@ export const BookPage = () => {
                   value={formData.postalCode}
                   onChange={(e) => setFormData(prev => ({ ...prev, postalCode: e.target.value }))}
                   placeholder="62704"
-                  style={{ height: 48, padding: '0 16px', borderRadius: 12, border: errors.postalCode ? '1.5px solid #C62828' : '1px solid #E3E7F2', fontSize: '15px', outline: 'none' }}
+                  style={{ height: 'var(--btn-h)', padding: '0 var(--space-3)', borderRadius: 'var(--radius)', border: errors.postalCode ? '1.5px solid #C62828' : '1px solid #E3E7F2', fontSize: 'var(--fs-body)', outline: 'none' }}
                 />
-                {errors.postalCode && <div style={{ fontSize: '13px', color: '#C62828' }}>{errors.postalCode}</div>}
+                {errors.postalCode && <div style={{ fontSize: 'var(--fs-small)', color: '#C62828' }}>{errors.postalCode}</div>}
               </div>
             </div>
 
@@ -1359,22 +1359,22 @@ export const BookPage = () => {
             {/* Price Box */}
             <div style={{
               background: '#F1F5FB',
-              borderRadius: 16,
+              borderRadius: 'var(--radius)',
               border: '1px solid #E3E7F2',
-              padding: 16,
+              padding: 'var(--space-3)',
               display: 'flex',
               flexDirection: 'column',
               gap: 8
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '14px', color: '#5B6478' }}>Diagnostic fee</span>
-                <span style={{ fontSize: '16px', fontWeight: 700, color: '#0B1F5C' }}>${diagnosticFee}</span>
+                <span style={{ fontSize: 'var(--fs-body)', color: '#5B6478' }}>Diagnostic fee</span>
+                <span style={{ fontSize: 'var(--fs-card)', fontWeight: 700, color: '#0B1F5C' }}>${diagnosticFee}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#0A0A0F' }}>Estimated total due now</span>
-                <span style={{ fontSize: '18px', fontWeight: 700, color: '#16A34A' }}>$0.00</span>
+                <span style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: '#0A0A0F' }}>Estimated total due now</span>
+                <span style={{ fontSize: 'var(--fs-title)', fontWeight: 700, color: '#16A34A' }}>$0.00</span>
               </div>
-              <div style={{ fontSize: '12px', color: '#7A8299', lineHeight: 1.4, marginTop: 2 }}>
+              <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299', lineHeight: 1.4, marginTop: 2 }}>
                 You pay only after the technician explains the repair and you approve it.
               </div>
             </div>
@@ -1382,13 +1382,13 @@ export const BookPage = () => {
             {/* Payment Method Row */}
             <div style={{
               background: '#FFFFFF',
-              borderRadius: 14,
+              borderRadius: 'var(--radius)',
               border: '1px solid #E3E7F2',
-              padding: '12px 16px',
+              padding: 'var(--space-2) var(--space-3)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              fontSize: '14px'
+              fontSize: 'var(--fs-body)'
             }}>
               <span style={{ color: '#5B6478' }}>Payment method:</span>
               <span style={{ fontWeight: 600, color: '#0A0A0F' }}>Pay after service (Card, Cash, Apple Pay)</span>
@@ -1406,11 +1406,11 @@ export const BookPage = () => {
                   }}
                   style={{ width: 18, height: 18, marginTop: 2, accentColor: '#0B1F5C' }}
                 />
-                <span style={{ fontSize: '13px', color: '#5B6478', lineHeight: 1.4 }}>
+                <span style={{ fontSize: 'var(--fs-small)', color: '#5B6478', lineHeight: 1.4 }}>
                   I agree to the <span style={{ color: '#14308F', fontWeight: 600 }}>Terms and Cancellation policy</span>. Free cancellation up to 2 hours before the window.
                 </span>
               </label>
-              {errors.agreedToTerms && <div style={{ fontSize: '13px', color: '#C62828', marginLeft: 28 }}>{errors.agreedToTerms}</div>}
+              {errors.agreedToTerms && <div style={{ fontSize: 'var(--fs-small)', color: '#C62828', marginLeft: 28 }}>{errors.agreedToTerms}</div>}
             </div>
           </div>
         )}
@@ -1438,10 +1438,10 @@ export const BookPage = () => {
       }}>
         {/* Left: Diagnostic fee */}
         <div>
-          <div style={{ fontSize: '12px', color: '#7A8299' }}>Diagnostic fee</div>
+          <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>Diagnostic fee</div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-            <span style={{ fontSize: '18px', fontWeight: 700, color: '#0B1F5C' }}>${diagnosticFee}</span>
-            <span style={{ fontSize: '11px', color: '#16A34A', fontWeight: 600 }}>Credited toward repair</span>
+            <span style={{ fontSize: 'var(--fs-title)', fontWeight: 700, color: '#0B1F5C' }}>${diagnosticFee}</span>
+            <span style={{ fontSize: 'var(--fs-small)', color: '#16A34A', fontWeight: 600 }}>Credited toward repair</span>
           </div>
         </div>
 
@@ -1452,12 +1452,12 @@ export const BookPage = () => {
           disabled={!isStepValid(step) || isSubmitting}
           className="tap-effect"
           style={{
-            height: 48,
-            padding: '0 28px',
+            height: 'var(--btn-h)',
+            padding: '0 clamp(16px, 5vw, 24px)',
             borderRadius: 9999,
             background: isStepValid(step) && !isSubmitting ? '#0B1F5C' : '#CBD5E1',
             color: '#FFFFFF',
-            fontSize: '15px',
+            fontSize: 'var(--fs-body)',
             fontWeight: 600,
             border: 'none',
             cursor: isStepValid(step) && !isSubmitting ? 'pointer' : 'not-allowed',

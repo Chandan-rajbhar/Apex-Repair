@@ -27,7 +27,7 @@ export const ReviewModal = ({ isOpen, onClose, onSubmitReview, technicianName = 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
             <div>
               <span className="badge badge-mint">SERVICE FEEDBACK</span>
-              <h3 style={{ fontSize: '1.25rem', color: '#0F2A44', marginTop: 4 }}>
+              <h3 style={{ fontSize: 'var(--fs-title)', color: '#0F2A44', marginTop: 4, fontWeight: 700 }}>
                 Review Your Master Technician
               </h3>
             </div>
@@ -38,7 +38,7 @@ export const ReviewModal = ({ isOpen, onClose, onSubmitReview, technicianName = 
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div style={{ textAlign: 'center', padding: '10px 0' }}>
-              <div style={{ fontSize: '0.86rem', color: '#0F2A44', fontWeight: 700, marginBottom: 10 }}>
+              <div style={{ fontSize: 'var(--fs-card)', color: '#0F2A44', fontWeight: 700, marginBottom: 10 }}>
                 How was your repair experience with {technicianName}?
               </div>
 
@@ -60,7 +60,7 @@ export const ReviewModal = ({ isOpen, onClose, onSubmitReview, technicianName = 
                   </button>
                 ))}
               </div>
-              <div style={{ fontSize: '0.74rem', color: 'var(--orange-600)', fontWeight: 700, marginTop: 6 }}>
+              <div style={{ fontSize: 'var(--fs-small)', color: 'var(--orange-600)', fontWeight: 700, marginTop: 6 }}>
                 {rating === 5 ? 'Exceptional 5-Star Craftsmanship' : `${rating} Stars Selected`}
               </div>
             </div>
@@ -76,10 +76,10 @@ export const ReviewModal = ({ isOpen, onClose, onSubmitReview, technicianName = 
                 placeholder="Marcus arrived on time, was polite, and fixed our Samsung refrigerator compressor quickly..."
                 style={{
                   width: '100%',
-                  borderRadius: 14,
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #CBD5E1',
-                  padding: 12,
-                  fontSize: '0.84rem',
+                  padding: 'var(--space-3)',
+                  fontSize: 'var(--fs-body)',
                   resize: 'none'
                 }}
               />
@@ -88,7 +88,7 @@ export const ReviewModal = ({ isOpen, onClose, onSubmitReview, technicianName = 
             <button
               type="submit"
               className="btn btn-primary btn-block tap-effect shine-sweep"
-              style={{ height: 46 }}
+              style={{ height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)' }}
             >
               <Check size={18} /> Submit Review
             </button>

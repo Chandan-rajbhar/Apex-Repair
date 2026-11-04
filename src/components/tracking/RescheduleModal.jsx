@@ -35,7 +35,7 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <div>
               <span className="badge badge-mint">SCHEDULE ADJUSTMENT</span>
-              <h3 style={{ fontSize: '1.25rem', color: '#0F2A44', marginTop: 4 }}>
+              <h3 style={{ fontSize: 'var(--fs-title)', color: '#0F2A44', marginTop: 4, fontWeight: 700 }}>
                 Reschedule Service Visit
               </h3>
             </div>
@@ -49,15 +49,15 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
               <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#0F2A44', marginBottom: 8 }}>
                 Select New Service Date
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-2)' }}>
                 {dates.map((d, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => setSelectedDate(d.label)}
                     style={{
-                      padding: '10px 12px',
-                      borderRadius: 14,
+                      padding: 'var(--space-2) var(--space-3)',
+                      borderRadius: 'var(--radius)',
                       background: selectedDate === d.label ? 'var(--orange-50)' : '#FFFFFF',
                       border: selectedDate === d.label ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                       textAlign: 'left'
@@ -82,8 +82,8 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      padding: '10px 14px',
-                      borderRadius: 14,
+                      padding: 'var(--space-2) var(--space-3)',
+                      borderRadius: 'var(--radius)',
                       background: selectedSlot === slot.label ? 'var(--orange-50)' : '#FFFFFF',
                       border: selectedSlot === slot.label ? '2px solid var(--orange-600)' : '1px solid var(--border)',
                       cursor: 'pointer'
@@ -112,7 +112,7 @@ export const RescheduleModal = ({ isOpen, onClose, onConfirm, currentSlot, curre
             <button
               type="submit"
               className="btn btn-primary btn-block tap-effect shine-sweep"
-              style={{ height: 46, marginTop: 6 }}
+              style={{ height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)', marginTop: 6 }}
             >
               <Check size={18} /> Confirm New Appointment
             </button>

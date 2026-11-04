@@ -57,10 +57,10 @@ export const TrackPage = () => {
 
   if (!bookingToDisplay) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: '24px 0 100px 0', textAlign: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', padding: 'var(--space-3) var(--space-3) var(--page-pad-bottom) var(--space-3)', textAlign: 'center' }}>
         <div style={{
-          width: 64,
-          height: 64,
+          width: 'clamp(56px, 15vw, 64px)',
+          height: 'clamp(56px, 15vw, 64px)',
           borderRadius: '50%',
           background: '#E8ECF8',
           display: 'flex',
@@ -69,25 +69,25 @@ export const TrackPage = () => {
           margin: '0 auto',
           color: '#14308F'
         }}>
-          <Truck size={32} strokeWidth={2} />
+          <Truck size={28} strokeWidth={2} />
         </div>
         <div>
-          <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 6px 0', lineHeight: 1.25 }}>
+          <h2 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 6px 0', lineHeight: 1.25 }}>
             No Active Repair Orders
           </h2>
-          <p style={{ fontSize: '14px', color: '#5B6478', maxWidth: 300, margin: '0 auto 16px auto', lineHeight: 1.5 }}>
+          <p style={{ fontSize: 'var(--fs-body)', color: '#5B6478', maxWidth: 300, margin: '0 auto 16px auto', lineHeight: 1.5 }}>
             You don't currently have an active repair scheduled.
           </p>
           <button
             onClick={() => navigate('/book')}
             className="tap-effect"
             style={{
-              height: 44,
-              padding: '0 24px',
+              height: 'var(--btn-h)',
+              padding: '0 clamp(16px, 5vw, 24px)',
               borderRadius: 9999,
               background: '#0B1F5C',
               color: '#FFFFFF',
-              fontSize: '14px',
+              fontSize: 'var(--fs-body)',
               fontWeight: 600,
               border: 'none',
               cursor: 'pointer'
@@ -177,7 +177,7 @@ export const TrackPage = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 100 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', paddingBottom: 'var(--page-pad-bottom)' }}>
       {/* --------------------------------------------------------------------------
           1. HEADER (Back arrow & Title "Track repair")
           -------------------------------------------------------------------------- */}
@@ -187,8 +187,8 @@ export const TrackPage = () => {
             onClick={() => navigate(-1)}
             className="tap-effect"
             style={{
-              width: 36,
-              height: 36,
+              width: 'clamp(32px, 8.5vw, 36px)',
+              height: 'clamp(32px, 8.5vw, 36px)',
               borderRadius: '50%',
               background: '#FFFFFF',
               border: '1px solid #E3E7F2',
@@ -215,12 +215,12 @@ export const TrackPage = () => {
               value={bookingToDisplay.id}
               onChange={(e) => setSelectedBookingId(e.target.value)}
               style={{
-                height: 36,
+                height: 'clamp(32px, 8.5vw, 36px)',
                 padding: '0 28px 0 12px',
                 borderRadius: 9999,
                 border: '1px solid #E3E7F2',
                 background: '#FFFFFF',
-                fontSize: '12px',
+                fontSize: 'var(--fs-small)',
                 fontWeight: 600,
                 color: '#0B1F5C',
                 cursor: 'pointer',
@@ -288,29 +288,29 @@ export const TrackPage = () => {
         {/* Big ETA / Schedule line */}
         {currentStep6 === 3 ? (
           <div>
-            <div style={{ fontSize: '18px', fontWeight: 600, color: '#14308F' }}>
+            <div style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#14308F' }}>
               Arrives in {etaMinutes} min
             </div>
-            <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+            <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299', marginTop: 2 }}>
               Today, {bookingToDisplay.timeSlot || '11:00 AM to 2:00 PM'}
             </div>
           </div>
         ) : currentStep6 === 6 ? (
           <div>
-            <div style={{ fontSize: '16px', fontWeight: 600, color: '#16A34A', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div style={{ fontSize: 'var(--fs-card)', fontWeight: 600, color: '#16A34A', display: 'flex', alignItems: 'center', gap: 6 }}>
               <CheckCircle2 size={18} color="#16A34A" />
               <span>All repairs cleared & warranty active</span>
             </div>
-            <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+            <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299', marginTop: 2 }}>
               Completed today at {bookingToDisplay.date}
             </div>
           </div>
         ) : (
           <div>
-            <div style={{ fontSize: '16px', fontWeight: 600, color: '#14308F' }}>
+            <div style={{ fontSize: 'var(--fs-card)', fontWeight: 600, color: '#14308F' }}>
               Scheduled for {bookingToDisplay.date || 'Today'}
             </div>
-            <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+            <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299', marginTop: 2 }}>
               Window: {bookingToDisplay.timeSlot || '11:00 AM to 2:00 PM'}
             </div>
           </div>
@@ -336,7 +336,7 @@ export const TrackPage = () => {
         <div style={{ height: 1, background: '#EEF1F8' }} />
 
         {/* Address with pin icon */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '14px', color: '#5B6478' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 'var(--fs-body)', color: '#5B6478' }}>
           <MapPin size={18} strokeWidth={2} color="#14308F" style={{ flexShrink: 0 }} />
           <span>{bookingToDisplay.address || '742 Evergreen Terr, Suite 4B, Springfield, IL'}</span>
         </div>
@@ -504,12 +504,12 @@ export const TrackPage = () => {
                 }}
                 className="tap-effect"
                 style={{
-                  height: 48,
+                  height: 'var(--btn-h)',
                   width: '100%',
                   borderRadius: 9999,
                   background: '#0B1F5C',
                   color: '#FFFFFF',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   fontWeight: 600,
                   border: 'none',
                   cursor: 'pointer',
@@ -580,13 +580,13 @@ export const TrackPage = () => {
             </div>
 
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '16px', fontWeight: 600, color: '#0A0A0F', lineHeight: 1.25 }}>
+              <div style={{ fontSize: 'var(--fs-card)', fontWeight: 600, color: '#0A0A0F', lineHeight: 1.25 }}>
                 {bookingToDisplay.technician?.name || 'Marcus Vance'}
               </div>
-              <div style={{ fontSize: '13px', color: '#7A8299', marginTop: 2 }}>
+              <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299', marginTop: 2 }}>
                 Senior appliance specialist
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '13px', color: '#0A0A0F', marginTop: 2 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 'var(--fs-small)', color: '#0A0A0F', marginTop: 2 }}>
                 <Star size={14} fill="#F59E0B" color="#F59E0B" />
                 <span style={{ fontWeight: 600 }}>4.98</span>
                 <span style={{ color: '#7A8299' }}>&bull; 1,420 jobs</span>
@@ -601,12 +601,12 @@ export const TrackPage = () => {
               className="tap-effect"
               style={{
                 flex: 1,
-                height: 44,
+                height: 'var(--btn-h)',
                 borderRadius: 9999,
                 background: '#FFFFFF',
                 border: '1px solid #E3E7F2',
                 color: '#0A0A0F',
-                fontSize: '14px',
+                fontSize: 'var(--fs-body)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 display: 'flex',
@@ -624,12 +624,12 @@ export const TrackPage = () => {
               className="tap-effect"
               style={{
                 flex: 1,
-                height: 44,
+                height: 'var(--btn-h)',
                 borderRadius: 9999,
                 background: '#0B1F5C',
                 border: 'none',
                 color: '#FFFFFF',
-                fontSize: '14px',
+                fontSize: 'var(--fs-body)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 display: 'flex',
@@ -871,16 +871,16 @@ export const TrackPage = () => {
             style={{
               background: '#FFFFFF',
               borderRadius: '24px 24px 0 0',
-              padding: 20,
+              padding: 'var(--space-3)',
               maxWidth: 480,
               margin: '0 auto'
             }}
           >
             <div style={{ width: 40, height: 4, borderRadius: 2, background: '#E2E8F0', margin: '0 auto 16px auto' }} />
-            <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 6px 0' }}>
+            <h3 style={{ fontSize: 'var(--fs-card)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 6px 0' }}>
               Cancel Appointment #{bookingToDisplay.id}?
             </h3>
-            <p style={{ fontSize: '14px', color: '#5B6478', margin: '0 0 16px 0', lineHeight: 1.5 }}>
+            <p style={{ fontSize: 'var(--fs-body)', color: '#5B6478', margin: '0 0 16px 0', lineHeight: 1.5 }}>
               Are you sure you want to cancel? If your plans have changed, you can reschedule for free.
             </p>
 
@@ -893,11 +893,11 @@ export const TrackPage = () => {
                 }}
                 className="tap-effect"
                 style={{
-                  height: 44,
+                  height: 'var(--btn-h)',
                   borderRadius: 9999,
                   background: '#DC2626',
                   color: '#FFFFFF',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   fontWeight: 600,
                   border: 'none',
                   cursor: 'pointer'
@@ -909,11 +909,11 @@ export const TrackPage = () => {
                 onClick={() => setShowCancelModal(false)}
                 className="tap-effect"
                 style={{
-                  height: 44,
+                  height: 'var(--btn-h)',
                   borderRadius: 9999,
                   background: '#FFFFFF',
                   color: '#0A0A0F',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   fontWeight: 600,
                   border: '1px solid #E3E7F2',
                   cursor: 'pointer'

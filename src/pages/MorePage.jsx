@@ -196,7 +196,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'edit-profile') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 32, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header with back button */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -222,7 +222,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Edit Profile Details
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -234,7 +234,7 @@ export const MorePage = () => {
         <form onSubmit={handleSaveProfile} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius)',
             border: '1px solid #E3E7F2',
             padding: 20,
             boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
@@ -252,12 +252,12 @@ export const MorePage = () => {
                 onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
                 style={{
                   width: '100%',
-                  height: 44,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
                   background: '#F8FAFC',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   color: '#0A0A0F',
                   outline: 'none',
                   boxSizing: 'border-box'
@@ -275,12 +275,12 @@ export const MorePage = () => {
                 onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
                 style={{
                   width: '100%',
-                  height: 44,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
                   background: '#F8FAFC',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   color: '#0A0A0F',
                   outline: 'none',
                   boxSizing: 'border-box'
@@ -298,12 +298,12 @@ export const MorePage = () => {
                 onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
                 style={{
                   width: '100%',
-                  height: 44,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
                   background: '#F8FAFC',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   color: '#0A0A0F',
                   outline: 'none',
                   boxSizing: 'border-box'
@@ -321,12 +321,12 @@ export const MorePage = () => {
                 onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
                 style={{
                   width: '100%',
-                  height: 44,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
                   background: '#F8FAFC',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   color: '#0A0A0F',
                   outline: 'none',
                   boxSizing: 'border-box'
@@ -344,12 +344,12 @@ export const MorePage = () => {
                 onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
                 style={{
                   width: '100%',
-                  height: 44,
-                  padding: '0 16px',
-                  borderRadius: 12,
+                  height: 'var(--btn-h)',
+                  padding: '0 var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
                   background: '#F8FAFC',
-                  fontSize: '14px',
+                  fontSize: 'var(--fs-body)',
                   color: '#0A0A0F',
                   outline: 'none',
                   boxSizing: 'border-box'
@@ -365,12 +365,12 @@ export const MorePage = () => {
               className="tap-effect"
               style={{
                 flex: 1,
-                height: 44,
+                height: 'var(--btn-h)',
                 borderRadius: 9999,
                 background: '#FFFFFF',
                 border: '1px solid #E3E7F2',
                 color: '#1B2236',
-                fontSize: '14px',
+                fontSize: 'var(--fs-body)',
                 fontWeight: 600,
                 cursor: 'pointer'
               }}
@@ -382,12 +382,12 @@ export const MorePage = () => {
               className="tap-effect"
               style={{
                 flex: 2,
-                height: 44,
+                height: 'var(--btn-h)',
                 borderRadius: 9999,
                 background: '#0B1F5C',
                 border: 'none',
                 color: '#FFFFFF',
-                fontSize: '14px',
+                fontSize: 'var(--fs-body)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 display: 'inline-flex',
@@ -410,7 +410,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'saved-items') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -439,7 +439,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Saved Appliances & Services
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -450,7 +450,7 @@ export const MorePage = () => {
         {savedItems.length === 0 ? (
           <div style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius)',
             border: '1px solid #E3E7F2',
             padding: 32,
             textAlign: 'center',
@@ -490,7 +490,7 @@ export const MorePage = () => {
                 key={item.code}
                 style={{
                   background: '#FFFFFF',
-                  borderRadius: 20,
+                  borderRadius: 'var(--radius)',
                   border: '1px solid #E3E7F2',
                   boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
                   overflow: 'hidden',
@@ -612,7 +612,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'my-bookings') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -655,7 +655,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Service History & Appointments
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -666,7 +666,7 @@ export const MorePage = () => {
         {/* 1. ACTIVE LIVE BOOKING */}
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius)',
           border: '1.5px solid #14308F',
           boxShadow: '0 6px 20px rgba(11,31,92,0.1)',
           padding: 16,
@@ -761,7 +761,7 @@ export const MorePage = () => {
           {/* Past 1 */}
           <div style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius)',
             border: '1px solid #E3E7F2',
             padding: 16,
             boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
@@ -813,7 +813,7 @@ export const MorePage = () => {
           {/* Past 2 */}
           <div style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius)',
             border: '1px solid #E3E7F2',
             padding: 16,
             boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
@@ -867,7 +867,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'invoices') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -893,7 +893,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Billing & Payment Receipts
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -904,7 +904,7 @@ export const MorePage = () => {
         {/* Summary Card */}
         <div style={{
           background: 'linear-gradient(135deg, #0B1F5C 0%, #14308F 100%)',
-          borderRadius: 20,
+          borderRadius: 'var(--radius)',
           padding: 18,
           color: '#FFFFFF',
           display: 'flex',
@@ -930,7 +930,7 @@ export const MorePage = () => {
           {/* Invoice 1 */}
           <div style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius)',
             border: '1px solid #E3E7F2',
             padding: 16,
             boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
@@ -998,7 +998,7 @@ export const MorePage = () => {
           {/* Invoice 2 */}
           <div style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius)',
             border: '1px solid #E3E7F2',
             padding: 16,
             boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
@@ -1064,7 +1064,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'warranty') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -1090,7 +1090,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Warranty Coverage & Docs
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -1101,7 +1101,7 @@ export const MorePage = () => {
         {/* Active Warranty Card */}
         <div style={{
           background: 'linear-gradient(135deg, #064E3B 0%, #047857 100%)',
-          borderRadius: 20,
+          borderRadius: 'var(--radius)',
           padding: 20,
           color: '#FFFFFF',
           display: 'flex',
@@ -1214,7 +1214,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'notifications') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -1240,7 +1240,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Notification Preferences
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -1296,7 +1296,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'support') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -1322,7 +1322,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Help & Verification Desk
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -1336,7 +1336,7 @@ export const MorePage = () => {
           className="tap-effect"
           style={{
             background: '#FDECEC',
-            borderRadius: 20,
+            borderRadius: 'var(--radius)',
             border: '1px solid #FCA5A5',
             padding: 18,
             cursor: 'pointer',
@@ -1426,7 +1426,7 @@ export const MorePage = () => {
 
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius)',
           border: '1px solid #E3E7F2',
           overflow: 'hidden'
         }}>
@@ -1482,7 +1482,7 @@ export const MorePage = () => {
   // ============================================================================
   if (subView === 'settings') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingBottom: 100 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap)', paddingBottom: 'var(--page-pad-bottom)' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button
@@ -1508,7 +1508,7 @@ export const MorePage = () => {
         </div>
 
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
+          <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', margin: '0 0 4px 0', lineHeight: 1.25 }}>
             Settings & Storage
           </h1>
           <p style={{ fontSize: '14px', color: '#5B6478', margin: 0, lineHeight: 1.5 }}>
@@ -1518,7 +1518,7 @@ export const MorePage = () => {
 
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius)',
           border: '1px solid #E3E7F2',
           padding: 20,
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
@@ -1558,7 +1558,7 @@ export const MorePage = () => {
 
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius)',
           border: '1px solid #E3E7F2',
           padding: 20,
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
@@ -1651,7 +1651,7 @@ export const MorePage = () => {
             {/* Name, Role & Verified Pill */}
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', lineHeight: 1.25 }}>
+                <span style={{ fontSize: 'var(--fs-title)', fontWeight: 600, color: '#0A0A0F', lineHeight: 1.25 }}>
                   {profileData.name}
                 </span>
                 <CheckCircle2 size={16} color="#10B981" strokeWidth={2} />

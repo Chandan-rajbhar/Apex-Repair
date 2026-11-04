@@ -92,7 +92,7 @@ export const AuthModal = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <div>
               <span className="badge badge-mint" style={{ marginBottom: 4 }}>APEX CUSTOMER PORTAL</span>
-              <h2 id="auth-modal-title" style={{ fontSize: '1.4rem', color: '#0F2A44', marginTop: 4 }}>
+              <h2 id="auth-modal-title" style={{ fontSize: 'var(--fs-title)', color: '#0F2A44', marginTop: 4, fontWeight: 700 }}>
                 {activeTab === 'signin' ? 'Welcome Back' : 'Create Your Account'}
               </h2>
             </div>
@@ -195,12 +195,12 @@ export const AuthModal = () => {
                     placeholder="demo@apex.com"
                     style={{
                       width: '100%',
-                      height: 46,
-                      borderRadius: 14,
+                      height: 'var(--btn-h)',
+                      borderRadius: 'var(--radius)',
                       border: '1px solid rgba(15, 42, 68, 0.14)',
                       padding: '0 14px 0 42px',
                       background: '#FFFFFF',
-                      fontSize: '0.9rem'
+                      fontSize: 'var(--fs-body)'
                     }}
                     required
                   />
@@ -229,12 +229,12 @@ export const AuthModal = () => {
                     placeholder="••••••••"
                     style={{
                       width: '100%',
-                      height: 46,
-                      borderRadius: 14,
+                      height: 'var(--btn-h)',
+                      borderRadius: 'var(--radius)',
                       border: '1px solid rgba(15, 42, 68, 0.14)',
                       padding: '0 42px 0 42px',
                       background: '#FFFFFF',
-                      fontSize: '0.9rem'
+                      fontSize: 'var(--fs-body)'
                     }}
                     required
                   />
@@ -266,7 +266,7 @@ export const AuthModal = () => {
                 type="submit"
                 disabled={loading}
                 className="btn btn-primary btn-block tap-effect shine-sweep"
-                style={{ height: 48, marginTop: 4 }}
+                style={{ height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)', marginTop: 4 }}
               >
                 {loading ? 'Authenticating...' : 'Sign In to Portal'}
               </button>
@@ -287,12 +287,12 @@ export const AuthModal = () => {
                     placeholder="e.g. Saurabh Yadav"
                     style={{
                       width: '100%',
-                      height: 44,
-                      borderRadius: 14,
+                      height: 'var(--btn-h)',
+                      borderRadius: 'var(--radius)',
                       border: '1px solid rgba(15, 42, 68, 0.14)',
                       padding: '0 14px 0 42px',
                       background: '#FFFFFF',
-                      fontSize: '0.9rem'
+                      fontSize: 'var(--fs-body)'
                     }}
                     required
                   />
@@ -312,12 +312,12 @@ export const AuthModal = () => {
                     placeholder="name@example.com"
                     style={{
                       width: '100%',
-                      height: 44,
-                      borderRadius: 14,
+                      height: 'var(--btn-h)',
+                      borderRadius: 'var(--radius)',
                       border: '1px solid rgba(15, 42, 68, 0.14)',
                       padding: '0 14px 0 42px',
                       background: '#FFFFFF',
-                      fontSize: '0.9rem'
+                      fontSize: 'var(--fs-body)'
                     }}
                     required
                   />
@@ -337,12 +337,12 @@ export const AuthModal = () => {
                     placeholder="(877) 225-2046"
                     style={{
                       width: '100%',
-                      height: 44,
-                      borderRadius: 14,
+                      height: 'var(--btn-h)',
+                      borderRadius: 'var(--radius)',
                       border: '1px solid rgba(15, 42, 68, 0.14)',
                       padding: '0 14px 0 42px',
                       background: '#FFFFFF',
-                      fontSize: '0.9rem'
+                      fontSize: 'var(--fs-body)'
                     }}
                   />
                 </div>
@@ -361,12 +361,12 @@ export const AuthModal = () => {
                     placeholder="At least 6 characters"
                     style={{
                       width: '100%',
-                      height: 44,
-                      borderRadius: 14,
+                      height: 'var(--btn-h)',
+                      borderRadius: 'var(--radius)',
                       border: '1px solid rgba(15, 42, 68, 0.14)',
                       padding: '0 42px 0 42px',
                       background: '#FFFFFF',
-                      fontSize: '0.9rem'
+                      fontSize: 'var(--fs-body)'
                     }}
                     required
                   />
@@ -384,7 +384,7 @@ export const AuthModal = () => {
                 type="submit"
                 disabled={loading}
                 className="btn btn-primary btn-block tap-effect shine-sweep"
-                style={{ height: 48, marginTop: 6 }}
+                style={{ height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)', marginTop: 6 }}
               >
                 {loading ? 'Creating Account...' : 'Register & Continue'}
               </button>

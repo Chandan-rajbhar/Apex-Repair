@@ -41,7 +41,7 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
             <div>
               <span className="badge badge-mint">SECURE CHECKOUT</span>
-              <h3 style={{ fontSize: '1.25rem', color: '#0F2A44', marginTop: 4 }}>
+              <h3 style={{ fontSize: 'var(--fs-title)', color: '#0F2A44', marginTop: 4, fontWeight: 700 }}>
                 Pay Diagnostic & Repair Bill
               </h3>
             </div>
@@ -65,10 +65,10 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
               }}>
                 <CheckCircle2 size={38} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', color: 'var(--navy-900)', marginBottom: 6 }}>
+              <h3 style={{ fontSize: 'var(--fs-title)', color: 'var(--navy-900)', marginBottom: 6, fontWeight: 700 }}>
                 Payment Approved!
               </h3>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              <p style={{ fontSize: 'var(--fs-body)', color: 'var(--text-muted)' }}>
                 ${quote.total?.toFixed(2)} received. Your 90-day warranty certificate is now active.
               </p>
             </div>
@@ -76,8 +76,8 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
             <form onSubmit={handlePay}>
               {/* Total display */}
               <div style={{
-                padding: '14px 18px',
-                borderRadius: 18,
+                padding: 'var(--space-3)',
+                borderRadius: 'var(--radius)',
                 background: 'var(--navy-50)',
                 display: 'flex',
                 alignItems: 'center',
@@ -166,12 +166,12 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                       onChange={(e) => setCardNumber(e.target.value)}
                       style={{
                         width: '100%',
-                        height: 42,
-                        borderRadius: 12,
+                        height: 'var(--btn-h)',
+                        borderRadius: 'var(--radius)',
                         border: '1px solid #CBD5E1',
                         padding: '0 12px',
                         background: '#FFFFFF',
-                        fontSize: '0.88rem'
+                        fontSize: 'var(--fs-body)'
                       }}
                       required
                     />
@@ -188,12 +188,12 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                         onChange={(e) => setExpiry(e.target.value)}
                         style={{
                           width: '100%',
-                          height: 42,
-                          borderRadius: 12,
+                          height: 'var(--btn-h)',
+                          borderRadius: 'var(--radius)',
                           border: '1px solid #CBD5E1',
                           padding: '0 12px',
                           background: '#FFFFFF',
-                          fontSize: '0.88rem'
+                          fontSize: 'var(--fs-body)'
                         }}
                         required
                       />
@@ -208,12 +208,12 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                         onChange={(e) => setCvv(e.target.value)}
                         style={{
                           width: '100%',
-                          height: 42,
-                          borderRadius: 12,
+                          height: 'var(--btn-h)',
+                          borderRadius: 'var(--radius)',
                           border: '1px solid #CBD5E1',
                           padding: '0 12px',
                           background: '#FFFFFF',
-                          fontSize: '0.88rem'
+                          fontSize: 'var(--fs-body)'
                         }}
                         required
                       />
@@ -224,15 +224,15 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
 
               {method === 'apple_pay' && (
                 <div style={{
-                  padding: 16,
-                  borderRadius: 14,
+                  padding: 'var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   background: '#0F2A44',
                   color: '#FFFFFF',
                   textAlign: 'center',
                   marginBottom: 16
                 }}>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 700 }}>One-Touch Biometric Checkout</div>
-                  <div style={{ fontSize: '0.72rem', color: '#94A3B8', marginTop: 4 }}>
+                  <div style={{ fontSize: 'var(--fs-card)', fontWeight: 700 }}>One-Touch Biometric Checkout</div>
+                  <div style={{ fontSize: 'var(--fs-small)', color: '#94A3B8', marginTop: 4 }}>
                     Tap confirm below to authorize with Apple Pay / Google Wallet
                   </div>
                 </div>
@@ -240,11 +240,11 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
 
               {method === 'cash' && (
                 <div style={{
-                  padding: 14,
-                  borderRadius: 14,
+                  padding: 'var(--space-3)',
+                  borderRadius: 'var(--radius)',
                   background: 'var(--orange-50)',
                   color: 'var(--orange-600)',
-                  fontSize: '0.76rem',
+                  fontSize: 'var(--fs-small)',
                   lineHeight: 1.4,
                   marginBottom: 16
                 }}>
@@ -256,7 +256,7 @@ export const PaymentModal = ({ isOpen, onClose, quote, onPaySuccess }) => {
                 type="submit"
                 disabled={processing}
                 className="btn btn-primary btn-block tap-effect shine-sweep"
-                style={{ height: 48 }}
+                style={{ height: 'var(--btn-h)', borderRadius: 'var(--radius)', fontSize: 'var(--fs-body)' }}
               >
                 {processing ? 'Processing Payment...' : `Confirm Payment of $${quote.total?.toFixed(2)}`}
               </button>

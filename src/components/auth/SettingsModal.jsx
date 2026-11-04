@@ -40,7 +40,7 @@ export const SettingsModal = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <div>
               <span className="badge badge-mint">PREFERENCES & CONTROLS</span>
-              <h2 style={{ fontSize: '1.35rem', color: '#0F2A44', marginTop: 4 }}>App Settings</h2>
+              <h2 style={{ fontSize: 'var(--fs-title)', color: '#0F2A44', marginTop: 4, fontWeight: 700 }}>App Settings</h2>
             </div>
             <button onClick={() => setSettingsModalOpen(false)} className="icon-btn-header">
               <X size={18} />
@@ -52,8 +52,8 @@ export const SettingsModal = () => {
             <div
               className="card-white"
               style={{
-                padding: '14px 16px',
-                borderRadius: 18,
+                padding: 'var(--space-3)',
+                borderRadius: 'var(--radius)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between'
@@ -80,8 +80,8 @@ export const SettingsModal = () => {
             <div
               className="card-white"
               style={{
-                padding: '14px 16px',
-                borderRadius: 18,
+                padding: 'var(--space-3)',
+                borderRadius: 'var(--radius)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between'
@@ -108,8 +108,8 @@ export const SettingsModal = () => {
             <div
               className="card-white"
               style={{
-                padding: '14px 16px',
-                borderRadius: 18,
+                padding: 'var(--space-3)',
+                borderRadius: 'var(--radius)',
                 border: '1.5px dashed rgba(34, 63, 107, 0.35)',
                 background: 'rgba(241, 245, 251, 0.7)'
               }}
@@ -155,6 +155,9 @@ export const SettingsModal = () => {
               style={{
                 color: '#DC2626',
                 borderColor: 'rgba(220, 38, 38, 0.25)',
+                height: 'var(--btn-h)',
+                borderRadius: 'var(--radius)',
+                fontSize: 'var(--fs-body)',
                 marginTop: 6
               }}
             >

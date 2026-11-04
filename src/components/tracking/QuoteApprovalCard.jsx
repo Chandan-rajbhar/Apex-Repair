@@ -28,8 +28,8 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
     <div
       className="card-white card-gloss"
       style={{
-        borderRadius: 24,
-        padding: 18,
+        borderRadius: 'var(--radius)',
+        padding: 'var(--space-3)',
         border: isPending ? '2px solid rgba(34, 63, 107, 0.35)' : '1px solid rgba(15, 42, 68, 0.08)',
         background: isPending ? 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%)' : '#FFFFFF'
       }}
