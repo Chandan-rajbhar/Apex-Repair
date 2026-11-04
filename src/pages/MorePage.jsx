@@ -1250,7 +1250,7 @@ export const MorePage = () => {
 
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           border: '1px solid #E3E7F2',
           overflow: 'hidden',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
@@ -1360,7 +1360,7 @@ export const MorePage = () => {
         {/* 2. Direct Support Channels */}
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           border: '1px solid #E3E7F2',
           overflow: 'hidden',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
@@ -1584,16 +1584,16 @@ export const MorePage = () => {
   // MAIN PROFILE VIEW (Matches User Request & Screenshots)
   // ============================================================================
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 32, paddingBottom: 100 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap, clamp(20px, 5.5vw, 26px))', paddingBottom: 'var(--page-pad-bottom, clamp(76px, 20vw, 96px))' }}>
       {/* --------------------------------------------------------------------------
           1. User Profile Header Card
           -------------------------------------------------------------------------- */}
       <div
         style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           border: '1px solid #E3E7F2',
-          padding: 20,
+          padding: 'clamp(14px, 3.5vw, 18px)',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
           display: 'flex',
           flexDirection: 'column',
@@ -1738,7 +1738,7 @@ export const MorePage = () => {
 
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           border: '1px solid #E3E7F2',
           overflow: 'hidden',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
@@ -1945,7 +1945,7 @@ export const MorePage = () => {
 
         <div style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           border: '1px solid #E3E7F2',
           overflow: 'hidden',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)'

@@ -74,29 +74,29 @@ export const Header = () => {
       {/* Brand Logo Left */}
       <Link to="/" className="header-brand" aria-label="Apex Appliance Repair Home">
         <div className="brand-icon-wrap shine-sweep">
-          <Wrench size={18} strokeWidth={2} />
+          <Wrench size={16} strokeWidth={2} />
         </div>
         <div className="brand-text-col">
-          <div className="brand-title" style={{ fontSize: '15px', fontWeight: 700 }}>
+          <div className="brand-title" style={{ fontSize: 'var(--text-logo, clamp(0.85rem, 3.6vw, 1rem))', fontWeight: 700 }}>
             APEX <span>REPAIR</span>
           </div>
-          <div className="brand-tagline" style={{ fontSize: '11px', fontWeight: 600 }}>
+          <div className="brand-tagline" style={{ fontSize: 'clamp(0.58rem, 2.4vw, 0.68rem)', fontWeight: 600 }}>
             Precision Care
           </div>
         </div>
       </Link>
 
       {/* Header Actions Right (Search, Heart with count, Bell with dot) */}
-      <div className="header-actions" ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      <div className="header-actions" ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 'clamp(3px, 1vw, 6px)' }}>
         {/* 1. Search Icon Button */}
         <button
           className="icon-btn-header tap-effect"
           onClick={() => navigate('/services')}
           aria-label="Search services"
           title="Search"
-          style={{ width: 32, height: 32, background: 'transparent', border: 'none', padding: 0 }}
+          style={{ width: 'clamp(28px, 7.5vw, 32px)', height: 'clamp(28px, 7.5vw, 32px)', background: 'transparent', border: 'none', padding: 0 }}
         >
-          <Search size={19} strokeWidth={2} />
+          <Search size={18} strokeWidth={2} />
         </button>
 
         {/* 2. Heart / Saved Icon Button with Count Badge */}
@@ -105,25 +105,25 @@ export const Header = () => {
           onClick={() => navigate('/more?sub=saved-items')}
           aria-label="View saved repairs"
           title="Saved Repairs"
-          style={{ width: 32, height: 32, background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
+          style={{ width: 'clamp(28px, 7.5vw, 32px)', height: 'clamp(28px, 7.5vw, 32px)', background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
         >
-          <Heart size={19} strokeWidth={2} />
+          <Heart size={18} strokeWidth={2} />
           <span
             style={{
               position: 'absolute',
               top: 1,
               right: 1,
-              minWidth: 15,
-              height: 15,
+              minWidth: 'clamp(13px, 3.5vw, 15px)',
+              height: 'clamp(13px, 3.5vw, 15px)',
               borderRadius: 9999,
               background: '#FF5A36',
               color: '#FFFFFF',
-              fontSize: '9px',
+              fontSize: 'clamp(8px, 2.1vw, 9px)',
               fontWeight: 700,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '0 3px',
+              padding: '0 2px',
               border: '1.5px solid #0B1F5C',
               lineHeight: 1,
               boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
@@ -139,9 +139,9 @@ export const Header = () => {
           onClick={() => setShowNotifications(!showNotifications)}
           aria-label="View notifications"
           title="Notifications"
-          style={{ width: 32, height: 32, background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
+          style={{ width: 'clamp(28px, 7.5vw, 32px)', height: 'clamp(28px, 7.5vw, 32px)', background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
         >
-          <Bell size={19} strokeWidth={2} />
+          <Bell size={18} strokeWidth={2} />
           <span
             style={{
               position: 'absolute',

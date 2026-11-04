@@ -203,7 +203,7 @@ export const TrackPage = () => {
           >
             <ArrowLeft size={18} strokeWidth={2} />
           </button>
-          <h1 style={{ fontSize: '22px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.2 }}>
+          <h1 style={{ fontSize: 'var(--text-title, clamp(1.1rem, 4.5vw, 1.35rem))', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.2 }}>
             Track repair
           </h1>
         </div>
@@ -266,9 +266,9 @@ export const TrackPage = () => {
       <div
         style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           border: '1px solid #E3E7F2',
-          padding: 16,
+          padding: 'var(--card-pad, clamp(10px, 2.8vw, 14px))',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
           display: 'flex',
           flexDirection: 'column',
@@ -276,12 +276,12 @@ export const TrackPage = () => {
         }}
       >
         {/* Small gray line: "Samsung Refrigerator and Freezer, #AR-1024" */}
-        <div style={{ fontSize: '13px', color: '#7A8299' }}>
+        <div style={{ fontSize: 'var(--text-small, clamp(0.65rem, 2.6vw, 0.75rem))', color: '#7A8299' }}>
           {bookingToDisplay.brand} {bookingToDisplay.applianceName}, #{bookingToDisplay.id}
         </div>
 
-        {/* Large headline (22px, weight 600) */}
-        <h2 style={{ fontSize: '22px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
+        {/* Large headline */}
+        <h2 style={{ fontSize: 'var(--text-title, clamp(1.1rem, 4.5vw, 1.35rem))', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
           {statusHeadline}
         </h2>
 
@@ -350,7 +350,7 @@ export const TrackPage = () => {
           style={{
             position: 'relative',
             height: 200,
-            borderRadius: 20,
+            borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
             overflow: 'hidden',
             border: '1px solid #E3E7F2',
             background: '#F0F4FA',
@@ -420,9 +420,9 @@ export const TrackPage = () => {
         <div
           style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
             border: '1px solid #E3E7F2',
-            padding: 16,
+            padding: 'var(--card-pad, clamp(10px, 2.8vw, 14px))',
             boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
             display: 'flex',
             flexDirection: 'column',
@@ -550,9 +550,9 @@ export const TrackPage = () => {
         <div
           style={{
             background: '#FFFFFF',
-            borderRadius: 20,
+            borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
             border: '1px solid #E3E7F2',
-            padding: 16,
+            padding: 'var(--card-pad, clamp(10px, 2.8vw, 14px))',
             boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
             display: 'flex',
             flexDirection: 'column',
@@ -652,9 +652,9 @@ export const TrackPage = () => {
       <div
         style={{
           background: '#FFFFFF',
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           border: '1px solid #E3E7F2',
-          padding: 16,
+          padding: 'var(--card-pad, clamp(10px, 2.8vw, 14px))',
           boxShadow: '0 4px 12px rgba(10,20,60,0.06)',
           display: 'flex',
           flexDirection: 'column',

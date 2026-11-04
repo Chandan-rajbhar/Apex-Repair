@@ -358,7 +358,7 @@ export const ServicesPage = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-          gap: 14
+          gap: 'var(--card-gap, clamp(8px, 2.5vw, 14px))'
         }}>
           {filteredServices.map((app) => {
             const code = SERVICE_CODES[app.id] || `AP-${app.id.slice(0, 2).toUpperCase()}`;
@@ -372,7 +372,7 @@ export const ServicesPage = () => {
                 className="featured-repair-card tap-effect"
                 style={{
                   background: '#FFFFFF',
-                  borderRadius: 20,
+                  borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
                   border: '1px solid #E3E7F2',
                   boxShadow: '0 4px 12px rgba(10, 20, 60, 0.08)',
                   overflow: 'hidden',
@@ -380,11 +380,12 @@ export const ServicesPage = () => {
                   flexDirection: 'column',
                   cursor: 'pointer',
                   height: '100%',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  minWidth: 0
                 }}
               >
-                {/* Rule 4: Photo on top, height 115px */}
-                <div style={{ position: 'relative', width: '100%', height: 115, overflow: 'hidden' }}>
+                {/* Photo on top: aspect-ratio 4/3 */}
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden' }}>
                   <img
                     src={app.image}
                     alt={app.name}
@@ -398,14 +399,14 @@ export const ServicesPage = () => {
                     pointerEvents: 'none'
                   }} />
 
-                  {/* Rule 4: Icon buttons on photo (40px circles, 8px from top and right, 8px between) */}
+                  {/* Icon buttons on photo */}
                   <div style={{
                     position: 'absolute',
-                    top: 8,
-                    right: 8,
+                    top: 'clamp(6px, 1.8vw, 8px)',
+                    right: 'clamp(6px, 1.8vw, 8px)',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 8,
+                    gap: 'clamp(4px, 1.2vw, 6px)',
                     zIndex: 2
                   }}>
                     {/* Compare Button */}
@@ -413,8 +414,8 @@ export const ServicesPage = () => {
                       onClick={(e) => handleToggleCompare(code, app.name, e)}
                       className="tap-effect"
                       style={{
-                        width: 40,
-                        height: 40,
+                        width: 'clamp(28px, 7.5vw, 34px)',
+                        height: 'clamp(28px, 7.5vw, 34px)',
                         borderRadius: '50%',
                         background: isCompared ? '#0284C7' : '#FFFFFF',
                         border: 'none',
@@ -428,7 +429,7 @@ export const ServicesPage = () => {
                       title={isCompared ? 'In comparison' : 'Compare service'}
                       aria-label="Compare"
                     >
-                      <Scale size={20} color={isCompared ? '#FFFFFF' : '#7A8299'} strokeWidth={2} />
+                      <Scale size={15} color={isCompared ? '#FFFFFF' : '#7A8299'} strokeWidth={2} />
                     </button>
 
                     {/* Heart Save Button */}
@@ -436,8 +437,8 @@ export const ServicesPage = () => {
                       onClick={(e) => handleToggleSave(code, app.name, e)}
                       className="tap-effect"
                       style={{
-                        width: 40,
-                        height: 40,
+                        width: 'clamp(28px, 7.5vw, 34px)',
+                        height: 'clamp(28px, 7.5vw, 34px)',
                         borderRadius: '50%',
                         background: '#FFFFFF',
                         border: 'none',
@@ -452,7 +453,7 @@ export const ServicesPage = () => {
                       aria-label="Save"
                     >
                       <Heart
-                        size={20}
+                        size={15}
                         color={isSaved ? '#E11D48' : '#7A8299'}
                         fill={isSaved ? '#E11D48' : 'none'}
                         strokeWidth={2}
@@ -461,45 +462,47 @@ export const ServicesPage = () => {
                   </div>
                 </div>
 
-                {/* Rule 4: Content Under Photo (Padding 12px) */}
+                {/* Content Under Photo */}
                 <div style={{
-                  padding: 12,
+                  padding: 'var(--card-pad, clamp(10px, 2.8vw, 12px))',
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  minWidth: 0
                 }}>
-                  {/* Row 1: Code on left (navy monospace), Price on right */}
+                  {/* Row 1: Code on left, Price on right */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{
-                      fontSize: '13px',
+                      fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace'
                     }}>
                       {code}
                     </span>
-                    <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F' }}>
+                    <span style={{ fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)', fontWeight: 600, color: '#0A0A0F' }}>
                       From ${app.diagnosticFee}
                     </span>
                   </div>
 
                   {/* Row 2: Service Title (single line with ellipsis) */}
                   <div style={{
-                    fontSize: '15px',
+                    fontSize: 'var(--text-card-title, clamp(0.85rem, 3.6vw, 1rem))',
                     fontWeight: 600,
                     color: '#0A0A0F',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     lineHeight: 1.25,
-                    marginTop: 4
+                    marginTop: 3,
+                    minWidth: 0
                   }}>
                     {app.name}
                   </div>
 
-                  {/* Thin divider line (#EEF1F8, 12px above and below) */}
-                  <div style={{ height: 1, background: '#EEF1F8', margin: '12px 0' }} />
+                  {/* Thin divider line */}
+                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(6px, 1.8vw, 8px) 0' }} />
 
                   {/* Row 3: Tag on left, Details with arrow on right */}
                   <div style={{
@@ -508,16 +511,16 @@ export const ServicesPage = () => {
                     alignItems: 'center',
                     marginTop: 'auto'
                   }}>
-                    <span style={{ fontSize: '13px', color: '#7A8299', fontWeight: 400 }}>
+                    <span style={{ fontSize: 'clamp(0.65rem, 2.6vw, 0.75rem)', color: '#7A8299', fontWeight: 400 }}>
                       Same-Day
                     </span>
                     <span style={{
-                      fontSize: '14px',
+                      fontSize: 'clamp(0.7rem, 2.8vw, 0.82rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: 4
+                      gap: 3
                     }}>
                       Details &rarr;
                     </span>

@@ -18,7 +18,7 @@ export const BottomNav = () => {
       >
         {({ isActive }) => (
           <>
-            <Home size={24} strokeWidth={2} />
+            <Home size={22} strokeWidth={2} />
             <span>Home</span>
             {isActive && <div className="nav-active-dot" />}
           </>
@@ -33,7 +33,7 @@ export const BottomNav = () => {
       >
         {({ isActive }) => (
           <>
-            <Settings size={24} strokeWidth={2} />
+            <Settings size={22} strokeWidth={2} />
             <span>Services</span>
             {isActive && <div className="nav-active-dot" />}
           </>
@@ -47,7 +47,7 @@ export const BottomNav = () => {
         aria-label="Book Diagnostic Appointment"
       >
         <div className="center-book-btn glow-pulse-primary shine-sweep tap-effect">
-          <Calendar size={22} strokeWidth={2} />
+          <Calendar size={20} strokeWidth={2} />
         </div>
         <span className="center-book-label">Book</span>
       </NavLink>
@@ -61,7 +61,7 @@ export const BottomNav = () => {
         {({ isActive }) => (
           <>
             <div style={{ position: 'relative' }}>
-              <Truck size={24} strokeWidth={2} />
+              <Truck size={22} strokeWidth={2} />
               {activeBooking && activeBooking.currentStep < 9 && (
                 <span
                   style={{
@@ -91,7 +91,7 @@ export const BottomNav = () => {
       >
         {({ isActive }) => (
           <>
-            <User size={24} strokeWidth={2} />
+            <User size={22} strokeWidth={2} />
             <span>Profile</span>
             {(isActive || location.pathname === '/profile') && <div className="nav-active-dot" />}
           </>

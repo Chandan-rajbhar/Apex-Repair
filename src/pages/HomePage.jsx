@@ -117,14 +117,14 @@ export const HomePage = () => {
   }).slice(0, 4);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--section-gap, clamp(20px, 5.5vw, 26px))' }}>
       {/* --------------------------------------------------------------------------
           1. Category Filter Chips
           -------------------------------------------------------------------------- */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 8,
+        gap: 'clamp(6px, 1.8vw, 8px)',
         overflowX: 'auto',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
@@ -138,13 +138,13 @@ export const HomePage = () => {
               onClick={() => setActiveTab(tab)}
               className="tap-effect"
               style={{
-                height: 36,
-                padding: '0 16px',
+                height: 'clamp(30px, 8vw, 38px)',
+                padding: '0 clamp(10px, 3vw, 14px)',
                 borderRadius: 9999,
                 background: isActive ? '#0B1F5C' : '#FFFFFF',
                 color: isActive ? '#FFFFFF' : '#1B2236',
                 border: isActive ? '1px solid #0B1F5C' : '1px solid #E3E7F2',
-                fontSize: '12px',
+                fontSize: 'var(--text-small, clamp(0.65rem, 2.6vw, 0.75rem))',
                 fontWeight: isActive ? 600 : 500,
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
@@ -163,10 +163,11 @@ export const HomePage = () => {
       <div
         style={{
           position: 'relative',
-          minHeight: 180,
-          borderRadius: 20,
+          aspectRatio: '2.2 / 1',
+          minHeight: 0,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           overflow: 'hidden',
-          padding: 20,
+          padding: 'clamp(12px, 3.5vw, 18px)',
           boxSizing: 'border-box',
           display: 'flex',
           alignItems: 'center',
@@ -193,10 +194,10 @@ export const HomePage = () => {
         <div
           style={{
             position: 'absolute',
-            top: 12,
-            right: 12,
-            width: 52,
-            height: 52,
+            top: 'clamp(8px, 2.5vw, 12px)',
+            right: 'clamp(8px, 2.5vw, 12px)',
+            width: 'clamp(38px, 10vw, 48px)',
+            height: 'clamp(38px, 10vw, 48px)',
             borderRadius: '50%',
             background: 'rgba(255, 255, 255, 0.18)',
             border: '1.5px solid rgba(255, 255, 255, 0.45)',
@@ -213,11 +214,11 @@ export const HomePage = () => {
             pointerEvents: 'none'
           }}
         >
-          <span style={{ fontSize: '13px', fontWeight: 800, lineHeight: 1.05 }}>50%</span>
-          <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', opacity: 0.95 }}>OFF</span>
+          <span style={{ fontSize: 'clamp(10px, 2.8vw, 13px)', fontWeight: 800, lineHeight: 1.05 }}>50%</span>
+          <span style={{ fontSize: 'clamp(7px, 2vw, 9px)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', opacity: 0.95 }}>OFF</span>
         </div>
 
-        {/* Left Column (about 60%): Text & Actions */}
+        {/* Left Column: Text & Actions */}
         <div
           style={{
             flex: '0 0 58%',
@@ -229,14 +230,14 @@ export const HomePage = () => {
             justifyContent: 'center'
           }}
         >
-          {/* 1. Headline (2 lines max, accent word #A9BCF5) */}
+          {/* 1. Headline (2 lines max, fluid) */}
           <h2
             style={{
-              fontSize: '20px',
+              fontSize: 'clamp(1rem, 4.2vw, 1.25rem)',
               fontWeight: 600,
               color: '#FFFFFF',
-              lineHeight: 1.25,
-              margin: '0 0 16px 0',
+              lineHeight: 1.2,
+              margin: '0 0 clamp(8px, 2.5vw, 12px) 0',
               padding: 0
             }}
           >
@@ -249,36 +250,36 @@ export const HomePage = () => {
             onClick={() => navigate('/book')}
             className="tap-effect"
             style={{
-              height: 44,
-              padding: '0 20px',
+              height: 'clamp(32px, 8.5vw, 38px)',
+              padding: '0 clamp(12px, 3.2vw, 16px)',
               borderRadius: 9999,
               background: 'linear-gradient(180deg, #FFFFFF 0%, #D6DDF0 100%)',
               color: '#0B1F5C',
-              fontSize: '14px',
+              fontSize: 'var(--text-btn, clamp(0.74rem, 3.1vw, 0.85rem))',
               fontWeight: 600,
               border: 'none',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 6,
+              gap: 5,
               boxShadow: '0 4px 14px rgba(4, 10, 34, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
               whiteSpace: 'nowrap',
               boxSizing: 'border-box'
             }}
           >
             <span>Book service</span>
-            <ArrowRight size={16} strokeWidth={2} />
+            <ArrowRight size={14} strokeWidth={2} />
           </button>
         </div>
 
-        {/* Right Column (about 40%): Washing Machine Image with soft fade */}
+        {/* Right Column: Washing Machine Image with soft fade */}
         <div
           style={{
             position: 'absolute',
             top: 0,
             right: 0,
             bottom: 0,
-            width: '42%',
+            width: '44%',
             height: '100%',
             overflow: 'hidden',
             display: 'flex',
@@ -303,12 +304,12 @@ export const HomePage = () => {
       </div>
 
       {/* --------------------------------------------------------------------------
-          3. Quick Action Cards (4 equal cards, 8px gap)
+          3. Quick Action Cards (4 equal columns, fluid sizing)
           -------------------------------------------------------------------------- */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: 8
+        gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+        gap: 'clamp(6px, 1.8vw, 10px)'
       }}>
         {/* 1. Book */}
         <div
@@ -316,18 +317,18 @@ export const HomePage = () => {
           className="quick-action-card tap-effect"
         >
           <div style={{
-            width: 40,
-            height: 40,
-            borderRadius: 12,
+            width: 'clamp(32px, 9vw, 40px)',
+            height: 'clamp(32px, 9vw, 40px)',
+            borderRadius: 'clamp(8px, 2.5vw, 12px)',
             background: '#E8ECF8',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            <CalendarPlus size={22} strokeWidth={2} color="#14308F" />
+            <CalendarPlus size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
+          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
             Book
           </span>
         </div>
@@ -340,14 +341,14 @@ export const HomePage = () => {
           {activeBooking && (
             <div style={{
               position: 'absolute',
-              top: 6,
-              right: 6,
-              width: 18,
-              height: 18,
+              top: 'clamp(4px, 1.2vw, 6px)',
+              right: 'clamp(4px, 1.2vw, 6px)',
+              width: 'clamp(15px, 4vw, 18px)',
+              height: 'clamp(15px, 4vw, 18px)',
               borderRadius: '50%',
               background: '#14308F',
               color: '#FFFFFF',
-              fontSize: '12px',
+              fontSize: 'clamp(9px, 2.4vw, 11px)',
               fontWeight: 700,
               display: 'flex',
               alignItems: 'center',
@@ -358,18 +359,18 @@ export const HomePage = () => {
             </div>
           )}
           <div style={{
-            width: 40,
-            height: 40,
-            borderRadius: 12,
+            width: 'clamp(32px, 9vw, 40px)',
+            height: 'clamp(32px, 9vw, 40px)',
+            borderRadius: 'clamp(8px, 2.5vw, 12px)',
             background: '#E8ECF8',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            <Truck size={22} strokeWidth={2} color="#14308F" />
+            <Truck size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
+          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
             Track
           </span>
         </div>
@@ -380,18 +381,18 @@ export const HomePage = () => {
           className="quick-action-card tap-effect"
         >
           <div style={{
-            width: 40,
-            height: 40,
-            borderRadius: 12,
+            width: 'clamp(32px, 9vw, 40px)',
+            height: 'clamp(32px, 9vw, 40px)',
+            borderRadius: 'clamp(8px, 2.5vw, 12px)',
             background: '#E8ECF8',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            <Receipt size={22} strokeWidth={2} color="#14308F" />
+            <Receipt size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
+          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
             Invoices
           </span>
         </div>
@@ -402,18 +403,18 @@ export const HomePage = () => {
           className="quick-action-card tap-effect"
         >
           <div style={{
-            width: 40,
-            height: 40,
-            borderRadius: 12,
+            width: 'clamp(32px, 9vw, 40px)',
+            height: 'clamp(32px, 9vw, 40px)',
+            borderRadius: 'clamp(8px, 2.5vw, 12px)',
             background: '#E8ECF8',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            <Headset size={22} strokeWidth={2} color="#14308F" />
+            <Headset size={20} strokeWidth={2} color="#14308F" />
           </div>
-          <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
+          <span style={{ fontSize: 'clamp(0.7rem, 3vw, 0.85rem)', fontWeight: 600, color: '#0A0A0F', textAlign: 'center', lineHeight: 1.1 }}>
             Support
           </span>
         </div>
@@ -423,26 +424,26 @@ export const HomePage = () => {
           4. FEATURED SERVICES (Rule 3 Section Header Row & Rule 4 Card Anatomy)
           -------------------------------------------------------------------------- */}
       <div>
-        {/* Section Header Row (Rule 3: Eyebrow above title left, link right, same baseline) */}
+        {/* Section Header Row (Eyebrow above title left, link right, same baseline) */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
-          marginBottom: 16
+          marginBottom: 'clamp(10px, 3vw, 14px)'
         }}>
           <div>
             <div style={{
-              fontSize: '12px',
+              fontSize: 'var(--text-small, clamp(0.65rem, 2.6vw, 0.75rem))',
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
               color: '#14308F',
-              marginBottom: 4
+              marginBottom: 3
             }}>
               OUR SERVICES
             </div>
             <h2 style={{
-              fontSize: '20px',
+              fontSize: 'var(--text-title, clamp(1.1rem, 4.5vw, 1.35rem))',
               fontWeight: 600,
               lineHeight: 1.25,
               color: '#0A0A0F',
@@ -455,12 +456,12 @@ export const HomePage = () => {
             onClick={() => navigate('/services')}
             className="tap-effect"
             style={{
-              fontSize: '14px',
+              fontSize: 'var(--text-btn, clamp(0.78rem, 3.2vw, 0.9rem))',
               fontWeight: 600,
               color: '#14308F',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 4,
+              gap: 3,
               background: 'none',
               border: 'none',
               padding: 0,
@@ -469,15 +470,15 @@ export const HomePage = () => {
             }}
           >
             <span>All services</span>
-            <ChevronRight size={16} strokeWidth={2} />
+            <ChevronRight size={15} strokeWidth={2} />
           </button>
         </div>
 
-        {/* 2-Column Grid (14px gap, equal minmax(0, 1fr) columns) */}
+        {/* 2-Column Grid (CSS Grid with minmax & clamp gap) */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-          gap: 14
+          gap: 'var(--card-gap, clamp(8px, 2.5vw, 14px))'
         }}>
           {FEATURED_SERVICES.map((item) => {
             const isSaved = savedServices.includes(item.code);
@@ -487,8 +488,8 @@ export const HomePage = () => {
                 onClick={() => setSelectedServiceDetail(item)}
                 className="featured-repair-card tap-effect"
               >
-                {/* Photo on top: height 115px, full card width, object-fit cover */}
-                <div style={{ position: 'relative', width: '100%', height: 115, overflow: 'hidden' }}>
+                {/* Photo on top: aspect-ratio 4/3, full card width, object-fit cover */}
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden' }}>
                   <img
                     src={item.image}
                     alt={item.alt || item.name}
@@ -502,11 +503,11 @@ export const HomePage = () => {
                     pointerEvents: 'none'
                   }} />
 
-                  {/* 36px white circle heart button 8px from top and right */}
+                  {/* Responsive heart button in circle */}
                   <div style={{
                     position: 'absolute',
-                    top: 8,
-                    right: 8,
+                    top: 'clamp(6px, 1.8vw, 8px)',
+                    right: 'clamp(6px, 1.8vw, 8px)',
                     display: 'flex',
                     alignItems: 'center',
                     zIndex: 2
@@ -518,8 +519,8 @@ export const HomePage = () => {
                       }}
                       className="tap-effect"
                       style={{
-                        width: 36,
-                        height: 36,
+                        width: 'clamp(28px, 7.5vw, 34px)',
+                        height: 'clamp(28px, 7.5vw, 34px)',
                         borderRadius: '50%',
                         background: '#FFFFFF',
                         border: 'none',
@@ -533,7 +534,7 @@ export const HomePage = () => {
                       aria-label={isSaved ? "Saved" : "Save repair"}
                     >
                       <Heart
-                        size={18}
+                        size={15}
                         strokeWidth={2}
                         color={isSaved ? "#E11D48" : "#7A8299"}
                         fill={isSaved ? "#E11D48" : "none"}
@@ -542,23 +543,24 @@ export const HomePage = () => {
                   </div>
                 </div>
 
-                {/* Text area padding 12px */}
+                {/* Text area with fluid padding */}
                 <div style={{
-                  padding: 12,
+                  padding: 'var(--card-pad, clamp(10px, 2.8vw, 12px))',
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  minWidth: 0
                 }}>
-                  {/* Row 1: Code on left (12px, weight 600, navy), "From $49" on right (12px, weight 600, dark), 6px margin below */}
+                  {/* Row 1: Code on left, From $ on right */}
                   <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    marginBottom: 6
+                    marginBottom: 'clamp(3px, 1vw, 5px)'
                   }}>
                     <span style={{
-                      fontSize: '12px',
+                      fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace'
@@ -566,7 +568,7 @@ export const HomePage = () => {
                       {item.code}
                     </span>
                     <span style={{
-                      fontSize: '12px',
+                      fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)',
                       fontWeight: 600,
                       color: '#0A0A0F'
                     }}>
@@ -574,39 +576,40 @@ export const HomePage = () => {
                     </span>
                   </div>
 
-                  {/* Row 2: Service name (15px, weight 600, single line with ellipsis, line-height 1.3) */}
+                  {/* Row 2: Service name (single line with ellipsis) */}
                   <div style={{
-                    fontSize: '15px',
+                    fontSize: 'var(--text-card-title, clamp(0.85rem, 3.6vw, 1rem))',
                     fontWeight: 600,
                     color: '#0A0A0F',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
-                    lineHeight: 1.3
+                    lineHeight: 1.25,
+                    minWidth: 0
                   }}>
                     {item.name}
                   </div>
 
-                  {/* Thin divider line (#EEF1F8, 10px above and below) */}
-                  <div style={{ height: 1, background: '#EEF1F8', margin: '10px 0' }} />
+                  {/* Thin divider line */}
+                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(6px, 1.8vw, 8px) 0' }} />
 
-                  {/* Row 3: Gray tag left (13px), Details + arrow right (13px, weight 600, navy) */}
+                  {/* Row 3: Tag left, Details arrow right */}
                   <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     marginTop: 'auto'
                   }}>
-                    <span style={{ fontSize: '13px', fontWeight: 400, color: '#7A8299' }}>
+                    <span style={{ fontSize: 'clamp(0.65rem, 2.6vw, 0.75rem)', fontWeight: 400, color: '#7A8299' }}>
                       {item.tag}
                     </span>
                     <span style={{
-                      fontSize: '13px',
+                      fontSize: 'clamp(0.7rem, 2.8vw, 0.82rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: 4
+                      gap: 3
                     }}>
                       Details &rarr;
                     </span>
@@ -619,38 +622,38 @@ export const HomePage = () => {
       </div>
 
       {/* --------------------------------------------------------------------------
-          Urgent Call CTA Banner (Orange Gradient)
+          Urgent Call CTA Banner (Fluid Gradient Banner)
           -------------------------------------------------------------------------- */}
       <div
         className="card-gloss shine-sweep"
         style={{
-          borderRadius: 20,
+          borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
           background: 'var(--grad-cta)',
           color: '#FFFFFF',
-          padding: 20,
+          padding: 'clamp(14px, 3.8vw, 18px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: 16,
+          gap: 'clamp(10px, 3vw, 16px)',
           boxShadow: 'var(--glow-orange)'
         }}
       >
         <div>
           <div style={{
-            fontSize: '12px',
+            fontSize: 'var(--text-small, clamp(0.65rem, 2.6vw, 0.75rem))',
             fontWeight: 600,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
             color: '#FFFFFF',
             opacity: 0.9,
-            marginBottom: 4
+            marginBottom: 3
           }}>
             EMERGENCY APPLIANCE HOTLINE
           </div>
-          <div style={{ fontSize: '20px', fontWeight: 600, lineHeight: 1.25, marginBottom: 4 }}>
+          <div style={{ fontSize: 'clamp(1rem, 4.2vw, 1.25rem)', fontWeight: 600, lineHeight: 1.25, marginBottom: 3 }}>
             Active Leak or Gas Odor?
           </div>
-          <div style={{ fontSize: '14px', fontWeight: 400, opacity: 0.9, lineHeight: 1.5 }}>
+          <div style={{ fontSize: 'var(--text-body, clamp(0.72rem, 3vw, 0.85rem))', fontWeight: 400, opacity: 0.9, lineHeight: 1.4 }}>
             2-Hour Immediate Master Technician Dispatch
           </div>
         </div>
@@ -659,21 +662,21 @@ export const HomePage = () => {
           href={`tel:${COMPANY_INFO.phoneRaw}`}
           className="tap-effect"
           style={{
-            height: 44,
-            padding: '0 20px',
+            height: 'clamp(36px, 9.5vw, 42px)',
+            padding: '0 clamp(12px, 3.5vw, 18px)',
             borderRadius: 9999,
             background: '#FFFFFF',
             color: '#0B1F5C',
-            fontSize: '14px',
+            fontSize: 'var(--text-btn, clamp(0.78rem, 3.2vw, 0.9rem))',
             fontWeight: 600,
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 6,
+            gap: 5,
             whiteSpace: 'nowrap',
             flexShrink: 0
           }}
         >
-          <PhoneCall size={18} strokeWidth={2} />
+          <PhoneCall size={16} strokeWidth={2} />
           <span>Call Now</span>
         </a>
       </div>
@@ -683,32 +686,32 @@ export const HomePage = () => {
           -------------------------------------------------------------------------- */}
       <div style={{
         background: '#FFFFFF',
-        padding: 20,
-        borderRadius: 20,
+        padding: 'clamp(14px, 3.8vw, 18px)',
+        borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
         border: '1px solid #E3E7F2',
         boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
       }}>
-        <div style={{ marginBottom: 16 }}>
+        <div style={{ marginBottom: 'clamp(10px, 3vw, 14px)' }}>
           <div style={{
-            fontSize: '12px',
+            fontSize: 'var(--text-small, clamp(0.65rem, 2.6vw, 0.75rem))',
             fontWeight: 600,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
             color: '#14308F',
-            marginBottom: 4
+            marginBottom: 3
           }}>
             HOW IT WORKS
           </div>
-          <h3 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
+          <h3 style={{ fontSize: 'var(--text-title, clamp(1.1rem, 4.5vw, 1.35rem))', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
             3 Simple Steps
           </h3>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(10px, 3vw, 14px)' }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
             <div style={{
-              width: 36,
-              height: 36,
+              width: 'clamp(30px, 8vw, 36px)',
+              height: 'clamp(30px, 8vw, 36px)',
               borderRadius: '50%',
               background: '#E8ECF8',
               color: '#14308F',
@@ -716,25 +719,25 @@ export const HomePage = () => {
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 600,
-              fontSize: '14px',
+              fontSize: 'clamp(12px, 3vw, 14px)',
               flexShrink: 0
             }}>
               1
             </div>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#0A0A0F', marginBottom: 2 }}>
+              <div style={{ fontSize: 'var(--text-card-title, clamp(0.85rem, 3.6vw, 1rem))', fontWeight: 600, color: '#0A0A0F', marginBottom: 2 }}>
                 Book Your 3-Hour Slot
               </div>
-              <div style={{ fontSize: '14px', color: '#5B6478', lineHeight: 1.5 }}>
+              <div style={{ fontSize: 'var(--text-body, clamp(0.72rem, 3vw, 0.85rem))', color: '#5B6478', lineHeight: 1.45 }}>
                 Choose your appliance, brand, and preferred morning or afternoon window. Zero upfront payment required.
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
             <div style={{
-              width: 36,
-              height: 36,
+              width: 'clamp(30px, 8vw, 36px)',
+              height: 'clamp(30px, 8vw, 36px)',
               borderRadius: '50%',
               background: '#E8ECF8',
               color: '#14308F',
@@ -742,25 +745,25 @@ export const HomePage = () => {
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 600,
-              fontSize: '14px',
+              fontSize: 'clamp(12px, 3vw, 14px)',
               flexShrink: 0
             }}>
               2
             </div>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#0A0A0F', marginBottom: 2 }}>
+              <div style={{ fontSize: 'var(--text-card-title, clamp(0.85rem, 3.6vw, 1rem))', fontWeight: 600, color: '#0A0A0F', marginBottom: 2 }}>
                 Master Diagnostic & Upfront Quote
               </div>
-              <div style={{ fontSize: '14px', color: '#5B6478', lineHeight: 1.5 }}>
+              <div style={{ fontSize: 'var(--text-body, clamp(0.72rem, 3vw, 0.85rem))', color: '#5B6478', lineHeight: 1.45 }}>
                 Our technician inspects your machine with digital telemetry and submits an itemized quote. The $79 fee is credited 100% to repair!
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
             <div style={{
-              width: 36,
-              height: 36,
+              width: 'clamp(30px, 8vw, 36px)',
+              height: 'clamp(30px, 8vw, 36px)',
               borderRadius: '50%',
               background: '#E8ECF8',
               color: '#14308F',
@@ -768,16 +771,16 @@ export const HomePage = () => {
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 600,
-              fontSize: '14px',
+              fontSize: 'clamp(12px, 3vw, 14px)',
               flexShrink: 0
             }}>
               3
             </div>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#0A0A0F', marginBottom: 2 }}>
+              <div style={{ fontSize: 'var(--text-card-title, clamp(0.85rem, 3.6vw, 1rem))', fontWeight: 600, color: '#0A0A0F', marginBottom: 2 }}>
                 OEM Repair & 90-Day Guarantee
               </div>
-              <div style={{ fontSize: '14px', color: '#5B6478', lineHeight: 1.5 }}>
+              <div style={{ fontSize: 'var(--text-body, clamp(0.72rem, 3vw, 0.85rem))', color: '#5B6478', lineHeight: 1.45 }}>
                 Parts are installed from our fully stocked vans. Completed jobs receive a certified 90-day parts & labor warranty.
               </div>
             </div>

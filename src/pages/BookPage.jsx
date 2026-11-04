@@ -497,7 +497,7 @@ export const BookPage = () => {
         {step === 1 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             {/* 2-Column Grid of 8 Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 'var(--card-gap, clamp(8px, 2.5vw, 14px))' }}>
               {APPLIANCE_OPTIONS.map((item) => {
                 const isSelected = formData.applianceId === item.id;
                 const ItemIcon = item.icon;
@@ -516,9 +516,9 @@ export const BookPage = () => {
                     }}
                     className="tap-effect"
                     style={{
-                      minHeight: 84,
-                      padding: '12px 14px',
-                      borderRadius: 16,
+                      minHeight: 'clamp(72px, 20vw, 84px)',
+                      padding: 'var(--card-pad, clamp(10px, 2.8vw, 12px))',
+                      borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
                       background: isSelected ? '#E8ECF8' : '#FFFFFF',
                       border: isSelected ? '2px solid #0B1F5C' : '1px solid #E3E7F2',
                       boxShadow: '0 4px 12px rgba(10,20,60,0.04)',
@@ -529,7 +529,8 @@ export const BookPage = () => {
                       cursor: 'pointer',
                       position: 'relative',
                       textAlign: 'left',
-                      boxSizing: 'border-box'
+                      boxSizing: 'border-box',
+                      minWidth: 0
                     }}
                   >
                     {isSelected && (
@@ -1421,16 +1422,19 @@ export const BookPage = () => {
       <div style={{
         position: 'fixed',
         bottom: 0,
-        left: 0,
-        right: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100%',
+        maxWidth: 'var(--app-max-width, 480px)',
         background: '#FFFFFF',
         borderTop: '1px solid #E3E7F2',
-        padding: '12px 16px calc(12px + env(safe-area-inset-bottom, 0px)) 16px',
+        padding: 'clamp(8px, 2.5vw, 12px) var(--page-pad-x) calc(clamp(8px, 2.5vw, 12px) + env(safe-area-inset-bottom, 0px)) var(--page-pad-x)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         zIndex: 50,
-        boxShadow: '0 -4px 16px rgba(10,20,60,0.08)'
+        boxShadow: '0 -4px 16px rgba(10,20,60,0.08)',
+        boxSizing: 'border-box'
       }}>
         {/* Left: Diagnostic fee */}
         <div>
