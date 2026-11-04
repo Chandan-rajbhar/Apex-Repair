@@ -184,24 +184,10 @@ export const ServicesPage = () => {
         {filteredServices.map((app) => (
           <div
             key={app.id}
-            className="card-white card-gloss tap-effect mouse-glow-card"
-            style={{
-              borderRadius: 22,
-              padding: 12,
-              display: 'flex',
-              gap: 12,
-              boxShadow: 'var(--shadow-xs)'
-            }}
+            className="card-white card-gloss tap-effect mouse-glow-card service-list-card"
           >
             {/* Left Image with Badge Overlay */}
-            <div style={{
-              width: 110,
-              height: 126,
-              borderRadius: 16,
-              overflow: 'hidden',
-              position: 'relative',
-              flexShrink: 0
-            }}>
+            <div className="service-card-img-wrap">
               <img
                 src={app.image}
                 alt={app.name}
@@ -224,7 +210,7 @@ export const ServicesPage = () => {
             </div>
 
             {/* Right Info Col */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span className="badge badge-mint" style={{ fontSize: '0.62rem', padding: '2px 8px' }}>
                   {app.tag}
@@ -257,32 +243,36 @@ export const ServicesPage = () => {
               {/* Duration and Warranty info */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: 8 }}>
                 <Clock size={12} color="var(--orange-600)" />
-                <span>{app.estDuration} • {app.warranty}</span>
+                <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{app.estDuration} • {app.warranty}</span>
               </div>
 
               {/* Bottom Row: Price + Details + Book Now */}
-              <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
-                <div>
-                  <span style={{ fontSize: '0.94rem', fontWeight: 800, color: 'var(--navy-900)' }}>
+              <div style={{
+                marginTop: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 6
+              }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, flexShrink: 0 }}>
+                  <span style={{ fontSize: '0.94rem', fontWeight: 800, color: 'var(--navy-900)', lineHeight: 1 }}>
                     ${app.diagnosticFee}
                   </span>
-                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginLeft: 3 }}>
+                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', lineHeight: 1 }}>
                     Diag
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', gap: 6 }}>
+                <div className="service-card-actions">
                   <button
                     onClick={() => setSelectedServiceForDetail(app)}
-                    className="btn btn-outline btn-xs tap-effect"
-                    style={{ padding: '6px 10px', fontSize: '0.74rem' }}
+                    className="btn btn-outline btn-xs tap-effect service-btn-details"
                   >
                     Details
                   </button>
                   <button
                     onClick={() => handleBook(app)}
-                    className="btn btn-primary btn-xs tap-effect shine-sweep"
-                    style={{ padding: '6px 12px', fontSize: '0.74rem' }}
+                    className="btn btn-primary btn-xs tap-effect shine-sweep service-btn-book"
                   >
                     Book Now &rarr;
                   </button>

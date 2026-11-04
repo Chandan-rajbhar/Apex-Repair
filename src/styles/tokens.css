@@ -73,8 +73,8 @@
   --grad-skeleton: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(230,237,248,0.7) 50%, rgba(255,255,255,0) 100%);
 
   /* Typography */
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
   /* Elevation & Shadows */
   --shadow-xs: 0 1px 3px rgba(22, 38, 74, 0.05);

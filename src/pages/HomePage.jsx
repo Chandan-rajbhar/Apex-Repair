@@ -182,10 +182,10 @@ export const HomePage = () => {
           {/* 1. Headline (2 lines max, accent word #A9BCF5) */}
           <h2
             style={{
-              fontSize: 'clamp(17px, 4.6vw, 19px)',
-              fontWeight: 600,
+              fontSize: 'clamp(20px, 5.5vw, 24px)',
+              fontWeight: 700,
               color: '#FFFFFF',
-              lineHeight: 1.18,
+              lineHeight: 1.2,
               margin: '0 0 6px 0',
               padding: 0,
               letterSpacing: '-0.01em'
@@ -430,7 +430,6 @@ export const HomePage = () => {
                 </div>
 
                 <div style={{
-                  fontFamily: 'var(--font-serif)',
                   fontSize: '0.82rem',
                   fontWeight: 700,
                   color: 'var(--navy-900)',

@@ -272,6 +272,7 @@
   border: none;
   outline: none;
   user-select: none;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -332,6 +333,7 @@
   padding: 5px 10px;
   font-size: 0.74rem;
   border-radius: var(--radius-pill);
+  white-space: nowrap;
 }
 
 .btn-block {

@@ -65,62 +65,6 @@ export const MorePage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 90 }}>
       {/* --------------------------------------------------------------------------
-          Top User Profile Summary Card
-          -------------------------------------------------------------------------- */}
-      <div
-        onClick={() => {
-          if (isAuthenticated) {
-            navigate('/portal');
-          } else {
-            setAuthModalOpen(true);
-          }
-        }}
-        className="tap-effect shine-sweep"
-        style={{
-          borderRadius: 22,
-          background: 'var(--grad-primary)',
-          color: '#FFFFFF',
-          padding: '14px 18px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          boxShadow: 'var(--shadow-md)',
-          cursor: 'pointer'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {/* Avatar circle with initials */}
-          <div style={{
-            width: 46,
-            height: 46,
-            borderRadius: '50%',
-            background: '#FFFFFF',
-            color: 'var(--navy-800)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.05rem',
-            fontWeight: 800,
-            boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
-            border: '2px solid rgba(255,255,255,0.6)'
-          }}>
-            {user?.initials || 'AP'}
-          </div>
-
-          <div>
-            <div style={{ fontSize: '1rem', fontWeight: 800, letterSpacing: '0.01em' }}>
-              {user ? user.name.toUpperCase() : 'GUEST CLIENT'}
-            </div>
-            <div style={{ fontSize: '0.72rem', color: 'rgba(255, 255, 255, 0.88)', marginTop: 1 }}>
-              {user ? `Client ${user.clientId || 'APEX-2409'} • Springfield Care Zone` : 'Sign in to sync your repair history'}
-            </div>
-          </div>
-        </div>
-
-        <ChevronRight size={20} color="#FFFFFF" />
-      </div>
-
-      {/* --------------------------------------------------------------------------
           4 Quick-Action Tiles
           -------------------------------------------------------------------------- */}
       <div className="quick-tiles-grid quick-tiles-square">
@@ -153,84 +97,14 @@ export const MorePage = () => {
         </div>
       </div>
 
-      {/* --------------------------------------------------------------------------
-          Big Feature Banner: AI Diagnostic Triage
-          -------------------------------------------------------------------------- */}
-      <div
-        className="card-gloss shine-sweep tap-effect"
-        style={{
-          borderRadius: 26,
-          background: 'linear-gradient(135deg, #0A1C30 0%, #0F2A44 50%, #17405F 100%)',
-          color: '#FFFFFF',
-          padding: '22px 18px',
-          boxShadow: 'var(--shadow-lg)',
-          position: 'relative',
-          overflow: 'hidden'
-        }}
-        onClick={openChat}
-      >
-        <div style={{
-          position: 'absolute',
-          top: -20,
-          right: -20,
-          width: 140,
-          height: 140,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(34,63,107,0.25) 0%, transparent 70%)',
-          pointerEvents: 'none'
-        }} />
-
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
-          <span className="badge" style={{
-            background: 'rgba(255,255,255,0.12)',
-            color: 'var(--amber-400)',
-            border: '1px solid rgba(255,255,255,0.2)'
-          }}>
-            <Sparkles size={12} /> AI APPLIANCE DIAGNOSTICS
-          </span>
-        </div>
-
-        <h3 style={{
-          fontSize: '1.25rem',
-          lineHeight: 1.25,
-          color: '#FFFFFF',
-          marginBottom: 8
-        }}>
-          AI Diagnostic Scanner for Instant Appliance Breakdown & Cost Estimate
-        </h3>
-
-        <p style={{
-          fontSize: '0.76rem',
-          color: '#CBD5E1',
-          lineHeight: 1.45,
-          marginBottom: 16
-        }}>
-          Instant AI analysis, expert master technician guidance, and upfront pricing before any technician arrives.
-        </p>
-
-        <button
-          className="btn btn-primary btn-sm tap-effect shine-sweep"
-          style={{
-            background: 'var(--grad-header)',
-            color: '#FFFFFF',
-            borderRadius: 9999,
-            padding: '9px 18px',
-            fontSize: '0.8rem',
-            fontWeight: 800
-          }}
-        >
-          <Sparkles size={14} /> Start Free Diagnostic
-        </button>
-      </div>
-
       {/* ==========================================================================
           SECTION 1: MY REPAIRS
           ========================================================================== */}
       <div>
         <div style={{
-          fontSize: '12px',
+          fontSize: '13px',
           textTransform: 'uppercase',
-          letterSpacing: '0.5px',
+          letterSpacing: '0.08em',
           color: '#7A8299',
           fontWeight: 600,
           margin: '20px 0 8px 0',
@@ -274,7 +148,7 @@ export const MorePage = () => {
                 <Truck size={20} strokeWidth={2} color="#14308F" />
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F', lineHeight: 1.2 }}>
+                <div style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                   Active repair #{activeBooking?.id || 'AR-1024'}
                 </div>
                 <div style={{ fontSize: '12px', fontWeight: 600, color: '#14308F', marginTop: 2 }}>
@@ -312,7 +186,7 @@ export const MorePage = () => {
               }}>
                 <Receipt size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Repair invoices and receipts
               </span>
             </div>
@@ -346,7 +220,7 @@ export const MorePage = () => {
               }}>
                 <ShieldCheck size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 90-day warranty
               </span>
             </div>
@@ -379,12 +253,12 @@ export const MorePage = () => {
               }}>
                 <Wrench size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 My appliances
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontSize: '14px', color: '#7A8299' }}>3</span>
+              <span style={{ fontSize: '15px', fontWeight: 500, color: '#8A92A6' }}>3</span>
               <ChevronRight size={16} color="#7A8299" />
             </div>
           </div>
@@ -396,9 +270,9 @@ export const MorePage = () => {
           ========================================================================== */}
       <div>
         <div style={{
-          fontSize: '12px',
+          fontSize: '13px',
           textTransform: 'uppercase',
-          letterSpacing: '0.5px',
+          letterSpacing: '0.08em',
           color: '#7A8299',
           fontWeight: 600,
           margin: '20px 0 8px 0',
@@ -442,7 +316,7 @@ export const MorePage = () => {
                 <Phone size={20} strokeWidth={2} color="#C62828" />
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F', lineHeight: 1.2 }}>
+                <div style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                   Emergency dispatch
                 </div>
                 <div style={{ fontSize: '12px', color: '#7A8299', marginTop: 2 }}>
@@ -480,7 +354,7 @@ export const MorePage = () => {
               }}>
                 <MessageSquare size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Live chat
               </span>
             </div>
@@ -514,7 +388,7 @@ export const MorePage = () => {
               }}>
                 <HelpCircle size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Frequently asked questions
               </span>
             </div>
@@ -548,7 +422,7 @@ export const MorePage = () => {
               }}>
                 <AlertTriangle size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Report a problem
               </span>
             </div>
@@ -582,7 +456,7 @@ export const MorePage = () => {
               }}>
                 <DollarSign size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Pricing and diagnostic fees
               </span>
             </div>
@@ -615,7 +489,7 @@ export const MorePage = () => {
               }}>
                 <Headphones size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Contact support
               </span>
             </div>
@@ -629,9 +503,9 @@ export const MorePage = () => {
           ========================================================================== */}
       <div>
         <div style={{
-          fontSize: '12px',
+          fontSize: '13px',
           textTransform: 'uppercase',
-          letterSpacing: '0.5px',
+          letterSpacing: '0.08em',
           color: '#7A8299',
           fontWeight: 600,
           margin: '20px 0 8px 0',
@@ -674,7 +548,7 @@ export const MorePage = () => {
               }}>
                 <Bell size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Notifications
               </span>
             </div>
@@ -708,7 +582,7 @@ export const MorePage = () => {
               }}>
                 <MapPin size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 Saved addresses
               </span>
             </div>
@@ -741,7 +615,7 @@ export const MorePage = () => {
               }}>
                 <Settings size={20} strokeWidth={2} color="#14308F" />
               </div>
-              <span style={{ fontSize: '15px', fontWeight: 500, color: '#0A0A0F' }}>
+              <span style={{ fontSize: '16px', fontWeight: 500, color: '#1B2236', lineHeight: 1.3 }}>
                 App settings
               </span>
             </div>

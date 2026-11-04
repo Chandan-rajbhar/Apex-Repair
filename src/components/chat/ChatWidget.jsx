@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MessageCircle, Send, Paperclip, X, Image as ImageIcon, Star, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useChat } from '../../context/ChatContext';
 import { useAuth } from '../../context/AuthContext';
@@ -25,8 +25,6 @@ export const ChatWidget = () => {
   const { setPrefillData, getBookings, bookings } = useBooking();
   const { showToast } = useToast();
   const navigate = useNavigate();
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
 
   const [inputVal, setInputVal] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -131,27 +129,6 @@ export const ChatWidget = () => {
 
   return (
     <>
-      {/* Floating Trigger Button (Above Bottom Nav - Home Page Only) */}
-      {!isOpen && isHomePage && (
-        <button
-          onClick={openChat}
-          className="floating-chat-trigger tap-effect glow-pulse-primary shine-sweep"
-          aria-label="Open Live Repair Chat"
-        >
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <MessageCircle size={20} />
-            {unreadCount > 0 && (
-              <span className="chat-trigger-unread">
-                {unreadCount}
-              </span>
-            )}
-          </div>
-          <span style={{ fontSize: '0.84rem', fontWeight: 800, letterSpacing: '0.01em' }}>
-            Live Chat
-          </span>
-        </button>
-      )}
-
       {/* Chat Bottom Sheet / Panel */}
       {isOpen && (
         <div className="sheet-backdrop" onClick={closeChat}>
