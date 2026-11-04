@@ -63,11 +63,12 @@ body, button, input, textarea, select {
 /* Main Content Area */
 .app-main-content {
   flex: 1;
-  padding: 16px 18px 96px 18px; /* Safe padding for bottom nav */
+  padding: 16px 16px 100px 16px; /* Rule 1: 16px left/right, 100px bottom */
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 32px; /* Rule 1: 32px gap between sections */
+  box-sizing: border-box;
 }
 
 /* When a sticky bar exists (e.g. Booking confirmation), add extra bottom space */

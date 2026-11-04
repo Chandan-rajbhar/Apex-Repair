@@ -157,21 +157,21 @@ export const BookPage = () => {
   // --------------------------------------------------------------------------
   if (step === 3 && confirmedBooking) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18, paddingTop: 10, paddingBottom: 30 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
         {/* Success Header Card */}
         <div
-          className="card-white card-gloss"
           style={{
-            borderRadius: 28,
-            padding: '28px 20px',
+            background: '#FFFFFF',
+            borderRadius: 20,
+            padding: 24,
             textAlign: 'center',
-            boxShadow: 'var(--shadow-md)',
-            border: '1.5px solid rgba(34, 63, 107, 0.2)'
+            boxShadow: '0 4px 12px rgba(10,20,60,0.08)',
+            border: '1px solid #E3E7F2'
           }}
         >
           <div style={{
-            width: 72,
-            height: 72,
+            width: 64,
+            height: 64,
             borderRadius: '50%',
             background: 'var(--grad-cta)',
             color: '#FFFFFF',
@@ -181,18 +181,25 @@ export const BookPage = () => {
             margin: '0 auto 16px auto',
             boxShadow: 'var(--glow-orange)'
           }}>
-            <CheckCircle2 size={44} />
+            <CheckCircle2 size={36} strokeWidth={2} />
           </div>
 
-          <span className="badge badge-warm" style={{ marginBottom: 6 }}>
+          <div style={{
+            fontSize: '12px',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: '#14308F',
+            marginBottom: 6
+          }}>
             BOOKING CONFIRMED & DISPATCHED
-          </span>
+          </div>
 
-          <h2 style={{ fontSize: '1.6rem', color: 'var(--navy-900)', margin: '4px 0 8px 0' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: '0 0 8px 0', lineHeight: 1.25 }}>
             Appointment Locked In!
           </h2>
 
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.45, maxWidth: 320, margin: '0 auto 18px auto' }}>
+          <p style={{ fontSize: '14px', color: '#5B6478', lineHeight: 1.5, maxWidth: 320, margin: '0 auto 16px auto' }}>
             Your service request has been transmitted to regional dispatch. Master Technician Marcus Vance has been reserved.
           </p>
 
@@ -204,66 +211,96 @@ export const BookPage = () => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              padding: '10px 18px',
+              height: 44,
+              padding: '0 20px',
               borderRadius: 9999,
-              background: 'var(--navy-50)',
-              border: '1px solid var(--border)',
+              background: '#F1F5FB',
+              border: '1px solid #E3E7F2',
               cursor: 'pointer',
               marginBottom: 16
             }}
           >
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Booking ID:</span>
-            <strong style={{ fontSize: '1.05rem', color: 'var(--orange-600)', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '13px', color: '#5B6478' }}>Booking ID:</span>
+            <strong style={{ fontSize: '15px', color: '#14308F', letterSpacing: '0.04em' }}>
               {confirmedBooking.id}
             </strong>
-            <Copy size={16} color="var(--orange-600)" />
+            <Copy size={16} strokeWidth={2} color="#14308F" />
           </div>
 
           {/* Details Summary Table */}
           <div style={{
-            background: 'var(--navy-50)',
-            borderRadius: 18,
-            padding: '14px 16px',
+            background: '#F8FAFC',
+            borderRadius: 16,
+            padding: 16,
             textAlign: 'left',
             display: 'flex',
             flexDirection: 'column',
-            gap: 8,
-            fontSize: '0.78rem',
-            color: 'var(--navy-900)'
+            gap: 12,
+            fontSize: '14px',
+            color: '#0A0A0F'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Appliance:</span>
-              <strong>{confirmedBooking.brand} {confirmedBooking.applianceName}</strong>
+              <span style={{ color: '#5B6478' }}>Appliance:</span>
+              <strong style={{ fontWeight: 600 }}>{confirmedBooking.brand} {confirmedBooking.applianceName}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Slot Window:</span>
-              <strong>{confirmedBooking.date} ({confirmedBooking.timeSlot})</strong>
+              <span style={{ color: '#5B6478' }}>Slot Window:</span>
+              <strong style={{ fontWeight: 600 }}>{confirmedBooking.date} ({confirmedBooking.timeSlot})</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Service Address:</span>
-              <strong style={{ textAlign: 'right', maxWidth: '60%' }}>{confirmedBooking.address}</strong>
+              <span style={{ color: '#5B6478' }}>Service Address:</span>
+              <strong style={{ textAlign: 'right', maxWidth: '60%', fontWeight: 600 }}>{confirmedBooking.address}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Diagnostic Fee:</span>
-              <strong style={{ color: 'var(--orange-600)' }}>$79 (Waived with repair)</strong>
+              <span style={{ color: '#5B6478' }}>Diagnostic Fee:</span>
+              <strong style={{ color: '#14308F', fontWeight: 600 }}>$79 (Waived with repair)</strong>
             </div>
           </div>
         </div>
 
         {/* Primary Action Buttons */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <button
             onClick={() => navigate('/track')}
-            className="btn btn-primary btn-block tap-effect shine-sweep"
-            style={{ height: 50, fontSize: '0.94rem' }}
+            className="tap-effect"
+            style={{
+              height: 44,
+              padding: '0 20px',
+              borderRadius: 9999,
+              background: '#0B1F5C',
+              color: '#FFFFFF',
+              fontSize: '14px',
+              fontWeight: 600,
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              boxShadow: '0 4px 14px rgba(11,31,92,0.3)'
+            }}
           >
-            Track Repair Live (GPS Stepper) &rarr;
+            <span>Track Repair Live</span>
+            <ArrowLeft size={16} strokeWidth={2} style={{ transform: 'rotate(180deg)' }} />
           </button>
 
           <button
             onClick={() => navigate('/')}
-            className="btn btn-outline btn-block tap-effect"
-            style={{ height: 46 }}
+            className="tap-effect"
+            style={{
+              height: 44,
+              padding: '0 20px',
+              borderRadius: 9999,
+              background: '#FFFFFF',
+              color: '#0A0A0F',
+              fontSize: '14px',
+              fontWeight: 600,
+              border: '1px solid #E3E7F2',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
             Return to Home
           </button>
@@ -276,25 +313,44 @@ export const BookPage = () => {
   // STEP 1 & 2 FORM
   // --------------------------------------------------------------------------
   return (
-    <div className="has-sticky-bar" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div className="has-sticky-bar" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
       {/* Top Stepper Indicator */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           {step === 2 && (
             <button
               onClick={() => setStep(1)}
-              className="icon-btn-header"
-              style={{ width: 34, height: 34 }}
+              className="tap-effect"
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: 12,
+                background: '#FFFFFF',
+                border: '1px solid #E3E7F2',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: '#0A0A0F',
+                padding: 0
+              }}
               aria-label="Back to Step 1"
             >
-              <ArrowLeft size={16} />
+              <ArrowLeft size={20} strokeWidth={2} />
             </button>
           )}
           <div>
-            <span className="badge badge-mint" style={{ fontSize: '0.62rem' }}>
+            <div style={{
+              fontSize: '12px',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              color: '#14308F',
+              marginBottom: 4
+            }}>
               STEP {step} OF 2
-            </span>
-            <h2 style={{ fontSize: '1.25rem', color: '#0F2A44', marginTop: 2 }}>
+            </div>
+            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0A0A0F', margin: 0, lineHeight: 1.25 }}>
               {step === 1 ? 'Appliance & Preferred Time' : 'Location & Contact Details'}
             </h2>
           </div>
@@ -305,13 +361,19 @@ export const BookPage = () => {
         /* ====================================================================
            STEP 1: Appliance, Brand, Issues, Date Strip, Slot
            ==================================================================== */
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
           {/* 1. Appliance Picker Grid */}
-          <div className="card-white" style={{ padding: 16, borderRadius: 22 }}>
-            <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 800, color: '#0F2A44', marginBottom: 10 }}>
+          <div style={{
+            background: '#FFFFFF',
+            padding: 16,
+            borderRadius: 20,
+            border: '1px solid #E3E7F2',
+            boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
+          }}>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#0A0A0F', marginBottom: 12 }}>
               1. Select Appliance
             </label>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 14 }}>
               {APPLIANCE_CATEGORIES.map((app) => {
                 const isSelected = selectedAppliance === app.id;
                 return (
@@ -324,30 +386,39 @@ export const BookPage = () => {
                     }}
                     className="tap-effect"
                     style={{
-                      padding: '10px 12px',
-                      borderRadius: 14,
-                      background: isSelected ? 'var(--orange-50)' : '#FFFFFF',
-                      border: isSelected ? '2px solid var(--orange-600)' : '1px solid var(--border)',
+                      height: 48,
+                      padding: '0 12px',
+                      borderRadius: 12,
+                      background: isSelected ? '#E8ECF8' : '#FFFFFF',
+                      border: isSelected ? '1.5px solid #14308F' : '1px solid #E3E7F2',
                       display: 'flex',
                       alignItems: 'center',
                       gap: 8,
-                      textAlign: 'left'
+                      textAlign: 'left',
+                      cursor: 'pointer'
                     }}
                   >
                     <div style={{
-                      width: 28,
-                      height: 28,
+                      width: 32,
+                      height: 32,
                       borderRadius: 8,
-                      background: isSelected ? 'var(--orange-600)' : 'var(--navy-50)',
-                      color: isSelected ? '#FFFFFF' : 'var(--orange-600)',
+                      background: isSelected ? '#14308F' : '#F1F5FB',
+                      color: isSelected ? '#FFFFFF' : '#14308F',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0
                     }}>
-                      <Wrench size={15} />
+                      <Wrench size={16} strokeWidth={2} />
                     </div>
-                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--navy-900)' }}>
+                    <span style={{
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      color: '#0A0A0F',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis'
+                    }}>
                       {app.name}
                     </span>
                   </button>

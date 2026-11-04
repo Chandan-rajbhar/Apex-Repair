@@ -57,13 +57,13 @@ export const Header = () => {
       {/* Brand Logo Left */}
       <Link to="/" className="header-brand" aria-label="Apex Appliance Repair Home">
         <div className="brand-icon-wrap shine-sweep">
-          <Wrench size={20} strokeWidth={2.4} />
+          <Wrench size={20} strokeWidth={2} />
         </div>
         <div className="brand-text-col">
-          <div className="brand-title">
+          <div className="brand-title" style={{ fontSize: '15px', fontWeight: 700 }}>
             APEX <span>REPAIR</span>
           </div>
-          <div className="brand-tagline">
+          <div className="brand-tagline" style={{ fontSize: '12px', fontWeight: 600 }}>
             Precision Care
           </div>
         </div>
@@ -78,7 +78,7 @@ export const Header = () => {
           aria-label="View notifications"
           title="Notifications"
         >
-          <Bell size={19} />
+          <Bell size={20} strokeWidth={2} />
           <span className="header-notification-dot" />
         </button>
 

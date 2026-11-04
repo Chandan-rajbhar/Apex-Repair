@@ -26,6 +26,7 @@ export function App() {
                   <Route path="/book" element={<BookPage />} />
                   <Route path="/track" element={<TrackPage />} />
                   <Route path="/more" element={<MorePage />} />
+                  <Route path="/profile" element={<MorePage />} />
                   <Route path="/portal" element={<CustomerPortalPage />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Route>

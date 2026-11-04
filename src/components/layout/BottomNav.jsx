@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Home, Settings, Calendar, Truck, Menu } from 'lucide-react';
+import { Home, Settings, Calendar, Truck, User } from 'lucide-react';
 import { useBooking } from '../../context/BookingContext';
 
 export const BottomNav = () => {
@@ -47,7 +47,7 @@ export const BottomNav = () => {
         aria-label="Book Diagnostic Appointment"
       >
         <div className="center-book-btn glow-pulse-primary shine-sweep tap-effect">
-          <Calendar size={25} strokeWidth={2.4} />
+          <Calendar size={22} strokeWidth={2} />
         </div>
         <span className="center-book-label">Book</span>
       </NavLink>
@@ -83,21 +83,22 @@ export const BottomNav = () => {
         )}
       </NavLink>
 
-      {/* 5. More */}
+      {/* 5. Profile */}
       <NavLink
         to="/more"
-        className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-        aria-label="More Options & Account"
+        className={({ isActive }) => `nav-item ${isActive || location.pathname === '/profile' ? 'active' : ''}`}
+        aria-label="User Profile & Settings"
       >
         {({ isActive }) => (
           <>
-            <Menu size={24} strokeWidth={2} />
-            <span>More</span>
-            {isActive && <div className="nav-active-dot" />}
+            <User size={24} strokeWidth={2} />
+            <span>Profile</span>
+            {(isActive || location.pathname === '/profile') && <div className="nav-active-dot" />}
           </>
         )}
       </NavLink>
     </nav>
   );
 };
+
 
