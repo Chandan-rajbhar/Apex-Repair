@@ -32,13 +32,14 @@ import {
   Sparkles,
   ChevronDown,
   Shield,
-  FileText
+  FileText,
+  Wrench
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useBooking } from '../context/BookingContext';
 import { useChat } from '../context/ChatContext';
 import { useToast } from '../context/ToastContext';
-import { COMPANY_INFO } from '../data/appliancesData';
+import { COMPANY_INFO, getServiceImage } from '../data/appliancesData';
 
 export const MorePage = () => {
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ export const MorePage = () => {
               category: 'Air Conditioners',
               price: '$49',
               tag: 'Same-day',
-              image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80',
+              image: '/images/services/ac.jpg',
               desc: 'Split AC diagnostics, refrigerant check, coil deep clean, and digital PCB testing.'
             },
             {
@@ -108,7 +109,7 @@ export const MorePage = () => {
               category: 'Refrigerators',
               price: '$45',
               tag: 'Same-day',
-              image: 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&q=80',
+              image: '/images/services/refrigerator.jpg',
               desc: 'Digital inverter diagnostics, sealed cooling system check, defrost sensor & fan motor service.'
             }
           ];
@@ -122,7 +123,7 @@ export const MorePage = () => {
         category: 'Air Conditioners',
         price: '$49',
         tag: 'Same-day',
-        image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80',
+        image: '/images/services/ac.jpg',
         desc: 'Split AC diagnostics, refrigerant check, coil deep clean, and digital PCB testing.'
       },
       {
@@ -131,7 +132,7 @@ export const MorePage = () => {
         category: 'Refrigerators',
         price: '$45',
         tag: 'Same-day',
-        image: 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&q=80',
+        image: '/images/services/refrigerator.jpg',
         desc: 'Digital inverter diagnostics, sealed cooling system check, defrost sensor & fan motor service.'
       },
       {
@@ -140,7 +141,7 @@ export const MorePage = () => {
         category: 'Washing Machines',
         price: '$39',
         tag: 'Same-day',
-        image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80',
+        image: '/images/services/washing-machine.jpg',
         desc: 'Drum balancing, pump replacement, door seal gasket fix, and electronic error clearing.'
       }
     ];
@@ -499,12 +500,38 @@ export const MorePage = () => {
                 }}
               >
                 {/* Image and Code/Price Row */}
-                <div style={{ position: 'relative', height: 115, width: '100%', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', height: 115, width: '100%', overflow: 'hidden', background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)' }}>
+                  {/* Fallback background icon */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 0,
+                    pointerEvents: 'none'
+                  }}>
+                    <Wrench size={26} color="#FFFFFF" />
+                  </div>
+
                   <img
-                    src={item.image}
-                    alt={item.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    src={getServiceImage(item).src}
+                    alt={getServiceImage(item).alt}
+                    loading="lazy"
+                    style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
+
+                  {/* Light navy gradient overlay on bottom 30% */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 1,
+                    background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.25) 100%)',
+                    pointerEvents: 'none'
+                  }} />
                   <div style={{
                     position: 'absolute',
                     top: 10,

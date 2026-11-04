@@ -45,7 +45,7 @@ const FEATURED_SERVICES = [
     name: 'Washing machine',
     price: '39',
     tag: 'Same-day',
-    image: '/images/services/washer.jpg',
+    image: '/images/services/washing-machine.jpg',
     alt: 'Technician repairing a washing machine',
     appliance: 'Washing Machines',
     categoryKey: 'washers',
@@ -472,16 +472,45 @@ export const HomePage = () => {
                 className="featured-repair-card tap-effect"
               >
                 {/* Photo on top: aspect-ratio 4/3, full card width, object-fit cover */}
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden' }}>
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '4 / 3',
+                  overflow: 'hidden',
+                  background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
+                }}>
+                  {/* Fallback wrench icon */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 0,
+                    pointerEvents: 'none'
+                  }}>
+                    <Wrench size={24} color="#FFFFFF" />
+                  </div>
+
                   <img
                     src={item.image}
                     alt={item.alt || item.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{
+                      position: 'relative',
+                      zIndex: 1,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 30%',
+                      display: 'block'
+                    }}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
                   {/* Light navy gradient overlay on bottom 30% */}
                   <div style={{
                     position: 'absolute',
                     inset: 0,
+                    zIndex: 1,
                     background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.25) 100%)',
                     pointerEvents: 'none'
                   }} />

@@ -12,9 +12,10 @@ import {
   ShieldCheck,
   CheckCircle2,
   X,
-  ArrowRight
+  ArrowRight,
+  Wrench
 } from 'lucide-react';
-import { APPLIANCE_CATEGORIES } from '../data/appliancesData';
+import { APPLIANCE_CATEGORIES, getServiceImage } from '../data/appliancesData';
 import { useBooking } from '../context/BookingContext';
 import { useToast } from '../context/ToastContext';
 
@@ -155,54 +156,60 @@ export const ServicesPage = () => {
           alignItems: 'center',
           background: '#F1F5F9',
           padding: 4,
-          borderRadius: 'var(--radius)',
+          borderRadius: 12,
           border: '1px solid #E2E8F0',
-          gap: 4
+          gap: 2
         }}>
-          <button
-            onClick={() => setViewMode('grid')}
-            className="tap-effect"
-            style={{
-              width: 'clamp(32px, 8.5vw, 36px)',
-              height: 'clamp(32px, 8.5vw, 36px)',
-              borderRadius: 'var(--space-2)',
-              border: 'none',
-              background: viewMode === 'grid' ? '#FFFFFF' : 'transparent',
-              color: viewMode === 'grid' ? '#0B1F5C' : '#7A8299',
-              boxShadow: viewMode === 'grid' ? '0 1px 3px rgba(11,31,92,0.1)' : 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              padding: 0
-            }}
-            aria-label="Grid view"
-            title="Grid view"
-          >
-            <LayoutGrid size={18} strokeWidth={2} />
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className="tap-effect"
-            style={{
-              width: 'clamp(32px, 8.5vw, 36px)',
-              height: 'clamp(32px, 8.5vw, 36px)',
-              borderRadius: 'var(--space-2)',
-              border: 'none',
-              background: viewMode === 'list' ? '#FFFFFF' : 'transparent',
-              color: viewMode === 'list' ? '#0B1F5C' : '#7A8299',
-              boxShadow: viewMode === 'list' ? '0 1px 3px rgba(11,31,92,0.1)' : 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              padding: 0
-            }}
-            aria-label="List view"
-            title="List view"
-          >
-            <List size={18} strokeWidth={2} />
-          </button>
+          <div style={{ position: 'relative', minWidth: 44, minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button
+              onClick={() => setViewMode('grid')}
+              className="tap-effect"
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 9,
+                border: 'none',
+                background: viewMode === 'grid' ? '#FFFFFF' : 'transparent',
+                color: viewMode === 'grid' ? '#14308F' : '#7A8299',
+                boxShadow: viewMode === 'grid' ? '0 2px 6px rgba(10,20,60,0.08)' : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'all 150ms ease'
+              }}
+              aria-label="Grid view"
+              title="Grid view"
+            >
+              <LayoutGrid size={18} strokeWidth={2} />
+            </button>
+          </div>
+          <div style={{ position: 'relative', minWidth: 44, minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button
+              onClick={() => setViewMode('list')}
+              className="tap-effect"
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 9,
+                border: 'none',
+                background: viewMode === 'list' ? '#FFFFFF' : 'transparent',
+                color: viewMode === 'list' ? '#14308F' : '#7A8299',
+                boxShadow: viewMode === 'list' ? '0 2px 6px rgba(10,20,60,0.08)' : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'all 150ms ease'
+              }}
+              aria-label="List view"
+              title="List view"
+            >
+              <List size={18} strokeWidth={2} />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -360,10 +367,11 @@ export const ServicesPage = () => {
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
           gap: 'var(--card-gap, clamp(8px, 2.5vw, 14px))'
         }}>
-          {filteredServices.map((app) => {
+          {filteredServices.map((app, index) => {
             const code = SERVICE_CODES[app.id] || `AP-${app.id.slice(0, 2).toUpperCase()}`;
             const isSaved = savedServices.includes(code);
             const isCompared = comparedServices.includes(code);
+            const imgData = getServiceImage(app);
 
             return (
               <div
@@ -385,28 +393,59 @@ export const ServicesPage = () => {
                 }}
               >
                 {/* Photo on top: aspect-ratio 4/3 */}
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden' }}>
-                  <img
-                    src={app.image}
-                    alt={app.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                  {/* Subtle navy gradient overlay */}
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '4 / 3',
+                  overflow: 'hidden',
+                  background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
+                }}>
+                  {/* Fallback wrench icon if image error */}
                   <div style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(180deg, transparent 40%, rgba(11, 31, 92, 0.25) 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 0,
+                    pointerEvents: 'none'
+                  }}>
+                    <Wrench size={24} color="#FFFFFF" />
+                  </div>
+
+                  <img
+                    src={imgData.src}
+                    alt={imgData.alt}
+                    loading={index >= 4 ? "lazy" : "eager"}
+                    style={{
+                      position: 'relative',
+                      zIndex: 1,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 30%',
+                      display: 'block'
+                    }}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+
+                  {/* Light navy gradient overlay on bottom 30% */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 1,
+                    background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.25) 100%)',
                     pointerEvents: 'none'
                   }} />
 
                   {/* Icon buttons on photo */}
                   <div style={{
                     position: 'absolute',
-                    top: 'clamp(6px, 1.8vw, 8px)',
-                    right: 'clamp(6px, 1.8vw, 8px)',
+                    top: 6,
+                    right: 6,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 'clamp(4px, 1.2vw, 6px)',
+                    gap: 6,
                     zIndex: 2
                   }}>
                     {/* Compare Button */}
@@ -414,8 +453,8 @@ export const ServicesPage = () => {
                       onClick={(e) => handleToggleCompare(code, app.name, e)}
                       className="tap-effect"
                       style={{
-                        width: 'clamp(28px, 7.5vw, 34px)',
-                        height: 'clamp(28px, 7.5vw, 34px)',
+                        width: 32,
+                        height: 32,
                         borderRadius: '50%',
                         background: isCompared ? '#0284C7' : '#FFFFFF',
                         border: 'none',
@@ -429,16 +468,16 @@ export const ServicesPage = () => {
                       title={isCompared ? 'In comparison' : 'Compare service'}
                       aria-label="Compare"
                     >
-                      <Scale size={15} color={isCompared ? '#FFFFFF' : '#7A8299'} strokeWidth={2} />
+                      <Scale size={14} color={isCompared ? '#FFFFFF' : '#7A8299'} strokeWidth={2} />
                     </button>
 
-                    {/* Heart Save Button */}
+                    {/* Heart Save Button - 32px white circle, 6px from edge */}
                     <button
                       onClick={(e) => handleToggleSave(code, app.name, e)}
                       className="tap-effect"
                       style={{
-                        width: 'clamp(28px, 7.5vw, 34px)',
-                        height: 'clamp(28px, 7.5vw, 34px)',
+                        width: 32,
+                        height: 32,
                         borderRadius: '50%',
                         background: '#FFFFFF',
                         border: 'none',
@@ -453,7 +492,7 @@ export const ServicesPage = () => {
                       aria-label="Save"
                     >
                       <Heart
-                        size={15}
+                        size={14}
                         color={isSaved ? '#E11D48' : '#7A8299'}
                         fill={isSaved ? '#E11D48' : 'none'}
                         strokeWidth={2}
@@ -532,73 +571,189 @@ export const ServicesPage = () => {
         </div>
       ) : (
         /* List View */
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          {filteredServices.map((app) => {
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+          transition: 'opacity 150ms ease-in-out'
+        }}>
+          {filteredServices.map((app, index) => {
             const code = SERVICE_CODES[app.id] || `AP-${app.id.slice(0, 2).toUpperCase()}`;
+            const isSaved = savedServices.includes(code);
+            const imgData = getServiceImage(app);
+
             return (
               <div
                 key={app.id}
-                className="featured-repair-card tap-effect"
+                onClick={() => setSelectedServiceForDetail(app)}
+                className="tap-effect"
                 style={{
-                  borderRadius: 'var(--radius)',
-                  padding: 'var(--space-2)',
                   display: 'flex',
                   flexDirection: 'row',
-                  gap: 'var(--space-2)',
                   alignItems: 'center',
+                  gap: 14,
+                  padding: 12,
+                  minHeight: 112,
+                  borderRadius: 20,
                   background: '#FFFFFF',
                   border: '1px solid #E3E7F2',
-                  boxShadow: '0 4px 12px rgba(10,20,60,0.08)'
+                  boxShadow: '0 4px 12px rgba(10,20,60,0.08)',
+                  cursor: 'pointer',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  textAlign: 'left',
+                  transition: 'background-color 0.15s ease'
                 }}
+                onMouseDown={(e) => { e.currentTarget.style.backgroundColor = '#F3F6FD'; }}
+                onMouseUp={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
+                onTouchStart={(e) => { e.currentTarget.style.backgroundColor = '#F3F6FD'; }}
+                onTouchEnd={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
               >
+                {/* LEFT: image 88px x 88px, border-radius 14px, object-fit: cover, object-position: center 30%, flex-shrink: 0 */}
                 <div style={{
-                  width: 'clamp(72px, 20vw, 84px)',
-                  height: 'clamp(72px, 20vw, 84px)',
-                  borderRadius: 'var(--radius)',
+                  position: 'relative',
+                  width: 88,
+                  height: 88,
+                  borderRadius: 14,
                   overflow: 'hidden',
-                  flexShrink: 0
+                  flexShrink: 0,
+                  background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
                 }}>
+                  {/* Fallback Wrench Icon */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 0,
+                    pointerEvents: 'none'
+                  }}>
+                    <Wrench size={22} color="#FFFFFF" />
+                  </div>
+
                   <img
-                    src={app.image}
-                    alt={app.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    src={imgData.src}
+                    alt={imgData.alt}
+                    loading={index >= 4 ? "lazy" : "eager"}
+                    style={{
+                      position: 'relative',
+                      zIndex: 1,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 30%',
+                      display: 'block'
+                    }}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
+
+                  {/* Light navy gradient overlay on the bottom 30% (transparent to rgba(11,31,92,.2)) */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 1,
+                    background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.2) 100%)',
+                    pointerEvents: 'none'
+                  }} />
+
+                  {/* Heart (save) icon as 32px white circle on the top-right corner of the image, 6px from the edges */}
+                  <button
+                    onClick={(e) => handleToggleSave(code, app.name, e)}
+                    className="tap-effect"
+                    style={{
+                      position: 'absolute',
+                      top: 6,
+                      right: 6,
+                      zIndex: 2,
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      background: '#FFFFFF',
+                      border: 'none',
+                      boxShadow: '0 2px 6px rgba(10, 20, 60, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      padding: 0
+                    }}
+                    title={isSaved ? 'Saved' : 'Save'}
+                    aria-label="Save"
+                  >
+                    <Heart
+                      size={14}
+                      color={isSaved ? '#E11D48' : '#7A8299'}
+                      fill={isSaved ? '#E11D48' : 'none'}
+                      strokeWidth={2}
+                    />
+                  </button>
                 </div>
-                <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
+
+                {/* RIGHT: flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; text-align: left */}
+                <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4, textAlign: 'left' }}>
+                  {/* Row 1: code on the left (12px, weight 600, navy #14308F), "From $79" on the right (13px, weight 600, #0B1F5C). justify-content: space-between */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 'var(--fs-small)', fontWeight: 600, color: '#14308F', fontFamily: 'monospace' }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: '#14308F', fontFamily: 'monospace' }}>
                       {code}
                     </span>
-                    <span style={{ fontSize: 'var(--fs-small)', fontWeight: 600, color: '#0A0A0F' }}>
+                    <span style={{ fontSize: 13, fontWeight: 600, color: '#0B1F5C' }}>
                       From ${app.diagnosticFee}
                     </span>
                   </div>
-                  <div style={{ fontSize: 'var(--fs-card)', fontWeight: 600, color: '#0A0A0F', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+
+                  {/* Row 2: service name, 16px, weight 600, #0B1F5C, single line, text-overflow: ellipsis */}
+                  <div style={{
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: '#0B1F5C',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: 1.25
+                  }}>
                     {app.name}
                   </div>
-                  <div style={{ fontSize: 'var(--fs-small)', color: '#7A8299' }}>
-                    {app.estDuration} • 90-Day Guarantee
+
+                  {/* Row 3: meta text "45-90 mins - 90-day guarantee", 12px, #7A8299, single line, ellipsis */}
+                  <div style={{
+                    fontSize: 12,
+                    color: '#7A8299',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: 1.3
+                  }}>
+                    {app.estDuration} • 90-day guarantee
+                  </div>
+
+                  {/* Row 4: bottom row with space-between: tag on left ("Same-day", 12px, weight 500, navy text on #E8ECF8, 8px radius, padding 3px 8px) and "Details" with arrow on right (13px, weight 600, #14308F) */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 2 }}>
+                    <span style={{
+                      fontSize: 12,
+                      fontWeight: 500,
+                      color: '#14308F',
+                      background: '#E8ECF8',
+                      borderRadius: 8,
+                      padding: '3px 8px',
+                      lineHeight: 1.2
+                    }}>
+                      {app.badge === 'SAME-DAY' ? 'Same-day' : (app.badge || 'Available')}
+                    </span>
+
+                    <span style={{
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: '#14308F',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 3
+                    }}>
+                      Details <ChevronRight size={14} strokeWidth={2.5} />
+                    </span>
                   </div>
                 </div>
-                <button
-                  onClick={() => setSelectedServiceForDetail(app)}
-                  className="tap-effect"
-                  style={{
-                    height: 'clamp(36px, 9vw, 40px)',
-                    padding: '0 clamp(12px, 3.5vw, 16px)',
-                    fontSize: 'var(--fs-small)',
-                    fontWeight: 600,
-                    borderRadius: 9999,
-                    background: '#E8ECF8',
-                    color: '#14308F',
-                    border: 'none',
-                    cursor: 'pointer',
-                    flexShrink: 0,
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  Details
-                </button>
               </div>
             );
           })}
@@ -649,13 +804,48 @@ export const ServicesPage = () => {
                 </button>
               </div>
 
-              {/* Photo */}
-              <div style={{ width: '100%', aspectRatio: '16 / 9', borderRadius: 'var(--radius)', overflow: 'hidden', marginBottom: 14 }}>
+              {/* Photo with fallback and gradient */}
+              <div style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '16 / 9',
+                borderRadius: 'var(--radius)',
+                overflow: 'hidden',
+                marginBottom: 14,
+                background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 0,
+                  pointerEvents: 'none'
+                }}>
+                  <Wrench size={32} color="#FFFFFF" />
+                </div>
                 <img
-                  src={selectedServiceForDetail.image}
-                  alt={selectedServiceForDetail.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  src={getServiceImage(selectedServiceForDetail).src}
+                  alt={getServiceImage(selectedServiceForDetail).alt}
+                  style={{
+                    position: 'relative',
+                    zIndex: 1,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 30%',
+                    display: 'block'
+                  }}
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  zIndex: 1,
+                  background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.25) 100%)',
+                  pointerEvents: 'none'
+                }} />
               </div>
 
               {/* Description */}

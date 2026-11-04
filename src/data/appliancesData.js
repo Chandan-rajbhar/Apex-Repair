@@ -9,7 +9,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '45-90 Mins',
     warranty: '90-Day Guarantee',
     badge: 'BEST-SELLER',
-    image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/refrigerator.jpg',
     commonIssues: [
       'Not cooling properly or fluctuating temperature',
       'Leaking water under or inside refrigerator',
@@ -31,7 +31,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '40-75 Mins',
     warranty: '90-Day Guarantee',
     badge: 'SAME-DAY',
-    image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/washing-machine.jpg',
     commonIssues: [
       'Will not drain or stops mid-cycle',
       'Excessive shaking, banging or unbalanced spinning',
@@ -53,7 +53,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '40-60 Mins',
     warranty: '90-Day Guarantee',
     badge: 'SAME-DAY',
-    image: 'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/dryer.jpg',
     commonIssues: [
       'Tumbling but blowing no heat (cold air)',
       'Takes 2-3 cycles to dry clothes',
@@ -75,7 +75,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '45-80 Mins',
     warranty: '90-Day Guarantee',
     badge: 'POPULAR',
-    image: 'https://images.unsplash.com/photo-1585837575652-267c041d77d4?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/dishwasher.jpg',
     commonIssues: [
       'Dishes come out dirty or cloudy white residue',
       'Standing dirty water at the bottom after cycle',
@@ -97,7 +97,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '50-90 Mins',
     warranty: '90-Day Guarantee',
     badge: 'PRECISION',
-    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/oven.jpg',
     commonIssues: [
       'Oven will not heat or igniter glows without gas flame',
       'Uneven baking or temperature 50° off target',
@@ -119,7 +119,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '40-70 Mins',
     warranty: '90-Day Guarantee',
     badge: 'URGENT CARE',
-    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/freezer.jpg',
     commonIssues: [
       'Freezer thawing food or clicking sounds',
       'Severe frost buildup around magnetic door seals',
@@ -140,7 +140,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '30-55 Mins',
     warranty: '90-Day Guarantee',
     badge: 'SAME-DAY',
-    image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/microwave.jpg',
     commonIssues: [
       'Turns on and spins but produces zero heat',
       'Sparks or arcing inside microwave cavity',
@@ -162,7 +162,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '30-50 Mins',
     warranty: '90-Day Guarantee',
     badge: 'QUICK FIX',
-    image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/disposal.jpg',
     commonIssues: [
       'Humming loudly without blades turning (jammed)',
       'Water leaking from disposal housing into cabinet',
@@ -183,7 +183,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '50-85 Mins',
     warranty: '90-Day Guarantee',
     badge: 'SPECIALTY',
-    image: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/ice-maker.jpg',
     commonIssues: [
       'No ice production at all',
       'Ice cubes are hollow, small, or cloudy',
@@ -204,7 +204,7 @@ export const APPLIANCE_CATEGORIES = [
     estDuration: '50-90 Mins',
     warranty: '90-Day Guarantee',
     badge: 'LUXURY CARE',
-    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80',
+    image: '/images/services/wine-cooler.jpg',
     commonIssues: [
       'Upper or lower zone temperature out of spec',
       'Excessive fan noise vibrating bottle racks',
@@ -216,6 +216,88 @@ export const APPLIANCE_CATEGORIES = [
     completedRepairs: 950
   }
 ];
+
+export const getServiceImage = (service) => {
+  const name = (service?.name || service?.appliance || service?.category || '').toLowerCase();
+  const code = (service?.code || service?.id || '').toLowerCase();
+
+  if (code.includes('ac') || name.includes('ac') || name.includes('air condition')) {
+    return {
+      src: '/images/services/ac.jpg',
+      alt: 'Technician servicing an air conditioner'
+    };
+  }
+  if (code.startsWith('rf') || code.includes('refrigerat') || name.includes('refrigerat') || name.includes('cooling')) {
+    return {
+      src: '/images/services/refrigerator.jpg',
+      alt: 'Technician repairing a refrigerator'
+    };
+  }
+  if (code.startsWith('wm') || code.includes('washer') || name.includes('washing') || name.includes('laundry')) {
+    return {
+      src: '/images/services/washing-machine.jpg',
+      alt: 'Technician repairing a washing machine'
+    };
+  }
+  if (code.startsWith('dr') || code.includes('dryer') || name.includes('dryer')) {
+    return {
+      src: '/images/services/dryer.jpg',
+      alt: 'Technician repairing a clothes dryer'
+    };
+  }
+  if (code.startsWith('dw') || code.includes('dishwash') || name.includes('dishwash')) {
+    return {
+      src: '/images/services/dishwasher.jpg',
+      alt: 'Technician repairing a dishwasher'
+    };
+  }
+  if (code.startsWith('ov') || code.includes('oven') || name.includes('oven') || name.includes('range') || name.includes('cooktop')) {
+    return {
+      src: '/images/services/oven.jpg',
+      alt: 'Technician repairing an oven and range'
+    };
+  }
+  if (code.startsWith('fz') || code.includes('freezer') || name.includes('freezer')) {
+    return {
+      src: '/images/services/freezer.jpg',
+      alt: 'Technician repairing a deep freezer'
+    };
+  }
+  if (code.startsWith('mw') || code.includes('microwave') || name.includes('microwave')) {
+    return {
+      src: '/images/services/microwave.jpg',
+      alt: 'Technician repairing a microwave'
+    };
+  }
+  if (code.includes('disposal') || name.includes('disposal')) {
+    return {
+      src: '/images/services/disposal.jpg',
+      alt: 'Technician repairing a garbage disposal'
+    };
+  }
+  if (code.includes('ice') || name.includes('ice')) {
+    return {
+      src: '/images/services/ice-maker.jpg',
+      alt: 'Technician repairing an ice maker'
+    };
+  }
+  if (code.includes('wine') || name.includes('wine')) {
+    return {
+      src: '/images/services/wine-cooler.jpg',
+      alt: 'Technician repairing a wine cooler'
+    };
+  }
+  if (code.includes('water') || name.includes('water')) {
+    return {
+      src: '/images/services/water-heater.jpg',
+      alt: 'Technician repairing a water heater'
+    };
+  }
+  return {
+    src: '/images/services/generic.jpg',
+    alt: `Technician repairing ${service?.name || 'appliance'}`
+  };
+};
 
 export const MAJOR_BRANDS = [
   'Whirlpool', 'Samsung', 'LG', 'Bosch', 'GE Profile', 
