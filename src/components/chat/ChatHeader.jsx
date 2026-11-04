@@ -86,8 +86,8 @@ export const ChatHeader = ({ onClose }) => {
             width: 32,
             height: 32,
             borderRadius: '50%',
-            background: '#FFEDD5',
-            color: '#E8541E',
+            background: 'var(--navy-50)',
+            color: 'var(--navy-800)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'

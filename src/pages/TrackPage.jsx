@@ -181,7 +181,7 @@ export const TrackPage = () => {
           borderRadius: 24,
           padding: '18px 18px',
           boxShadow: 'var(--shadow-sm)',
-          border: '1.5px solid rgba(232, 84, 30, 0.25)'
+          border: '1.5px solid rgba(34, 63, 107, 0.2)'
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>

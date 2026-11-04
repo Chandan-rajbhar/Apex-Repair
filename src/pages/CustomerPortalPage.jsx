@@ -187,7 +187,7 @@ export const CustomerPortalPage = () => {
           style={{
             borderRadius: 22,
             background: 'var(--grad-warm)',
-            border: '1.5px solid rgba(232, 84, 30, 0.25)',
+            border: '1.5px solid rgba(34, 63, 107, 0.2)',
             padding: '16px 16px',
             boxShadow: 'var(--shadow-sm)',
             cursor: 'pointer'
@@ -204,7 +204,7 @@ export const CustomerPortalPage = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: '1px solid rgba(232, 84, 30, 0.2)'
+                border: '1px solid rgba(34, 63, 107, 0.15)'
               }}>
                 <Truck size={18} />
               </div>

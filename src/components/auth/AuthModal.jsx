@@ -113,7 +113,7 @@ export const AuthModal = () => {
               padding: '10px 14px',
               borderRadius: '16px',
               background: 'var(--grad-warm)',
-              border: '1px solid rgba(232, 84, 30, 0.25)',
+              border: '1px solid rgba(34, 63, 107, 0.18)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',

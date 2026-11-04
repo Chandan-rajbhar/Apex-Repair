@@ -46,11 +46,13 @@ html, body {
 
 @media (min-width: 480px) {
   .mobile-viewport-container {
-    margin: 16px auto;
-    border-radius: 36px;
-    min-height: calc(100vh - 32px);
-    overflow: hidden;
-    border: 8px solid rgba(255, 255, 255, 0.85);
+    margin: 0 auto;
+    min-height: 100vh;
+    border-radius: 0;
+    border: none;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    box-shadow: 0 0 60px rgba(15, 42, 68, 0.14);
   }
 }
 

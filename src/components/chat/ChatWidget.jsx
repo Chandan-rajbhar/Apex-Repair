@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { MessageCircle, Send, Paperclip, X, Image as ImageIcon, Star, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useChat } from '../../context/ChatContext';
 import { useAuth } from '../../context/AuthContext';
@@ -25,6 +25,8 @@ export const ChatWidget = () => {
   const { setPrefillData, getBookings, bookings } = useBooking();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const [inputVal, setInputVal] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -129,8 +131,8 @@ export const ChatWidget = () => {
 
   return (
     <>
-      {/* Floating Trigger Button (Above Bottom Nav) */}
-      {!isOpen && (
+      {/* Floating Trigger Button (Above Bottom Nav - Home Page Only) */}
+      {!isOpen && isHomePage && (
         <button
           onClick={openChat}
           className="floating-chat-trigger tap-effect glow-pulse-primary shine-sweep"
@@ -176,7 +178,7 @@ export const ChatWidget = () => {
             {linkedBooking && (
               <div style={{
                 background: 'var(--orange-50)',
-                borderBottom: '1px solid rgba(232, 84, 30, 0.2)',
+                borderBottom: '1px solid rgba(34, 63, 107, 0.15)',
                 padding: '8px 16px',
                 display: 'flex',
                 alignItems: 'center',
@@ -305,7 +307,7 @@ export const ChatWidget = () => {
                       padding: '6px 12px',
                       borderRadius: 9999,
                       background: '#FFFFFF',
-                      border: '1.5px solid rgba(232, 84, 30, 0.35)',
+                      border: '1.5px solid rgba(34, 63, 107, 0.25)',
                       color: 'var(--orange-600)',
                       fontSize: '0.76rem',
                       fontWeight: 700,
@@ -326,7 +328,7 @@ export const ChatWidget = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                borderTop: '1px solid rgba(232, 84, 30, 0.2)'
+                borderTop: '1px solid rgba(34, 63, 107, 0.15)'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <ImageIcon size={16} color="var(--orange-600)" />

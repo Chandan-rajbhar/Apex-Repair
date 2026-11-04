@@ -12,7 +12,7 @@ export const MessageBubble = ({ message, onActionClick }) => {
         padding: '6px 12px',
         borderRadius: 9999,
         background: 'var(--orange-50)',
-        border: '1px solid rgba(232, 84, 30, 0.2)',
+        border: '1px solid rgba(34, 63, 107, 0.15)',
         color: 'var(--orange-700)',
         fontSize: '0.72rem',
         fontWeight: 600,

@@ -80,8 +80,8 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
 
             {/* Gradient along the transit route */}
             <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#E8541E" />
-              <stop offset="100%" stopColor="#FFB547" />
+              <stop offset="0%" stopColor="#223F6B" />
+              <stop offset="100%" stopColor="#3C5F94" />
             </linearGradient>
 
             {/* Pulsing ring filter */}
@@ -124,15 +124,15 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
 
           {/* Customer Destination Pin */}
           <g transform="translate(350, 60)">
-            <circle cx="0" cy="0" r="16" fill="rgba(232, 84, 30, 0.2)" />
-            <circle cx="0" cy="0" r="10" fill="#E8541E" />
+            <circle cx="0" cy="0" r="16" fill="rgba(34, 63, 107, 0.2)" />
+            <circle cx="0" cy="0" r="10" fill="#223F6B" />
             <circle cx="0" cy="0" r="4" fill="#FFFFFF" />
           </g>
 
           {/* Animated Van Location Along Curve */}
           <g>
             {/* Radar Pulsing circle */}
-            <circle cx="190" cy="115" r="18" fill="rgba(232, 84, 30, 0.25)">
+            <circle cx="190" cy="115" r="18" fill="rgba(34, 63, 107, 0.25)">
               <animate
                 attributeName="r"
                 values="12;28;12"
@@ -149,7 +149,7 @@ export const LiveTrackingMap = ({ etaMinutes = 12, vehicle = 'Ford Transit #TX-4
 
             {/* Van Pin Box */}
             <g transform="translate(176, 102)">
-              <rect width="28" height="26" rx="8" fill="#E8541E" filter="url(#glow)" />
+              <rect width="28" height="26" rx="8" fill="#223F6B" filter="url(#glow)" />
               <path d="M6 13 L12 13 L15 17 L22 17 L22 21 L6 21 Z" fill="#FFFFFF" opacity="0.9" />
               <circle cx="9" cy="21" r="2" fill="#16264A" />
               <circle cx="19" cy="21" r="2" fill="#16264A" />

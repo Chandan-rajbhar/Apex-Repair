@@ -135,7 +135,7 @@ export const TrackingStepper = ({ currentStep = 4, timeline = [] }) => {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 6,
-                    border: '1px solid rgba(232, 84, 30, 0.25)'
+                    border: '1px solid rgba(34, 63, 107, 0.2)'
                   }}>
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--orange-600)', animation: 'pulse 1.2s infinite' }} />
                     <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--orange-700)' }}>

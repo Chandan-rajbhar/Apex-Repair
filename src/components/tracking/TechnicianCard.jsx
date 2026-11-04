@@ -19,8 +19,8 @@ export const TechnicianCard = ({ technician, bookingId }) => {
               height: 58,
               borderRadius: '50%',
               objectFit: 'cover',
-              border: '2.5px solid var(--orange-600)',
-              boxShadow: '0 4px 12px rgba(232, 84, 30, 0.25)'
+              border: '2.5px solid var(--navy-800)',
+              boxShadow: '0 4px 12px rgba(34, 63, 107, 0.25)'
             }}
           />
           <span style={{

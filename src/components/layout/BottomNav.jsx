@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Home, Sparkles, Calendar, Truck, Menu } from 'lucide-react';
+import { Home, Settings, Calendar, Truck, Menu } from 'lucide-react';
 import { useBooking } from '../../context/BookingContext';
 
 export const BottomNav = () => {
@@ -18,7 +18,7 @@ export const BottomNav = () => {
       >
         {({ isActive }) => (
           <>
-            <Home size={21} strokeWidth={isActive ? 2.5 : 1.9} />
+            <Home size={24} strokeWidth={2} />
             <span>Home</span>
             {isActive && <div className="nav-active-dot" />}
           </>
@@ -33,7 +33,7 @@ export const BottomNav = () => {
       >
         {({ isActive }) => (
           <>
-            <Sparkles size={21} strokeWidth={isActive ? 2.5 : 1.9} />
+            <Settings size={24} strokeWidth={2} />
             <span>Services</span>
             {isActive && <div className="nav-active-dot" />}
           </>
@@ -61,7 +61,7 @@ export const BottomNav = () => {
         {({ isActive }) => (
           <>
             <div style={{ position: 'relative' }}>
-              <Truck size={21} strokeWidth={isActive ? 2.5 : 1.9} />
+              <Truck size={24} strokeWidth={2} />
               {activeBooking && activeBooking.currentStep < 9 && (
                 <span
                   style={{
@@ -91,7 +91,7 @@ export const BottomNav = () => {
       >
         {({ isActive }) => (
           <>
-            <Menu size={21} strokeWidth={isActive ? 2.5 : 1.9} />
+            <Menu size={24} strokeWidth={2} />
             <span>More</span>
             {isActive && <div className="nav-active-dot" />}
           </>

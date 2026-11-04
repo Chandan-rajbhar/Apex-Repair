@@ -30,7 +30,7 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
       style={{
         borderRadius: 24,
         padding: 18,
-        border: isPending ? '2px solid rgba(232, 84, 30, 0.4)' : '1px solid rgba(15, 42, 68, 0.08)',
+        border: isPending ? '2px solid rgba(34, 63, 107, 0.35)' : '1px solid rgba(15, 42, 68, 0.08)',
         background: isPending ? 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%)' : '#FFFFFF'
       }}
     >
@@ -155,7 +155,7 @@ export const QuoteApprovalCard = ({ quote, onApprove, onDecline, isStep6 = false
           <button
             onClick={() => setShowDeclineModal(true)}
             className="btn btn-outline tap-effect"
-            style={{ flex: 1, height: 44, fontSize: '0.82rem', color: '#C2410C', borderColor: 'rgba(232, 84, 30, 0.3)' }}
+            style={{ flex: 1, height: 44, fontSize: '0.82rem', color: 'var(--text-muted)', borderColor: 'rgba(22, 38, 74, 0.2)' }}
           >
             Decline
           </button>

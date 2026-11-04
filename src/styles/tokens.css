@@ -14,12 +14,12 @@
   --navy-100: #E6EDF8;
   --navy-50:  #F1F5FB;
 
-  --orange-500: #F26B2D;
-  --orange-600: #E8541E; /* main CTA */
-  --orange-700: #C93E10;
+  --orange-500: #2F5082;
+  --orange-600: #223F6B; /* Nav bar primary color */
+  --orange-700: #16264A;
   --amber-400:  #FFB547; /* active underline, small accents */
   --amber-200:  #FFE2B0;
-  --orange-50:  #FFF3EB;
+  --orange-50:  #F1F5FB;
 
   --success: #1FA971;    /* only for completed/verified states */
   --danger:  #D93A3A;
@@ -37,39 +37,39 @@
   --border-glass: rgba(255, 255, 255, 0.7);
   --border-glass-dark: rgba(255, 255, 255, 0.18);
 
-  /* Primary Brand Aliases -> Orange CTA */
-  --primary-50:  var(--orange-50);
-  --primary-100: var(--amber-200);
-  --primary-500: var(--orange-500);
-  --primary-600: var(--orange-600);
-  --primary-700: var(--orange-700);
+  /* Primary Brand Aliases -> Navy CTA */
+  --primary-50:  var(--navy-50);
+  --primary-100: var(--navy-100);
+  --primary-500: var(--navy-700);
+  --primary-600: var(--navy-800);
+  --primary-700: var(--navy-900);
 
   /* Accent & Utility */
   --mint-tint:   var(--navy-50);
-  --mint-soft:   var(--orange-50);
+  --mint-soft:   var(--navy-50);
   --gold-accent: var(--amber-400);
   --gold-dark:   #B45309;
   --gold-amber:  var(--amber-400);
-  --cta-orange:  var(--orange-600);
-  --cta-orange-hover: var(--orange-500);
-  --cta-orange-dark:  var(--orange-700);
+  --cta-orange:  var(--navy-800);
+  --cta-orange-hover: var(--navy-700);
+  --cta-orange-dark:  var(--navy-900);
 
   /* Gradients */
   --grad-header:  linear-gradient(135deg, #223F6B 0%, #2F5082 50%, #3C5F94 100%);
   --grad-navy:    linear-gradient(145deg, #0E1A36 0%, #223F6B 55%, #3C5F94 100%);
   --grad-hero:    radial-gradient(circle at 15% 0%, rgba(255,255,255,.22), transparent 45%), linear-gradient(145deg, #0E1A36 0%, #223F6B 55%, #3C5F94 100%);
-  --grad-cta:     linear-gradient(135deg, #FF8A4C 0%, #E8541E 55%, #C93E10 100%);
-  --grad-primary: var(--grad-cta);
+  --grad-cta:     linear-gradient(135deg, #223F6B 0%, #2F5082 50%, #3C5F94 100%);
+  --grad-primary: var(--grad-header);
   --grad-soft:    linear-gradient(160deg, #FFFFFF 0%, #F1F5FB 100%);
-  --grad-warm:    linear-gradient(160deg, #FFF3EB 0%, #FFE2B0 140%);
+  --grad-warm:    linear-gradient(160deg, #F1F5FB 0%, #E6EDF8 140%);
   --grad-mint:    var(--grad-soft);
   --grad-gold:    var(--grad-warm);
   --grad-card-soft: var(--grad-soft);
   --grad-page:
-    radial-gradient(60% 40% at 90% 0%, rgba(242,107,45,.10), transparent 70%),
+    radial-gradient(60% 40% at 90% 0%, rgba(34,63,107,.12), transparent 70%),
     radial-gradient(50% 40% at 0% 20%, rgba(60,95,148,.12), transparent 70%),
     linear-gradient(180deg, #F6F8FC 0%, #FFFFFF 100%);
-  --grad-text:    linear-gradient(135deg, #FF8A4C, #E8541E 60%, #C93E10);
+  --grad-text:    linear-gradient(135deg, #223F6B, #2F5082 60%, #16264A);
   --grad-skeleton: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(230,237,248,0.7) 50%, rgba(255,255,255,0) 100%);
 
   /* Typography */
@@ -81,11 +81,11 @@
   --shadow-sm: 0 2px 8px rgba(22, 38, 74, 0.08);
   --shadow-md: 0 10px 30px rgba(22, 38, 74, 0.12);
   --shadow-lg: 0 24px 60px rgba(22, 38, 74, 0.18);
-  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.9), var(--shadow-md);
-  --shadow-glow-primary: var(--glow-orange);
-  --shadow-glow-orange: var(--glow-orange);
-  --glow-orange: 0 8px 24px rgba(232, 84, 30, 0.38);
-  --glow-navy:   0 8px 24px rgba(47, 80, 130, 0.35);
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.45), var(--shadow-sm);
+  --shadow-glow-primary: var(--glow-navy);
+  --shadow-glow-orange: var(--glow-navy);
+  --glow-orange: 0 4px 14px rgba(34, 63, 107, 0.25);
+  --glow-navy:   0 4px 14px rgba(34, 63, 107, 0.25);
 
   /* Border Radii */
   --radius-xs: 8px;

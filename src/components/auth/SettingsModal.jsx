@@ -110,8 +110,8 @@ export const SettingsModal = () => {
               style={{
                 padding: '14px 16px',
                 borderRadius: 18,
-                border: '1.5px dashed rgba(232, 84, 30, 0.4)',
-                background: 'rgba(255, 243, 235, 0.6)'
+                border: '1.5px dashed rgba(34, 63, 107, 0.35)',
+                background: 'rgba(241, 245, 251, 0.7)'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>

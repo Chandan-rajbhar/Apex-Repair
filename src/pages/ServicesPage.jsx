@@ -67,7 +67,7 @@ export const ServicesPage = () => {
           borderRadius: 24,
           padding: '20px 18px',
           background: 'var(--grad-warm)',
-          border: '1px solid rgba(232, 84, 30, 0.2)',
+          border: '1px solid rgba(34, 63, 107, 0.18)',
           position: 'relative',
           overflow: 'hidden'
         }}
@@ -339,7 +339,7 @@ export const ServicesPage = () => {
                 padding: '12px 14px',
                 borderRadius: 16,
                 background: 'var(--orange-50)',
-                border: '1px solid rgba(232, 84, 30, 0.25)',
+                border: '1px solid rgba(34, 63, 107, 0.18)',
                 marginBottom: 16
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
