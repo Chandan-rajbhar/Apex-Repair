@@ -30,13 +30,17 @@ export const Header = () => {
         setProfileAvatar(user.avatarUrl);
         setImgError(false);
       } else {
-        setProfileAvatar(null);
+        setProfileAvatar('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=240&q=80');
       }
     };
 
     checkAvatar();
     window.addEventListener('storage', checkAvatar);
-    return () => window.removeEventListener('storage', checkAvatar);
+    window.addEventListener('apex_profile_updated', checkAvatar);
+    return () => {
+      window.removeEventListener('storage', checkAvatar);
+      window.removeEventListener('apex_profile_updated', checkAvatar);
+    };
   }, [user]);
 
   return (

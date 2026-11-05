@@ -93,7 +93,7 @@ export const DEMO_USER = {
   zip: '62704',
   clientSince: '2026',
   clientId: 'APEX-2409',
-  avatarUrl: null
+  avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=240&q=80'
 };
 
 export const INITIAL_BOOKINGS = [

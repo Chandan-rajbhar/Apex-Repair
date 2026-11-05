@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, User, Phone, MapPin, Check } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { X, User, Phone, MapPin, Check, Camera } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export const EditProfileModal = () => {
@@ -10,8 +10,20 @@ export const EditProfileModal = () => {
   const [address, setAddress] = useState(user?.address || '');
   const [city, setCity] = useState(user?.city || '');
   const [zip, setZip] = useState(user?.zip || '');
+  const [avatarUrl, setAvatarUrl] = useState(user?.avatarUrl || null);
+  const fileInputRef = useRef(null);
 
   if (!isProfileModalOpen || !user) return null;
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setAvatarUrl(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,8 +32,16 @@ export const EditProfileModal = () => {
       phone,
       address,
       city,
-      zip
+      zip,
+      avatarUrl
     });
+    try {
+      const s = localStorage.getItem('apex_profile_data');
+      const prev = s ? JSON.parse(s) : {};
+      localStorage.setItem('apex_profile_data', JSON.stringify({ ...prev, name, phone, address, city, zip, avatarUrl }));
+      window.dispatchEvent(new Event('storage'));
+      window.dispatchEvent(new Event('apex_profile_updated'));
+    } catch {}
   };
 
   return (
@@ -46,6 +66,63 @@ export const EditProfileModal = () => {
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {/* Avatar preview and upload */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '10px 14px', background: '#F8FAFC', borderRadius: '12px', border: '1px solid #EEF1F8' }}>
+              <div style={{
+                width: 50,
+                height: 50,
+                borderRadius: '14px',
+                background: '#0B1F5C',
+                color: '#FFFFFF',
+                fontSize: '20px',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                border: '2px solid #FFFFFF',
+                boxShadow: '0 2px 6px rgba(11,31,92,0.18)',
+                flexShrink: 0
+              }}>
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  (name || 'S').charAt(0).toUpperCase()
+                )}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <span style={{ fontSize: '12px', fontWeight: 600, color: '#0A0A0F' }}>Profile Photo</span>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="tap-effect"
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: '9999px',
+                    background: '#14308F',
+                    color: '#FFFFFF',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 4
+                  }}
+                >
+                  <Camera size={12} strokeWidth={2} />
+                  <span>Choose Photo</span>
+                </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={handleFileChange}
+                />
+              </div>
+            </div>
+
             <div>
               <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#0F2A44', marginBottom: 5 }}>
                 Full Name
@@ -175,4 +252,3 @@ export const EditProfileModal = () => {
     </div>
   );
 };
-

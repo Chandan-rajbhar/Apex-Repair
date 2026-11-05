@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   User,
@@ -41,6 +41,8 @@ import { useChat } from '../context/ChatContext';
 import { useToast } from '../context/ToastContext';
 import { COMPANY_INFO, getServiceImage } from '../data/appliancesData';
 
+const DEFAULT_AVATAR_URL = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=240&q=80';
+
 export const MorePage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -70,7 +72,8 @@ export const MorePage = () => {
         const parsed = JSON.parse(saved);
         return {
           ...parsed,
-          role: parsed.role?.toLowerCase().includes('solar') ? 'Test Engineer' : (parsed.role || 'Test Engineer')
+          role: parsed.role?.toLowerCase().includes('solar') ? 'Test Engineer' : (parsed.role || 'Test Engineer'),
+          avatarUrl: parsed.avatarUrl || user?.avatarUrl || DEFAULT_AVATAR_URL
         };
       }
     } catch {}
@@ -80,11 +83,72 @@ export const MorePage = () => {
       company: 'Apex Energy Partners LLC',
       email: user?.email || 'demo@apex.com',
       phone: user?.phone || '(877) 225-2046',
-      address: '452 Lexington Ave, Floor 14, New York, NY 10017'
+      address: '452 Lexington Ave, Floor 14, New York, NY 10017',
+      avatarUrl: user?.avatarUrl || DEFAULT_AVATAR_URL
     };
   });
 
+  const [isPhotoViewerOpen, setIsPhotoViewerOpen] = useState(false);
+
   const [editForm, setEditForm] = useState({ ...profileData });
+
+  // Refs for avatar uploading
+  const avatarFileInputRef = useRef(null);
+  const editFileInputRef = useRef(null);
+
+  const handleAvatarUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      showToast('Please select a valid image file', 'error');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64Url = event.target.result;
+      const updatedProfile = {
+        ...profileData,
+        avatarUrl: base64Url
+      };
+      setProfileData(updatedProfile);
+      setEditForm((prev) => ({ ...prev, avatarUrl: base64Url }));
+
+      try {
+        localStorage.setItem('apex_profile_data', JSON.stringify(updatedProfile));
+        window.dispatchEvent(new Event('storage'));
+        window.dispatchEvent(new Event('apex_profile_updated'));
+      } catch (err) {
+        console.error('Failed to save avatar:', err);
+      }
+
+      if (updateProfile) {
+        updateProfile({ avatarUrl: base64Url });
+      }
+
+      showToast('Profile picture updated successfully!', 'success');
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleEditAvatarUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      showToast('Please select a valid image file', 'error');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64Url = event.target.result;
+      setEditForm((prev) => ({ ...prev, avatarUrl: base64Url }));
+      showToast('Photo selected! Click Save Changes to confirm.', 'info');
+    };
+    reader.readAsDataURL(file);
+  };
 
   // Saved Appliance Repairs List
   const [savedItems, setSavedItems] = useState(() => {
@@ -179,13 +243,16 @@ export const MorePage = () => {
     setProfileData({ ...editForm });
     try {
       localStorage.setItem('apex_profile_data', JSON.stringify(editForm));
+      window.dispatchEvent(new Event('storage'));
+      window.dispatchEvent(new Event('apex_profile_updated'));
     } catch {}
     if (updateProfile) {
       updateProfile({
         name: editForm.name,
         email: editForm.email,
         phone: editForm.phone,
-        address: editForm.address
+        address: editForm.address,
+        avatarUrl: editForm.avatarUrl
       });
     }
     showToast('Profile updated successfully!', 'success');
@@ -243,6 +310,91 @@ export const MorePage = () => {
             flexDirection: 'column',
             gap: 16
           }}>
+            {/* Profile Picture Uploader Banner */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 14,
+              padding: 12,
+              background: '#F8FAFC',
+              borderRadius: '12px',
+              border: '1px solid #EEF1F8'
+            }}>
+              <div style={{
+                width: 56,
+                height: 56,
+                borderRadius: '16px',
+                background: '#0B1F5C',
+                color: '#FFFFFF',
+                fontSize: '22px',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                border: '2px solid #FFFFFF',
+                boxShadow: '0 2px 8px rgba(11,31,92,0.18)',
+                flexShrink: 0
+              }}>
+                {editForm.avatarUrl ? (
+                  <img src={editForm.avatarUrl} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  (editForm.name || 'S').charAt(0).toUpperCase()
+                )}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#0A0A0F' }}>Profile Photo</span>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button
+                    type="button"
+                    onClick={() => editFileInputRef.current?.click()}
+                    className="tap-effect"
+                    style={{
+                      padding: '5px 12px',
+                      borderRadius: '9999px',
+                      background: '#14308F',
+                      color: '#FFFFFF',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      border: 'none',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4
+                    }}
+                  >
+                    <Camera size={13} strokeWidth={2} />
+                    <span>Upload Photo</span>
+                  </button>
+                  {editForm.avatarUrl && (
+                    <button
+                      type="button"
+                      onClick={() => setEditForm(prev => ({ ...prev, avatarUrl: null }))}
+                      className="tap-effect"
+                      style={{
+                        padding: '5px 10px',
+                        borderRadius: '9999px',
+                        background: '#FFFFFF',
+                        color: '#E11D48',
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        border: '1px solid #E2E8F0',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <input
+                  type="file"
+                  ref={editFileInputRef}
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={handleEditAvatarUpload}
+                />
+              </div>
+            </div>
             <div>
               <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#0A0A0F', marginBottom: 6 }}>
                 Full Name
@@ -1630,9 +1782,12 @@ export const MorePage = () => {
         {/* Top Row: Avatar + Name & Role + Edit Button */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            {/* Avatar with Camera Badge */}
+            {/* Avatar with Camera Badge (Direct Upload & Photo Viewer) */}
             <div style={{ position: 'relative' }}>
               <div
+                onClick={() => setIsPhotoViewerOpen(true)}
+                className="tap-effect"
+                title="Click to view profile photo"
                 style={{
                   width: 56,
                   height: 56,
@@ -1645,20 +1800,30 @@ export const MorePage = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   letterSpacing: '0.02em',
-                  boxShadow: '0 4px 12px rgba(11,31,92,0.25)'
+                  boxShadow: '0 4px 12px rgba(11,31,92,0.25)',
+                  overflow: 'hidden',
+                  cursor: 'pointer'
                 }}
               >
-                {profileData.name.charAt(0).toUpperCase()}
+                {profileData.avatarUrl ? (
+                  <img
+                    src={profileData.avatarUrl}
+                    alt={profileData.name}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  profileData.name.charAt(0).toUpperCase()
+                )}
               </div>
               <button
-                onClick={() => openSubView('edit-profile')}
+                onClick={() => avatarFileInputRef.current?.click()}
                 className="tap-effect"
                 style={{
                   position: 'absolute',
                   bottom: -2,
                   right: -2,
-                  width: 20,
-                  height: 20,
+                  width: 22,
+                  height: 22,
                   borderRadius: '50%',
                   background: '#FF5A36',
                   color: '#FFFFFF',
@@ -1667,12 +1832,21 @@ export const MorePage = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  padding: 0
+                  padding: 0,
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
                 }}
-                aria-label="Change photo"
+                aria-label="Upload profile photo"
+                title="Change Photo"
               >
-                <Camera size={12} strokeWidth={2} />
+                <Camera size={13} strokeWidth={2.2} />
               </button>
+              <input
+                type="file"
+                ref={avatarFileInputRef}
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleAvatarUpload}
+              />
             </div>
 
             {/* Name, Role & Verified Pill */}
@@ -1956,184 +2130,6 @@ export const MorePage = () => {
       </div>
 
       {/* --------------------------------------------------------------------------
-          2.5 SAVED REPAIRS & SERVICES SECTION (Directly visible on Profile)
-          -------------------------------------------------------------------------- */}
-      <div>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: 12
-        }}>
-          <div style={{
-            fontSize: '12px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#7A8299',
-            fontWeight: 600
-          }}>
-            SAVED REPAIRS ({savedItems.length})
-          </div>
-          {savedItems.length > 0 && (
-            <button
-              onClick={() => openSubView('saved-items')}
-              className="tap-effect"
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#14308F',
-                fontSize: '13px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 4,
-                padding: 0
-              }}
-            >
-              <span>View all</span>
-              <ChevronRight size={15} strokeWidth={2} />
-            </button>
-          )}
-        </div>
-
-        {savedItems.length === 0 ? (
-          <div
-            style={{
-              background: '#FFFFFF',
-              borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
-              border: '1px solid #E3E7F2',
-              padding: '24px 16px',
-              textAlign: 'center',
-              boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
-            }}
-          >
-            <div style={{ fontSize: '13px', color: '#7A8299', marginBottom: 10 }}>
-              You haven't saved any appliance repairs yet.
-            </div>
-            <button
-              onClick={() => navigate('/services')}
-              className="tap-effect"
-              style={{
-                padding: '6px 16px',
-                borderRadius: '9999px',
-                background: '#0B1F5C',
-                color: '#FFFFFF',
-                fontSize: '12px',
-                fontWeight: 600,
-                border: 'none',
-                cursor: 'pointer'
-              }}
-            >
-              Explore Services
-            </button>
-          </div>
-        ) : (
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-              gap: 'var(--card-gap, clamp(8px, 2.2vw, 12px))'
-            }}
-          >
-            {savedItems.slice(0, 4).map((item) => (
-              <div
-                key={item.code}
-                onClick={() => openSubView('saved-items')}
-                className="featured-repair-card tap-effect"
-                style={{
-                  borderRadius: 'var(--radius-card, clamp(12px, 3.2vw, 15px))',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  background: '#FFFFFF',
-                  border: '1px solid #E3E7F2',
-                  boxShadow: '0 3px 10px rgba(10, 20, 60, 0.05)',
-                  cursor: 'pointer'
-                }}
-              >
-                {/* Photo */}
-                <div style={{
-                  position: 'relative',
-                  width: '100%',
-                  aspectRatio: '16 / 10.5',
-                  overflow: 'hidden',
-                  background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
-                }}>
-                  <img
-                    src={getServiceImage(item).src}
-                    alt={item.name}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: 'center 30%',
-                      display: 'block'
-                    }}
-                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                  />
-                  <div style={{
-                    position: 'absolute',
-                    top: 'clamp(5px, 1.5vw, 7px)',
-                    right: 'clamp(5px, 1.5vw, 7px)',
-                    zIndex: 2
-                  }}>
-                    <div style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: '50%',
-                      background: '#FFFFFF',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.15)'
-                    }}>
-                      <Heart size={12} color="#E11D48" fill="#E11D48" strokeWidth={2} />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div style={{
-                  padding: 'clamp(7px, 2vw, 10px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flex: 1
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
-                    <span style={{ fontSize: 'clamp(0.65rem, 2.4vw, 0.72rem)', fontWeight: 600, color: '#14308F' }}>
-                      {item.code}
-                    </span>
-                    <span style={{ fontSize: 'clamp(0.66rem, 2.5vw, 0.74rem)', fontWeight: 600, color: '#0A0A0F' }}>
-                      {item.price}
-                    </span>
-                  </div>
-                  <div style={{
-                    fontSize: 'clamp(0.78rem, 3vw, 0.86rem)',
-                    fontWeight: 600,
-                    color: '#0A0A0F',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    lineHeight: 1.25
-                  }}>
-                    {item.name}
-                  </div>
-                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(4px, 1.2vw, 6px) 0' }} />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
-                    <span style={{ fontSize: 'clamp(0.62rem, 2.3vw, 0.68rem)', color: '#7A8299' }}>{item.tag || 'Saved'}</span>
-                    <span style={{ fontSize: 'clamp(0.65rem, 2.4vw, 0.72rem)', fontWeight: 600, color: '#14308F' }}>
-                      Details &rarr;
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* --------------------------------------------------------------------------
           3. PREFERENCES & SUPPORT Section (Notifications, Support, Settings, Sign Out)
           -------------------------------------------------------------------------- */}
       <div>
@@ -2294,6 +2290,151 @@ export const MorePage = () => {
           </div>
         </div>
       </div>
+      {/* 4. Full Profile Photo Viewer Modal */}
+      {isPhotoViewerOpen && (
+        <div
+          className="sheet-backdrop"
+          onClick={() => setIsPhotoViewerOpen(false)}
+          style={{
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="glass-strong card-gloss"
+            style={{
+              width: '100%',
+              maxWidth: 340,
+              background: '#FFFFFF',
+              borderRadius: 24,
+              padding: 24,
+              boxShadow: '0 20px 50px rgba(10, 20, 60, 0.25)',
+              border: '1px solid #E3E7F2',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              position: 'relative'
+            }}
+          >
+            {/* Close button top right */}
+            <button
+              onClick={() => setIsPhotoViewerOpen(false)}
+              className="tap-effect"
+              style={{
+                position: 'absolute',
+                top: 14,
+                right: 14,
+                width: 32,
+                height: 32,
+                borderRadius: '50%',
+                background: '#F1F5FB',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#4A5A78',
+                cursor: 'pointer'
+              }}
+              aria-label="Close photo preview"
+            >
+              <X size={18} strokeWidth={2.2} />
+            </button>
+
+            {/* Enlarged Full Photo in Square */}
+            <div
+              style={{
+                width: '100%',
+                maxWidth: 260,
+                aspectRatio: '1 / 1',
+                borderRadius: 20,
+                overflow: 'hidden',
+                background: '#0B1F5C',
+                border: '3px solid #E3E7F2',
+                boxShadow: '0 8px 24px rgba(11,31,92,0.18)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                fontSize: 64,
+                fontWeight: 700,
+                marginBottom: 16,
+                marginTop: 8
+              }}
+            >
+              {profileData.avatarUrl ? (
+                <img
+                  src={profileData.avatarUrl}
+                  alt={profileData.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                profileData.name.charAt(0).toUpperCase()
+              )}
+            </div>
+
+            <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0A0A0F', marginBottom: 2 }}>
+              {profileData.name}
+            </div>
+            <div style={{ fontSize: '0.82rem', color: '#7A8299', marginBottom: 20 }}>
+              {profileData.role} • {profileData.company}
+            </div>
+
+            {/* Actions: Change Photo / Close */}
+            <div style={{ display: 'flex', gap: 10, width: '100%' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  avatarFileInputRef.current?.click();
+                  setIsPhotoViewerOpen(false);
+                }}
+                className="tap-effect"
+                style={{
+                  flex: 1,
+                  height: 42,
+                  borderRadius: '9999px',
+                  background: '#14308F',
+                  color: '#FFFFFF',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 6
+                }}
+              >
+                <Camera size={16} strokeWidth={2} />
+                <span>Change Photo</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsPhotoViewerOpen(false)}
+                className="tap-effect"
+                style={{
+                  height: 42,
+                  padding: '0 16px',
+                  borderRadius: '9999px',
+                  background: '#F1F5FB',
+                  color: '#4A5A78',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  border: '1px solid #E3E7F2',
+                  cursor: 'pointer'
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
