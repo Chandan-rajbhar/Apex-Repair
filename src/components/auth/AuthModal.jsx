@@ -27,7 +27,7 @@ export const AuthModal = () => {
   const { isAuthModalOpen, setAuthModalOpen, login, register } = useAuth();
   const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState('signin'); // 'signin' | 'register'
-  
+
   // Sign In fields
   const [loginIdentifier, setLoginIdentifier] = useState('demo@apex.com');
   const [loginPassword, setLoginPassword] = useState('Demo@123');
@@ -132,7 +132,7 @@ export const AuthModal = () => {
       try {
         login('demo@apex.com', 'Demo@123');
         setAuthModalOpen(false);
-      } catch (err) {}
+      } catch (err) { }
       finally {
         setLoading(false);
       }
@@ -175,8 +175,8 @@ export const AuthModal = () => {
                 {isForgotPassword
                   ? 'Reset Password'
                   : activeTab === 'signin'
-                  ? 'Welcome Back'
-                  : 'Create Your Account'}
+                    ? 'Welcome Back'
+                    : 'Create Your Account'}
               </h2>
             </div>
             <button

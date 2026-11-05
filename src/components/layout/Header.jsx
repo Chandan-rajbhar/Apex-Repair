@@ -29,7 +29,7 @@ export const Header = () => {
             return;
           }
         }
-      } catch {}
+      } catch { }
 
       if (user?.avatarUrl) {
         setProfileAvatar(user.avatarUrl);
@@ -214,7 +214,7 @@ export const Header = () => {
               marginLeft: '2px'
             }}
           >
-            <LogIn size={13} strokeWidth={2.5} color="#0B1F5C" />
+            {/* <LogIn size={13} strokeWidth={2.5} color="#0B1F5C" /> */}
             <span>Login</span>
           </button>
         )}
