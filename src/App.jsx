@@ -13,6 +13,7 @@ import { TrackPage } from './pages/TrackPage';
 import { MorePage } from './pages/MorePage';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { CustomerPortalPage } from './pages/CustomerPortalPage';
+import { AuthPage } from './pages/AuthPage';
 
 export function App() {
   return (
@@ -32,6 +33,9 @@ export function App() {
                     <Route path="/profile" element={<MorePage />} />
                     <Route path="/notifications" element={<NotificationsPage />} />
                     <Route path="/portal" element={<CustomerPortalPage />} />
+                    <Route path="/login" element={<AuthPage initialMode="signin" />} />
+                    <Route path="/signup" element={<AuthPage initialMode="signup" />} />
+                    <Route path="/auth" element={<AuthPage />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Route>
                 </Routes>

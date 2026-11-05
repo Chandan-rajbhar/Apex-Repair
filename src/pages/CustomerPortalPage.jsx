@@ -33,7 +33,7 @@ export const CustomerPortalPage = () => {
           Access your appliance warranty documents, active repairs, and service records.
         </p>
         <button
-          onClick={() => setAuthModalOpen(true)}
+          onClick={() => navigate('/login')}
           className="btn btn-primary tap-effect shine-sweep"
         >
           Sign In to Portal

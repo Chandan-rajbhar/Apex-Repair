@@ -13,6 +13,8 @@ export const AppLayout = () => {
   useMouseGlow();
   const location = useLocation();
   const isBookPage = location.pathname === '/book';
+  const isAuthPage = ['/login', '/signup', '/auth'].includes(location.pathname);
+  const hideFloatingWidgets = isBookPage || isAuthPage;
 
   return (
     <>
@@ -33,11 +35,11 @@ export const AppLayout = () => {
           <Outlet />
         </main>
 
-        {/* Floating Live Chat Button & Panel (Hidden on Book page) */}
-        {!isBookPage && <ChatWidget />}
+        {/* Floating Live Chat Button & Panel (Hidden on Book page & dedicated Auth page) */}
+        {!hideFloatingWidgets && <ChatWidget />}
 
-        {/* Floating Glass Bottom Navigation (Hidden on Book page per spec) */}
-        {!isBookPage && <BottomNav />}
+        {/* Floating Glass Bottom Navigation (Hidden on Book page & dedicated Auth page) */}
+        {!hideFloatingWidgets && <BottomNav />}
 
         {/* Modals & Bottom Sheets */}
         <AuthModal />
@@ -47,4 +49,3 @@ export const AppLayout = () => {
     </>
   );
 };
-

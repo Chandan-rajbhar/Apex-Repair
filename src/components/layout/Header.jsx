@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, Wrench, Search, User } from 'lucide-react';
+import { Bell, Wrench, Search, User, LogIn } from 'lucide-react';
 import { useNotifications } from '../../context/NotificationContext';
 import { useAuth } from '../../context/AuthContext';
 
 export const Header = () => {
   const navigate = useNavigate();
   const { unreadCount } = useNotifications();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [profileAvatar, setProfileAvatar] = useState(null);
   const [imgError, setImgError] = useState(false);
 
   // Sync profile avatar from user context or localStorage
   useEffect(() => {
     const checkAvatar = () => {
+      if (!user && !isAuthenticated) {
+        setProfileAvatar(null);
+        return;
+      }
+
       try {
         const s = localStorage.getItem('apex_profile_data');
         if (s) {
@@ -41,7 +46,7 @@ export const Header = () => {
       window.removeEventListener('storage', checkAvatar);
       window.removeEventListener('apex_profile_updated', checkAvatar);
     };
-  }, [user]);
+  }, [user, isAuthenticated]);
 
   return (
     <header className="app-header glass">
@@ -60,7 +65,7 @@ export const Header = () => {
         </div>
       </Link>
 
-      {/* Header Actions Right (Search, Bell with dynamic badge, Profile Avatar) */}
+      {/* Header Actions Right (Search, Bell with dynamic badge, Profile Avatar OR Login Button) */}
       <div
         className="header-actions"
         style={{
@@ -138,52 +143,81 @@ export const Header = () => {
           )}
         </button>
 
-        {/* 3. Circular Profile Picture (Extreme right, clickable -> navigates to /profile) */}
-        <button
-          className="tap-effect"
-          onClick={() => navigate('/profile')}
-          aria-label="User Profile"
-          title="Profile"
-          style={{
-            width: 'clamp(28px, 7.5vw, 32px)',
-            height: 'clamp(28px, 7.5vw, 32px)',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #16264A 0%, #2F5082 100%)',
-            border: '1.5px solid rgba(255, 255, 255, 0.9)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 0,
-            cursor: 'pointer',
-            overflow: 'hidden',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-            flexShrink: 0,
-            marginLeft: '2px'
-          }}
-        >
-          {profileAvatar && !imgError ? (
-            <img
-              src={profileAvatar}
-              alt={user?.name || 'Profile'}
-              onError={() => setImgError(true)}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'linear-gradient(135deg, #16264A 0%, #2F5082 100%)',
-                color: '#FFFFFF'
-              }}
-            >
-              <User size={15} strokeWidth={2.2} color="#FFFFFF" />
-            </div>
-          )}
-        </button>
+        {/* 3. Extreme Right: Circular Profile Picture (if logged in) OR Login Button (if logged out) */}
+        {isAuthenticated && user ? (
+          <button
+            className="tap-effect"
+            onClick={() => navigate('/profile')}
+            aria-label="User Profile"
+            title="Profile"
+            style={{
+              width: 'clamp(28px, 7.5vw, 32px)',
+              height: 'clamp(28px, 7.5vw, 32px)',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #16264A 0%, #2F5082 100%)',
+              border: '1.5px solid rgba(255, 255, 255, 0.9)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0,
+              cursor: 'pointer',
+              overflow: 'hidden',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+              flexShrink: 0,
+              marginLeft: '2px'
+            }}
+          >
+            {profileAvatar && !imgError ? (
+              <img
+                src={profileAvatar}
+                alt={user?.name || 'Profile'}
+                onError={() => setImgError(true)}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: 'linear-gradient(135deg, #16264A 0%, #2F5082 100%)',
+                  color: '#FFFFFF'
+                }}
+              >
+                <User size={15} strokeWidth={2.2} color="#FFFFFF" />
+              </div>
+            )}
+          </button>
+        ) : (
+          <button
+            className="tap-effect header-login-pill"
+            onClick={() => navigate('/login')}
+            aria-label="Log In"
+            title="Log In"
+            style={{
+              height: 'clamp(28px, 7.5vw, 32px)',
+              padding: '0 clamp(10px, 2.5vw, 13px)',
+              borderRadius: '9999px',
+              background: '#FFFFFF',
+              color: '#0B1F5C',
+              fontSize: 'clamp(11px, 2.8vw, 12px)',
+              fontWeight: 700,
+              border: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 5,
+              cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.18)',
+              flexShrink: 0,
+              marginLeft: '2px'
+            }}
+          >
+            <LogIn size={13} strokeWidth={2.5} color="#0B1F5C" />
+            <span>Login</span>
+          </button>
+        )}
       </div>
     </header>
   );

@@ -2258,6 +2258,7 @@ export const MorePage = () => {
             onClick={() => {
               if (logout) logout();
               showToast('Signed out of partner workspace.', 'info');
+              navigate('/login');
             }}
             className="app-profile-row tap-effect"
             style={{

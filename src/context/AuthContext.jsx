@@ -24,6 +24,11 @@ export const AuthProvider = ({ children }) => {
       const loggedUser = authService.login(identifier, password);
       setUser(loggedUser);
       setAuthModalOpen(false);
+      try {
+        localStorage.setItem('apex_profile_data', JSON.stringify(loggedUser));
+        window.dispatchEvent(new Event('apex_profile_updated'));
+        window.dispatchEvent(new Event('storage'));
+      } catch {}
       showToast(`Welcome back, ${loggedUser.name}!`, 'success');
       return loggedUser;
     } catch (err) {
@@ -37,6 +42,11 @@ export const AuthProvider = ({ children }) => {
       const newUser = authService.register(data);
       setUser(newUser);
       setAuthModalOpen(false);
+      try {
+        localStorage.setItem('apex_profile_data', JSON.stringify(newUser));
+        window.dispatchEvent(new Event('apex_profile_updated'));
+        window.dispatchEvent(new Event('storage'));
+      } catch {}
       showToast(`Account created! Welcome to Apex, ${newUser.name}.`, 'success');
       return newUser;
     } catch (err) {
@@ -47,6 +57,11 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     authService.logout();
+    try {
+      localStorage.removeItem('apex_profile_data');
+      window.dispatchEvent(new Event('apex_profile_updated'));
+      window.dispatchEvent(new Event('storage'));
+    } catch {}
     setUser(null);
     setProfileModalOpen(false);
     setSettingsModalOpen(false);
@@ -95,4 +110,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

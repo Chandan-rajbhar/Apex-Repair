@@ -3,6 +3,7 @@ import { DEMO_USER } from '../data/mockData';
 
 const USERS_KEY = 'apex_users';
 const CURRENT_USER_KEY = 'apex_current_user';
+const LOGGED_OUT_KEY = 'apex_user_logged_out';
 
 export const authService = {
   init() {
@@ -20,9 +21,10 @@ export const authService = {
     }
 
     // Default current user to demo user for a polished immediate experience,
-    // or respect existing session
+    // unless user explicitly logged out
+    const isLoggedOut = storageService.get(LOGGED_OUT_KEY, false);
     const currentSession = storageService.get(CURRENT_USER_KEY, null);
-    if (!currentSession) {
+    if (!currentSession && !isLoggedOut) {
       storageService.set(CURRENT_USER_KEY, DEMO_USER);
     }
   },
@@ -56,6 +58,7 @@ export const authService = {
 
     const { password: _, ...safeUser } = user;
     storageService.set(CURRENT_USER_KEY, safeUser);
+    storageService.remove(LOGGED_OUT_KEY);
     return safeUser;
   },
 
@@ -82,6 +85,7 @@ export const authService = {
       clientSince: new Date().getFullYear().toString(),
       clientId: randomId,
       password: password,
+      avatarUrl: DEMO_USER.avatarUrl,
       createdAt: new Date().toISOString()
     };
 
@@ -90,6 +94,7 @@ export const authService = {
 
     const { password: _, ...safeUser } = newUser;
     storageService.set(CURRENT_USER_KEY, safeUser);
+    storageService.remove(LOGGED_OUT_KEY);
     return safeUser;
   },
 
@@ -118,6 +123,6 @@ export const authService = {
 
   logout() {
     storageService.remove(CURRENT_USER_KEY);
+    storageService.set(LOGGED_OUT_KEY, true);
   }
 };
-
