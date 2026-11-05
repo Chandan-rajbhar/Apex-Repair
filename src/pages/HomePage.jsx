@@ -461,7 +461,7 @@ export const HomePage = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-          gap: 'var(--card-gap, clamp(8px, 2.5vw, 14px))'
+          gap: 'var(--card-gap, clamp(8px, 2.2vw, 12px))'
         }}>
           {FEATURED_SERVICES.map((item) => {
             const isSaved = savedServices.includes(item.code);
@@ -470,12 +470,22 @@ export const HomePage = () => {
                 key={item.code}
                 onClick={() => setSelectedServiceDetail(item)}
                 className="featured-repair-card tap-effect"
+                style={{
+                  borderRadius: 'var(--radius-card, clamp(12px, 3.2vw, 15px))',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  background: '#FFFFFF',
+                  border: '1px solid #E3E7F2',
+                  boxShadow: '0 3px 10px rgba(10, 20, 60, 0.05)',
+                  cursor: 'pointer'
+                }}
               >
-                {/* Photo on top: aspect-ratio 4/3, full card width, object-fit cover */}
+                {/* Photo on top: compact ratio 16 / 10.5 */}
                 <div style={{
                   position: 'relative',
                   width: '100%',
-                  aspectRatio: '4 / 3',
+                  aspectRatio: '16 / 10.5',
                   overflow: 'hidden',
                   background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
                 }}>
@@ -489,7 +499,7 @@ export const HomePage = () => {
                     zIndex: 0,
                     pointerEvents: 'none'
                   }}>
-                    <Wrench size={24} color="#FFFFFF" />
+                    <Wrench size={20} color="#FFFFFF" />
                   </div>
 
                   <img
@@ -511,15 +521,15 @@ export const HomePage = () => {
                     position: 'absolute',
                     inset: 0,
                     zIndex: 1,
-                    background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.25) 100%)',
+                    background: 'linear-gradient(180deg, transparent 65%, rgba(11, 31, 92, 0.22) 100%)',
                     pointerEvents: 'none'
                   }} />
 
-                  {/* Responsive heart button in circle */}
+                  {/* Responsive compact heart button in circle */}
                   <div style={{
                     position: 'absolute',
-                    top: 'clamp(6px, 1.8vw, 8px)',
-                    right: 'clamp(6px, 1.8vw, 8px)',
+                    top: 'clamp(5px, 1.5vw, 7px)',
+                    right: 'clamp(5px, 1.5vw, 7px)',
                     display: 'flex',
                     alignItems: 'center',
                     zIndex: 2
@@ -531,8 +541,8 @@ export const HomePage = () => {
                       }}
                       className="tap-effect"
                       style={{
-                        width: 'clamp(28px, 7.5vw, 34px)',
-                        height: 'clamp(28px, 7.5vw, 34px)',
+                        width: 'clamp(26px, 6.8vw, 29px)',
+                        height: 'clamp(26px, 6.8vw, 29px)',
                         borderRadius: '50%',
                         background: '#FFFFFF',
                         border: 'none',
@@ -546,7 +556,7 @@ export const HomePage = () => {
                       aria-label={isSaved ? "Saved" : "Save repair"}
                     >
                       <Heart
-                        size={15}
+                        size={13}
                         strokeWidth={2}
                         color={isSaved ? "#E11D48" : "#7A8299"}
                         fill={isSaved ? "#E11D48" : "none"}
@@ -555,9 +565,9 @@ export const HomePage = () => {
                   </div>
                 </div>
 
-                {/* Text area with fluid padding */}
+                {/* Text area with compact fluid padding */}
                 <div style={{
-                  padding: 'var(--card-pad, clamp(10px, 2.8vw, 12px))',
+                  padding: 'clamp(7px, 2vw, 10px)',
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
@@ -569,10 +579,10 @@ export const HomePage = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    marginBottom: 'clamp(3px, 1vw, 5px)'
+                    marginBottom: 'clamp(2px, 0.8vw, 4px)'
                   }}>
                     <span style={{
-                      fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)',
+                      fontSize: 'clamp(0.65rem, 2.4vw, 0.74rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace'
@@ -580,7 +590,7 @@ export const HomePage = () => {
                       {item.code}
                     </span>
                     <span style={{
-                      fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)',
+                      fontSize: 'clamp(0.66rem, 2.5vw, 0.76rem)',
                       fontWeight: 600,
                       color: '#0A0A0F'
                     }}>
@@ -590,7 +600,7 @@ export const HomePage = () => {
 
                   {/* Row 2: Service name (single line with ellipsis) */}
                   <div style={{
-                    fontSize: 'var(--text-card-title, clamp(0.85rem, 3.6vw, 1rem))',
+                    fontSize: 'clamp(0.8rem, 3.1vw, 0.9rem)',
                     fontWeight: 600,
                     color: '#0A0A0F',
                     whiteSpace: 'nowrap',
@@ -603,7 +613,7 @@ export const HomePage = () => {
                   </div>
 
                   {/* Thin divider line */}
-                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(6px, 1.8vw, 8px) 0' }} />
+                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(4px, 1.2vw, 6px) 0' }} />
 
                   {/* Row 3: Tag left, Details arrow right */}
                   <div style={{
@@ -612,11 +622,11 @@ export const HomePage = () => {
                     alignItems: 'center',
                     marginTop: 'auto'
                   }}>
-                    <span style={{ fontSize: 'clamp(0.65rem, 2.6vw, 0.75rem)', fontWeight: 400, color: '#7A8299' }}>
+                    <span style={{ fontSize: 'clamp(0.62rem, 2.3vw, 0.7rem)', fontWeight: 400, color: '#7A8299' }}>
                       {item.tag}
                     </span>
                     <span style={{
-                      fontSize: 'clamp(0.7rem, 2.8vw, 0.82rem)',
+                      fontSize: 'clamp(0.65rem, 2.4vw, 0.74rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       display: 'inline-flex',

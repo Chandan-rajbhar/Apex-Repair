@@ -1956,6 +1956,184 @@ export const MorePage = () => {
       </div>
 
       {/* --------------------------------------------------------------------------
+          2.5 SAVED REPAIRS & SERVICES SECTION (Directly visible on Profile)
+          -------------------------------------------------------------------------- */}
+      <div>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 12
+        }}>
+          <div style={{
+            fontSize: '12px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: '#7A8299',
+            fontWeight: 600
+          }}>
+            SAVED REPAIRS ({savedItems.length})
+          </div>
+          {savedItems.length > 0 && (
+            <button
+              onClick={() => openSubView('saved-items')}
+              className="tap-effect"
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#14308F',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 4,
+                padding: 0
+              }}
+            >
+              <span>View all</span>
+              <ChevronRight size={15} strokeWidth={2} />
+            </button>
+          )}
+        </div>
+
+        {savedItems.length === 0 ? (
+          <div
+            style={{
+              background: '#FFFFFF',
+              borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
+              border: '1px solid #E3E7F2',
+              padding: '24px 16px',
+              textAlign: 'center',
+              boxShadow: '0 4px 12px rgba(10,20,60,0.06)'
+            }}
+          >
+            <div style={{ fontSize: '13px', color: '#7A8299', marginBottom: 10 }}>
+              You haven't saved any appliance repairs yet.
+            </div>
+            <button
+              onClick={() => navigate('/services')}
+              className="tap-effect"
+              style={{
+                padding: '6px 16px',
+                borderRadius: '9999px',
+                background: '#0B1F5C',
+                color: '#FFFFFF',
+                fontSize: '12px',
+                fontWeight: 600,
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              Explore Services
+            </button>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+              gap: 'var(--card-gap, clamp(8px, 2.2vw, 12px))'
+            }}
+          >
+            {savedItems.slice(0, 4).map((item) => (
+              <div
+                key={item.code}
+                onClick={() => openSubView('saved-items')}
+                className="featured-repair-card tap-effect"
+                style={{
+                  borderRadius: 'var(--radius-card, clamp(12px, 3.2vw, 15px))',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  background: '#FFFFFF',
+                  border: '1px solid #E3E7F2',
+                  boxShadow: '0 3px 10px rgba(10, 20, 60, 0.05)',
+                  cursor: 'pointer'
+                }}
+              >
+                {/* Photo */}
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16 / 10.5',
+                  overflow: 'hidden',
+                  background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
+                }}>
+                  <img
+                    src={getServiceImage(item).src}
+                    alt={item.name}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 30%',
+                      display: 'block'
+                    }}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: 'clamp(5px, 1.5vw, 7px)',
+                    right: 'clamp(5px, 1.5vw, 7px)',
+                    zIndex: 2
+                  }}>
+                    <div style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: '50%',
+                      background: '#FFFFFF',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.15)'
+                    }}>
+                      <Heart size={12} color="#E11D48" fill="#E11D48" strokeWidth={2} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{
+                  padding: 'clamp(7px, 2vw, 10px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flex: 1
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
+                    <span style={{ fontSize: 'clamp(0.65rem, 2.4vw, 0.72rem)', fontWeight: 600, color: '#14308F' }}>
+                      {item.code}
+                    </span>
+                    <span style={{ fontSize: 'clamp(0.66rem, 2.5vw, 0.74rem)', fontWeight: 600, color: '#0A0A0F' }}>
+                      {item.price}
+                    </span>
+                  </div>
+                  <div style={{
+                    fontSize: 'clamp(0.78rem, 3vw, 0.86rem)',
+                    fontWeight: 600,
+                    color: '#0A0A0F',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: 1.25
+                  }}>
+                    {item.name}
+                  </div>
+                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(4px, 1.2vw, 6px) 0' }} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
+                    <span style={{ fontSize: 'clamp(0.62rem, 2.3vw, 0.68rem)', color: '#7A8299' }}>{item.tag || 'Saved'}</span>
+                    <span style={{ fontSize: 'clamp(0.65rem, 2.4vw, 0.72rem)', fontWeight: 600, color: '#14308F' }}>
+                      Details &rarr;
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* --------------------------------------------------------------------------
           3. PREFERENCES & SUPPORT Section (Notifications, Support, Settings, Sign Out)
           -------------------------------------------------------------------------- */}
       <div>

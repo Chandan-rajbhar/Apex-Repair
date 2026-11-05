@@ -365,7 +365,7 @@ export const ServicesPage = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-          gap: 'var(--card-gap, clamp(8px, 2.5vw, 14px))'
+          gap: 'var(--card-gap, clamp(8px, 2.2vw, 12px))'
         }}>
           {filteredServices.map((app, index) => {
             const code = SERVICE_CODES[app.id] || `AP-${app.id.slice(0, 2).toUpperCase()}`;
@@ -380,9 +380,9 @@ export const ServicesPage = () => {
                 className="featured-repair-card tap-effect"
                 style={{
                   background: '#FFFFFF',
-                  borderRadius: 'var(--radius-card, clamp(14px, 3.8vw, 18px))',
+                  borderRadius: 'var(--radius-card, clamp(12px, 3.2vw, 15px))',
                   border: '1px solid #E3E7F2',
-                  boxShadow: '0 4px 12px rgba(10, 20, 60, 0.08)',
+                  boxShadow: '0 3px 10px rgba(10, 20, 60, 0.05)',
                   overflow: 'hidden',
                   display: 'flex',
                   flexDirection: 'column',
@@ -392,11 +392,11 @@ export const ServicesPage = () => {
                   minWidth: 0
                 }}
               >
-                {/* Photo on top: aspect-ratio 4/3 */}
+                {/* Photo on top: compact ratio 16 / 10.5 */}
                 <div style={{
                   position: 'relative',
                   width: '100%',
-                  aspectRatio: '4 / 3',
+                  aspectRatio: '16 / 10.5',
                   overflow: 'hidden',
                   background: 'linear-gradient(160deg, #2F54B8, #0B1F5C)'
                 }}>
@@ -410,7 +410,7 @@ export const ServicesPage = () => {
                     zIndex: 0,
                     pointerEvents: 'none'
                   }}>
-                    <Wrench size={24} color="#FFFFFF" />
+                    <Wrench size={20} color="#FFFFFF" />
                   </div>
 
                   <img
@@ -434,18 +434,18 @@ export const ServicesPage = () => {
                     position: 'absolute',
                     inset: 0,
                     zIndex: 1,
-                    background: 'linear-gradient(180deg, transparent 70%, rgba(11, 31, 92, 0.25) 100%)',
+                    background: 'linear-gradient(180deg, transparent 65%, rgba(11, 31, 92, 0.22) 100%)',
                     pointerEvents: 'none'
                   }} />
 
                   {/* Icon buttons on photo */}
                   <div style={{
                     position: 'absolute',
-                    top: 6,
-                    right: 6,
+                    top: 'clamp(5px, 1.5vw, 7px)',
+                    right: 'clamp(5px, 1.5vw, 7px)',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 6,
+                    gap: 5,
                     zIndex: 2
                   }}>
                     {/* Compare Button */}
@@ -453,8 +453,8 @@ export const ServicesPage = () => {
                       onClick={(e) => handleToggleCompare(code, app.name, e)}
                       className="tap-effect"
                       style={{
-                        width: 32,
-                        height: 32,
+                        width: 'clamp(26px, 6.8vw, 29px)',
+                        height: 'clamp(26px, 6.8vw, 29px)',
                         borderRadius: '50%',
                         background: isCompared ? '#0284C7' : '#FFFFFF',
                         border: 'none',
@@ -468,16 +468,16 @@ export const ServicesPage = () => {
                       title={isCompared ? 'In comparison' : 'Compare service'}
                       aria-label="Compare"
                     >
-                      <Scale size={14} color={isCompared ? '#FFFFFF' : '#7A8299'} strokeWidth={2} />
+                      <Scale size={12} color={isCompared ? '#FFFFFF' : '#7A8299'} strokeWidth={2} />
                     </button>
 
-                    {/* Heart Save Button - 32px white circle, 6px from edge */}
+                    {/* Heart Save Button */}
                     <button
                       onClick={(e) => handleToggleSave(code, app.name, e)}
                       className="tap-effect"
                       style={{
-                        width: 32,
-                        height: 32,
+                        width: 'clamp(26px, 6.8vw, 29px)',
+                        height: 'clamp(26px, 6.8vw, 29px)',
                         borderRadius: '50%',
                         background: '#FFFFFF',
                         border: 'none',
@@ -492,7 +492,7 @@ export const ServicesPage = () => {
                       aria-label="Save"
                     >
                       <Heart
-                        size={14}
+                        size={12}
                         color={isSaved ? '#E11D48' : '#7A8299'}
                         fill={isSaved ? '#E11D48' : 'none'}
                         strokeWidth={2}
@@ -503,7 +503,7 @@ export const ServicesPage = () => {
 
                 {/* Content Under Photo */}
                 <div style={{
-                  padding: 'var(--card-pad, clamp(10px, 2.8vw, 12px))',
+                  padding: 'clamp(7px, 2vw, 10px)',
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
@@ -511,37 +511,41 @@ export const ServicesPage = () => {
                   minWidth: 0
                 }}>
                   {/* Row 1: Code on left, Price on right */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: 'clamp(2px, 0.8vw, 4px)'
+                  }}>
                     <span style={{
-                      fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)',
+                      fontSize: 'clamp(0.65rem, 2.4vw, 0.74rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace'
                     }}>
                       {code}
                     </span>
-                    <span style={{ fontSize: 'clamp(0.68rem, 2.8vw, 0.8rem)', fontWeight: 600, color: '#0A0A0F' }}>
+                    <span style={{ fontSize: 'clamp(0.66rem, 2.5vw, 0.76rem)', fontWeight: 600, color: '#0A0A0F' }}>
                       From ${app.diagnosticFee}
                     </span>
                   </div>
 
                   {/* Row 2: Service Title (single line with ellipsis) */}
                   <div style={{
-                    fontSize: 'var(--text-card-title, clamp(0.85rem, 3.6vw, 1rem))',
+                    fontSize: 'clamp(0.8rem, 3.1vw, 0.9rem)',
                     fontWeight: 600,
                     color: '#0A0A0F',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     lineHeight: 1.25,
-                    marginTop: 3,
                     minWidth: 0
                   }}>
                     {app.name}
                   </div>
 
                   {/* Thin divider line */}
-                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(6px, 1.8vw, 8px) 0' }} />
+                  <div style={{ height: 1, background: '#EEF1F8', margin: 'clamp(4px, 1.2vw, 6px) 0' }} />
 
                   {/* Row 3: Tag on left, Details with arrow on right */}
                   <div style={{
@@ -550,11 +554,11 @@ export const ServicesPage = () => {
                     alignItems: 'center',
                     marginTop: 'auto'
                   }}>
-                    <span style={{ fontSize: 'clamp(0.65rem, 2.6vw, 0.75rem)', color: '#7A8299', fontWeight: 400 }}>
+                    <span style={{ fontSize: 'clamp(0.62rem, 2.3vw, 0.7rem)', color: '#7A8299', fontWeight: 400 }}>
                       Same-Day
                     </span>
                     <span style={{
-                      fontSize: 'clamp(0.7rem, 2.8vw, 0.82rem)',
+                      fontSize: 'clamp(0.65rem, 2.4vw, 0.74rem)',
                       fontWeight: 600,
                       color: '#14308F',
                       display: 'inline-flex',

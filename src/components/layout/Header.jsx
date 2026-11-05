@@ -1,73 +1,43 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, Wrench, Shield, CheckCircle2, Truck, Search, Heart } from 'lucide-react';
-import { useBooking } from '../../context/BookingContext';
+import { Bell, Wrench, Search, User } from 'lucide-react';
+import { useNotifications } from '../../context/NotificationContext';
+import { useAuth } from '../../context/AuthContext';
 
 export const Header = () => {
-  const { activeBooking } = useBooking();
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [savedCount, setSavedCount] = useState(2);
-  const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const { unreadCount } = useNotifications();
+  const { user } = useAuth();
+  const [profileAvatar, setProfileAvatar] = useState(null);
+  const [imgError, setImgError] = useState(false);
 
-  // Sync saved repairs count from localStorage
+  // Sync profile avatar from user context or localStorage
   useEffect(() => {
-    const updateSaved = () => {
+    const checkAvatar = () => {
       try {
-        const s = localStorage.getItem('apex_saved_repairs');
+        const s = localStorage.getItem('apex_profile_data');
         if (s) {
           const parsed = JSON.parse(s);
-          if (Array.isArray(parsed)) {
-            setSavedCount(parsed.length);
+          if (parsed && parsed.avatarUrl) {
+            setProfileAvatar(parsed.avatarUrl);
+            setImgError(false);
+            return;
           }
         }
       } catch {}
-    };
-    updateSaved();
-    window.addEventListener('storage', updateSaved);
-    return () => window.removeEventListener('storage', updateSaved);
-  }, []);
 
-  // Close dropdown on click outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setShowNotifications(false);
+      if (user?.avatarUrl) {
+        setProfileAvatar(user.avatarUrl);
+        setImgError(false);
+      } else {
+        setProfileAvatar(null);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
-  const notifications = [
-    activeBooking ? {
-      id: 'notif_1',
-      title: `Technician Status #${activeBooking.id}`,
-      desc: activeBooking.currentStep === 4 ? 'Van en route • ETA 12 mins' : `Currently in step ${activeBooking.currentStep}/9`,
-      time: 'Just now',
-      icon: Truck,
-      color: 'var(--orange-600)',
-      link: '/track'
-    } : null,
-    {
-      id: 'notif_2',
-      title: 'Same-Day Dispatch Available',
-      desc: 'Master technicians available in your zip code until 9 PM.',
-      time: '1h ago',
-      icon: Shield,
-      color: 'var(--navy-800)',
-      link: '/services'
-    },
-    {
-      id: 'notif_3',
-      title: '90-Day Guarantee Active',
-      desc: 'All completed repairs covered with 100% parts & labor warranty.',
-      time: 'Today',
-      icon: CheckCircle2,
-      color: 'var(--amber-400)',
-      link: '/more'
-    }
-  ].filter(Boolean);
+    checkAvatar();
+    window.addEventListener('storage', checkAvatar);
+    return () => window.removeEventListener('storage', checkAvatar);
+  }, [user]);
 
   return (
     <header className="app-header glass">
@@ -86,145 +56,131 @@ export const Header = () => {
         </div>
       </Link>
 
-      {/* Header Actions Right (Search, Heart with count, Bell with dot) */}
-      <div className="header-actions" ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 'clamp(3px, 1vw, 6px)' }}>
+      {/* Header Actions Right (Search, Bell with dynamic badge, Profile Avatar) */}
+      <div
+        className="header-actions"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'clamp(5px, 1.5vw, 8px)',
+          flexShrink: 0
+        }}
+      >
         {/* 1. Search Icon Button */}
         <button
           className="icon-btn-header tap-effect"
           onClick={() => navigate('/services')}
           aria-label="Search services"
           title="Search"
-          style={{ width: 'clamp(28px, 7.5vw, 32px)', height: 'clamp(28px, 7.5vw, 32px)', background: 'transparent', border: 'none', padding: 0 }}
+          style={{
+            width: 'clamp(28px, 7.5vw, 32px)',
+            height: 'clamp(28px, 7.5vw, 32px)',
+            background: 'transparent',
+            border: 'none',
+            padding: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer'
+          }}
         >
           <Search size={18} strokeWidth={2} />
         </button>
 
-        {/* 2. Heart / Saved Icon Button with Count Badge */}
+        {/* 2. Notification Bell with Dynamic Unread Badge (Navigates to dedicated Notifications page) */}
         <button
           className="icon-btn-header tap-effect"
-          onClick={() => navigate('/more?sub=saved-items')}
-          aria-label="View saved repairs"
-          title="Saved Repairs"
-          style={{ width: 'clamp(28px, 7.5vw, 32px)', height: 'clamp(28px, 7.5vw, 32px)', background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
-        >
-          <Heart size={18} strokeWidth={2} />
-          <span
-            style={{
-              position: 'absolute',
-              top: 1,
-              right: 1,
-              minWidth: 'clamp(13px, 3.5vw, 15px)',
-              height: 'clamp(13px, 3.5vw, 15px)',
-              borderRadius: 9999,
-              background: '#FF5A36',
-              color: '#FFFFFF',
-              fontSize: 'clamp(8px, 2.1vw, 9px)',
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '0 2px',
-              border: '1.5px solid #0B1F5C',
-              lineHeight: 1,
-              boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
-            }}
-          >
-            {savedCount || 2}
-          </span>
-        </button>
-
-        {/* 3. Notification Bell with Indicator Dot */}
-        <button
-          className="icon-btn-header tap-effect"
-          onClick={() => setShowNotifications(!showNotifications)}
+          onClick={() => navigate('/notifications')}
           aria-label="View notifications"
           title="Notifications"
-          style={{ width: 'clamp(28px, 7.5vw, 32px)', height: 'clamp(28px, 7.5vw, 32px)', background: 'transparent', border: 'none', padding: 0, position: 'relative' }}
+          style={{
+            width: 'clamp(28px, 7.5vw, 32px)',
+            height: 'clamp(28px, 7.5vw, 32px)',
+            background: 'transparent',
+            border: 'none',
+            padding: 0,
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer'
+          }}
         >
           <Bell size={18} strokeWidth={2} />
-          <span
-            style={{
-              position: 'absolute',
-              top: 4,
-              right: 5,
-              width: 7,
-              height: 7,
-              borderRadius: '50%',
-              background: '#FF5A36',
-              border: '1.5px solid #0B1F5C'
-            }}
-          />
+          {unreadCount > 0 && (
+            <span
+              style={{
+                position: 'absolute',
+                top: 1,
+                right: 1,
+                minWidth: 'clamp(13px, 3.5vw, 15px)',
+                height: 'clamp(13px, 3.5vw, 15px)',
+                borderRadius: 9999,
+                background: '#FF5A36',
+                color: '#FFFFFF',
+                fontSize: 'clamp(8px, 2.1vw, 9px)',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0 2px',
+                border: '1.5px solid #0B1F5C',
+                lineHeight: 1,
+                boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
+              }}
+            >
+              {unreadCount > 9 ? '9+' : unreadCount}
+            </span>
+          )}
         </button>
 
-        {/* Notifications Dropdown Card */}
-        {showNotifications && (
-          <div
-            className="glass-strong card-gloss"
-            style={{
-              position: 'absolute',
-              top: '56px',
-              right: '16px',
-              width: '290px',
-              borderRadius: '20px',
-              padding: '14px',
-              zIndex: 100,
-              boxShadow: '0 16px 40px rgba(15, 42, 68, 0.18)',
-              border: '1px solid rgba(255, 255, 255, 0.9)'
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, paddingBottom: 6, borderBottom: '1px solid rgba(15, 42, 68, 0.08)' }}>
-              <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#0F2A44' }}>Notifications</span>
-              <span className="badge badge-mint" style={{ fontSize: '0.62rem' }}>{notifications.length} New</span>
+        {/* 3. Circular Profile Picture (Extreme right, clickable -> navigates to /profile) */}
+        <button
+          className="tap-effect"
+          onClick={() => navigate('/profile')}
+          aria-label="User Profile"
+          title="Profile"
+          style={{
+            width: 'clamp(28px, 7.5vw, 32px)',
+            height: 'clamp(28px, 7.5vw, 32px)',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #16264A 0%, #2F5082 100%)',
+            border: '1.5px solid rgba(255, 255, 255, 0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 0,
+            cursor: 'pointer',
+            overflow: 'hidden',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+            flexShrink: 0,
+            marginLeft: '2px'
+          }}
+        >
+          {profileAvatar && !imgError ? (
+            <img
+              src={profileAvatar}
+              alt={user?.name || 'Profile'}
+              onError={() => setImgError(true)}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          ) : (
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'linear-gradient(135deg, #16264A 0%, #2F5082 100%)',
+                color: '#FFFFFF'
+              }}
+            >
+              <User size={15} strokeWidth={2.2} color="#FFFFFF" />
             </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {notifications.map((n) => {
-                const ItemIcon = n.icon;
-                return (
-                  <div
-                    key={n.id}
-                    onClick={() => {
-                      setShowNotifications(false);
-                      navigate(n.link);
-                    }}
-                    className="tap-effect"
-                    style={{
-                      padding: '8px 10px',
-                      borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.8)',
-                      display: 'flex',
-                      gap: 10,
-                      alignItems: 'flex-start',
-                      cursor: 'pointer',
-                      border: '1px solid rgba(15, 42, 68, 0.05)'
-                    }}
-                  >
-                    <div style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: 8,
-                      background: '#F1F5FB',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: n.color,
-                      flexShrink: 0
-                    }}>
-                      <ItemIcon size={15} />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0F2A44' }}>{n.title}</div>
-                      <div style={{ fontSize: '0.7rem', color: '#4A5D6E', lineHeight: 1.25 }}>{n.desc}</div>
-                      <div style={{ fontSize: '0.62rem', color: '#7E92A2', marginTop: 2 }}>{n.time}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+          )}
+        </button>
       </div>
     </header>
   );
 };
-

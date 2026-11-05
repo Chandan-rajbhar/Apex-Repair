@@ -96,23 +96,23 @@
      Core Sizing Tokens (Home Screen Reference)
      ========================================================================== */
   --fs-title: clamp(1.1rem, 4.5vw, 1.35rem);
-  --fs-card: clamp(0.85rem, 3.6vw, 1rem);
+  --fs-card: clamp(0.82rem, 3.2vw, 0.95rem);
   --fs-body: clamp(0.72rem, 3vw, 0.85rem);
   --fs-small: clamp(0.65rem, 2.6vw, 0.75rem);
   --space-1: clamp(4px, 1.2vw, 6px);
-  --space-2: clamp(8px, 2.5vw, 12px);
+  --space-2: clamp(7px, 2vw, 10px);
   --space-3: clamp(12px, 3.5vw, 16px);
-  --radius: clamp(12px, 3.5vw, 18px);
+  --radius: clamp(12px, 3.2vw, 15px);
   --icon: clamp(20px, 5.5vw, 24px);
   --btn-h: clamp(40px, 11vw, 46px);
 
   /* Border Radii */
   --radius-xs: 8px;
   --radius-sm: clamp(8px, 2.2vw, 10px);
-  --radius-md: clamp(12px, 3.2vw, 16px);
-  --radius-lg: clamp(16px, 4.2vw, 20px);
-  --radius-card: var(--radius);
-  --radius-xl: clamp(20px, 5vw, 26px);
+  --radius-md: clamp(12px, 3.2vw, 15px);
+  --radius-lg: clamp(15px, 4vw, 18px);
+  --radius-card: clamp(12px, 3.2vw, 15px);
+  --radius-xl: clamp(18px, 4.5vw, 22px);
   --radius-pill: 9999px;
 
   /* Fluid Responsive App Dimensions */
@@ -123,9 +123,9 @@
   /* Fluid Page & Component Spacing */
   --page-pad-x: var(--space-3);
   --page-pad-bottom: clamp(76px, 20vw, 96px);
-  --section-gap: clamp(20px, 5.5vw, 26px);
-  --card-gap: var(--space-2);
-  --card-pad: var(--space-2);
+  --section-gap: clamp(16px, 4.5vw, 22px);
+  --card-gap: clamp(8px, 2.2vw, 12px);
+  --card-pad: clamp(7px, 2vw, 10px);
 
   /* Fluid Responsive Type Scale */
   --text-title: var(--fs-title);
