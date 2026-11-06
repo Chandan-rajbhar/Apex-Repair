@@ -1,0 +1,242 @@
+/* ==========================================================================
+   Apex Appliance Repair - Mobile Device Wrapper Mockup (Phone Frame)
+   Matches high-end mobile showcase design with realistic chassis & bezel
+   ========================================================================== */
+
+/* Outer Desktop Background Canvas */
+.device-canvas-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+  padding: 16px 0;
+  box-sizing: border-box;
+}
+
+/* Smartphone Wrapper / Centering Shell */
+.device-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* Outer Phone Chassis / Titanium Bezel */
+.device-frame {
+  position: relative;
+  width: 100%;
+  max-width: 424px;
+  height: min(880px, calc(100vh - 36px));
+  min-height: 580px;
+  background: #171A22;
+  border-radius: 52px;
+  padding: 12px 10px 14px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #2B313E;
+  overflow: hidden !important; /* Strictly contain all children inside wrapper */
+  box-shadow: 
+    0 35px 90px -15px rgba(0, 0, 0, 0.85),
+    0 15px 35px -6px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Top Bezel Speaker Slit & Sensor */
+.device-speaker-bezel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.device-speaker {
+  width: 52px;
+  height: 4px;
+  border-radius: 9999px;
+  background: #090B0E;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+.device-camera {
+  position: absolute;
+  left: calc(50% + 40px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #080A0E;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 2px rgba(47, 80, 130, 0.6);
+}
+
+/* Inner Phone Screen Display */
+.device-screen {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  height: 100% !important;
+  width: 100% !important;
+  border-radius: 40px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: var(--bg-page) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box !important;
+}
+
+/* Header inside device screen */
+.device-screen .app-header {
+  flex-shrink: 0 !important;
+  width: 100% !important;
+  border-top-left-radius: 40px !important;
+  border-top-right-radius: 40px !important;
+  position: relative !important;
+  top: 0 !important;
+}
+
+/* Scrollable Main Content inside device screen */
+.device-screen .app-main-content {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 24px !important;
+}
+
+.device-screen .app-main-content::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Bottom Navigation inside device screen */
+.device-screen .bottom-nav-container {
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-radius: 0 0 40px 40px !important;
+  box-shadow: 0 -4px 16px rgba(15, 42, 68, 0.05) !important;
+  z-index: 50 !important;
+}
+
+/* Floating Chat Trigger inside device screen */
+.device-screen .floating-chat-trigger {
+  position: absolute !important;
+  bottom: 86px !important;
+  right: 16px !important;
+  left: auto !important;
+  transform: none !important;
+  z-index: 55 !important;
+}
+
+/* Modal Backdrops & Sheets inside device screen */
+.device-screen .sheet-backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  z-index: 100 !important;
+}
+
+.device-screen .sheet-container {
+  max-width: 100% !important;
+  max-height: 86% !important;
+  border-top-left-radius: 28px !important;
+  border-top-right-radius: 28px !important;
+  border-bottom-left-radius: 40px !important;
+  border-bottom-right-radius: 40px !important;
+}
+
+/* Sticky Booking Action Bar */
+.device-screen .book-bottom-action-bar,
+.device-screen .sticky-confirm-bar {
+  position: sticky !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: auto !important;
+  z-index: 50 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom-left-radius: 40px !important;
+  border-bottom-right-radius: 40px !important;
+}
+
+/* Native Mobile Breakpoint (<= 500px): Clean Fullscreen View */
+@media (max-width: 500px) {
+  .device-canvas-container {
+    padding: 0 !important;
+  }
+
+  .device-wrapper {
+    max-width: 100% !important;
+    height: 100vh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .device-frame {
+    max-width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .device-speaker-bezel,
+  .device-home-bar-wrap {
+    display: none !important;
+  }
+
+  .device-screen {
+    border-radius: 0 !important;
+    height: 100vh !important;
+    box-shadow: none !important;
+  }
+
+  .device-screen .app-header {
+    border-radius: 0 !important;
+  }
+
+  .device-home-bar-wrap {
+    border-radius: 0 !important;
+    height: env(safe-area-inset-bottom, 12px) !important;
+  }
+}
+

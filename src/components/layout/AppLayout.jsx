@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { BottomNav } from './BottomNav';
@@ -16,8 +16,45 @@ export const AppLayout = () => {
   const isAuthPage = ['/login', '/signup', '/auth'].includes(location.pathname);
   const hideFloatingWidgets = isBookPage || isAuthPage;
 
+  const mainRef = useRef(null);
+
+  // Reset scroll on route change
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname]);
+
+  // Intercept window.scrollTo so step changes in wizards scroll the app screen container
+  useEffect(() => {
+    const origScrollTo = window.scrollTo;
+    window.scrollTo = (options, y) => {
+      if (mainRef.current) {
+        if (typeof options === 'object') {
+          mainRef.current.scrollTo(options);
+        } else {
+          mainRef.current.scrollTo(options, y);
+        }
+      }
+      try {
+        origScrollTo.call(window, options, y);
+      } catch { }
+    };
+    return () => {
+      window.scrollTo = origScrollTo;
+    };
+  }, []);
+
+  // Forward mouse wheel on desktop canvas background to scroll the phone screen
+  const handleCanvasWheel = (e) => {
+    if (mainRef.current && e.target && !e.target.closest('.device-screen')) {
+      mainRef.current.scrollTop += e.deltaY;
+    }
+  };
+
   return (
-    <>
+    <div className="device-canvas-container" onWheel={handleCanvasWheel}>
       {/* Background Animated Blobs */}
       <div className="bg-blob-container" aria-hidden="true">
         <div className="bg-blob bg-blob-1" />
@@ -25,27 +62,38 @@ export const AppLayout = () => {
         <div className="bg-blob bg-blob-3" />
       </div>
 
-      {/* Centered Mobile-First App Shell */}
-      <div className="mobile-viewport-container">
-        {/* Frosted Glass Header */}
-        <Header />
+      {/* Smartphone Device Wrapper (Image 2 Mockup Style) */}
+      <div className="device-wrapper">
+        <div className="device-frame">
+          {/* Top Bezel Speaker & Sensor */}
+          <div className="device-speaker-bezel" aria-hidden="true">
+            <div className="device-speaker" />
+            <div className="device-camera" />
+          </div>
 
-        {/* Dynamic Route Content */}
-        <main className="app-main-content">
-          <Outlet />
-        </main>
+          {/* Centered Mobile-First App Shell (The Screen) */}
+          <div className="device-screen mobile-viewport-container" id="app-screen-container">
+            {/* Frosted Glass Header */}
+            <Header />
 
-        {/* Floating Live Chat Button & Panel (Hidden on Book page & dedicated Auth page) */}
-        {!hideFloatingWidgets && <ChatWidget />}
+            {/* Dynamic Route Content */}
+            <main className="app-main-content" ref={mainRef}>
+              <Outlet />
+            </main>
 
-        {/* Floating Glass Bottom Navigation (Hidden on Book page & dedicated Auth page) */}
-        {!hideFloatingWidgets && <BottomNav />}
+            {/* Floating Live Chat Button & Panel (Hidden on Book page & dedicated Auth page) */}
+            {!hideFloatingWidgets && <ChatWidget />}
 
-        {/* Modals & Bottom Sheets */}
-        <AuthModal />
-        <EditProfileModal />
-        <SettingsModal />
+            {/* Floating Glass Bottom Navigation (Hidden on Book page & dedicated Auth page) */}
+            {!hideFloatingWidgets && <BottomNav />}
+
+            {/* Modals & Bottom Sheets */}
+            <AuthModal />
+            <EditProfileModal />
+            <SettingsModal />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };

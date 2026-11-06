@@ -1419,7 +1419,7 @@ export const BookPage = () => {
       {/* --------------------------------------------------------------------------
           STICKY BOTTOM ACTION BAR (Device Safe Area + 16px Padding)
           -------------------------------------------------------------------------- */}
-      <div style={{
+      <div className="book-bottom-action-bar" style={{
         position: 'fixed',
         bottom: 0,
         left: '50%',

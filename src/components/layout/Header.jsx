@@ -71,7 +71,7 @@ export const Header = () => {
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 'clamp(5px, 1.5vw, 8px)',
+          gap: 'clamp(8px, 2vw, 10px)',
           flexShrink: 0
         }}
       >
@@ -207,14 +207,13 @@ export const Header = () => {
               border: 'none',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 5,
+              justifyContent: 'center',
               cursor: 'pointer',
               boxShadow: '0 2px 6px rgba(0,0,0,0.18)',
               flexShrink: 0,
-              marginLeft: '2px'
+              whiteSpace: 'nowrap'
             }}
           >
-            {/* <LogIn size={13} strokeWidth={2.5} color="#0B1F5C" /> */}
             <span>Login</span>
           </button>
         )}

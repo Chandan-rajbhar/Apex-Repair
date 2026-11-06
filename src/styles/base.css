@@ -49,7 +49,7 @@ select {
 }
 
 /* App-like mobile viewport container (max ~480px centered on desktop) */
-.mobile-viewport-container {
+.mobile-viewport-container:not(.device-screen) {
   width: 100%;
   max-width: var(--app-max-width, 480px);
   margin: 0 auto;
@@ -63,8 +63,19 @@ select {
   z-index: 1;
 }
 
+.device-screen.mobile-viewport-container {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 @media (min-width: 480px) {
-  .mobile-viewport-container {
+  .mobile-viewport-container:not(.device-screen) {
     margin: 0 auto;
     min-height: 100vh;
     border-radius: 0;
