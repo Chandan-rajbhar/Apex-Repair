@@ -236,6 +236,26 @@
     border-radius: 0 !important;
   }
 
+  /* Mobile: revert bottom nav to fixed so it stays at viewport bottom */
+  .device-screen .bottom-nav-container {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
+    flex: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    z-index: 100 !important;
+  }
+
+  /* Add padding-bottom to main content so it doesn't hide behind fixed nav */
+  .device-screen .app-main-content {
+    padding-bottom: 80px !important;
+  }
+
   .device-home-bar-wrap {
     border-radius: 0 !important;
     height: env(safe-area-inset-bottom, 12px) !important;
